@@ -188,7 +188,7 @@ func _draw():
 
 func get_rays_enabled():
 	if get_node_or_null("Level") != null:
-		return $Level.PlayerCircle_enabled
+		return $Level.PlayerCircle_enabled && Input.is_action_pressed("ui_select")
 	else:
 		return false 
 

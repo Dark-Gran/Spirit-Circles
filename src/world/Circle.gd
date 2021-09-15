@@ -6,7 +6,7 @@ var ct_dict = {
 	ColorType.WHITE: {
 		"color": Color.white,
 		"speed": 1,
-		"lowest_power": 2
+		"lowest_power": 3
 	}
 }
 export (ColorType) var color_type = ColorType.WHITE

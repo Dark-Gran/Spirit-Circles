@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/world/levels/Level.gd" type="Script" id=2]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+level_name = "Destinies Must Be Written"
+FocusPower_enabled = false
+
+[node name="Circles" type="Node2D" parent="."]
+
+[node name="Circle" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 695.416, 500 )
+angle = 270
+
+[node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1220.03, 500 )
+angle = 90
