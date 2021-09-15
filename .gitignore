@@ -1,0 +1,18 @@
+# Import cache
+.import/
+
+# Git
+main/
+git_api.gdnlib
+git_api.gdns
+libgitapi.dll
+
+# Binaries
+bin/
+build/
+lib/
+
+# Misc
+*.translation
+export_presets.cfg
+.mono/
