@@ -85,7 +85,7 @@ func _physics_process(delta):
 				collider = $RayCastB.get_collider()
 			else:
 				collider = $RayCastA.get_collider()
-			var r = (size*Main.SIZE_TO_SCALE + Main.PC_RADIUS - RAY_TRESH)
+			var r = (radius + Main.PC_RADIUS - RAY_TRESH)
 			var sic = Geometry.segment_intersects_circle(to_local(position), cast, to_local(collider.position), r)
 			ray_point_a = to_global(cast*sic)
 			var remaining_cast = to_global(cast)-ray_point_a
@@ -132,6 +132,10 @@ func refresh_size():
 	$MeshInstance2D.scale = Vector2(s, s)
 	$CollisionShape2D.scale = Vector2(s, s)
 	radius = s * Main.SIZE_TO_SCALE
+	top_portal = -radius
+	left_portal = -radius
+	bot_portal = Main.DEFAULT_HEIGHT+radius
+	right_portal = Main.DEFAULT_WIDTH+radius
 
 func get_radius_shifted_by_one(): # shifted to avoid scale lower than 1
 	var s = 0
@@ -148,14 +152,14 @@ func refresh_velocity():
 	refresh_raycasts()
 
 func refresh_raycasts():
-	if world.get_rays_enabled():
+	var d = velocity_direction * radius
+	var ray = Vector2(d.y, -d.x)
+	$RayCastA.position = -ray
+	$RayCastB.position = ray
+	if get_parent().get_parent().PlayerCircle_enabled:
 		$RayCastA.enabled = true
 		$RayCastB.enabled = true
 		$RayCastC.enabled = true
-		var d = velocity_direction * radius
-		var ray = Vector2(d.y, -d.x)
-		$RayCastA.position = -ray
-		$RayCastB.position = ray
 	else:
 		$RayCastA.enabled = false
 		$RayCastB.enabled = false

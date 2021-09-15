@@ -11,9 +11,9 @@ FocusPower_enabled = false
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 695.416, 500 )
+position = Vector2( 612, -200 )
 angle = 270
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1220.03, 500 )
+position = Vector2( 1308, 1280 )
 angle = 90

@@ -12,7 +12,6 @@ height = 18.0
 
 [node name="PlayerCircle" type="Area2D"]
 scale = Vector2( 4, 4 )
-collision_layer = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource( 1 )
@@ -22,5 +21,4 @@ modulate = Color( 0, 0, 0, 1 )
 mesh = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 3 )

@@ -20,7 +20,7 @@ var won = false
 
 func _ready():
 	enable_continue(false)
-	level_id = 1
+	level_id = 2
 	move_to_level(level_id)
 
 func reload_level():
@@ -102,7 +102,7 @@ func _input(event):
 						spawn_pc(get_viewport().get_mouse_position())
 					pc_accumulator = 0
 				pc_linger = false
-			else:
+			elif Geometry.is_point_in_circle(get_viewport().get_mouse_position(), $PlayerCircle.position, Main.PC_RADIUS):
 				release_pc()
 				pc_accumulator = 0
 				pc_linger = true
@@ -134,8 +134,8 @@ func _physics_process(delta):
 		if !won && Input.is_action_pressed("ui_select"):
 			# Focus Power
 			var hit
+			var mouse = get_viewport().get_mouse_position()
 			if $Level.FocusPower_enabled && pc_accumulator == 0:
-				var mouse = get_viewport().get_mouse_position()
 				for c in $Level/Circles.get_children():
 					if !c.merging_away && Geometry.is_point_in_circle(mouse, c.position, c.radius):
 						hit = c
@@ -144,6 +144,9 @@ func _physics_process(delta):
 			# Player Circle
 			if $Level.PlayerCircle_enabled && hit == null && !has_node("PlayerCircle") && !pc_linger:
 				pc_accumulator += delta
+			# Hypothetical Circle
+			if pc_accumulator > 0:
+				$HypoCircle.position = mouse
 		# Screen Edge
 		screen_checker += 1
 		if screen_checker >= SCREEN_CHECK:
@@ -181,16 +184,16 @@ func _draw():
 			draw_line(c.position, c.ray_point_a, Color.white, 2, false)
 			if c.ray_point_b != null:
 				draw_line(c.ray_point_a, c.ray_point_b, Color.white, 2, false)
-			#draw_circle(c.position+c.get_node("RayCastA").position, 3, Color.red)
-			#draw_circle(c.position+c.get_node("RayCastB").position, 3, Color.red)
+			#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
+			#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
 
 # Player Circle
 
 func get_rays_enabled():
 	if get_node_or_null("Level") != null:
-		return $Level.PlayerCircle_enabled && Input.is_action_pressed("ui_select")
+		return $Level.PlayerCircle_enabled && Input.is_action_pressed("ui_select") && !has_node("PlayerCircle") && !won
 	else:
-		return false 
+		return false
 
 func spawn_pc(pos):
 	if get_node_or_null("Level") != null && $Level.PlayerCircle_enabled:
