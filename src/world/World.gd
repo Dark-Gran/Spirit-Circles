@@ -1,5 +1,8 @@
 extends Node2D
 
+var world_speed = 300
+var grow_speed_adjust = 0.02 # see get_grow_speed()
+
 const SCREEN_CHECK = 50
 var screen_checker = SCREEN_CHECK
 
@@ -9,7 +12,7 @@ const PC_WAIT = 1
 var pc_accumulator = 0
 var pc_linger = false # disables pc_accumulator right after despawn
 
-var level_id
+var level_id # World -> Level -> Circles -> Circle
 var hideLevelName = false
 var won = false
 
@@ -50,7 +53,7 @@ func load_level(path):
 	var Level = load(path).instance()
 	if Level != null:
 		add_child(Level)
-		#reset_LevelName()
+		reset_LevelName()
 		won = false
 
 func unload_level():
@@ -60,10 +63,20 @@ func unload_level():
 	if get_node_or_null("Level") != null:
 		$Level.queue_free()
 		remove_child($Level)
-	#$GUI/LevelName.hide()
-	#$GUI/LevelName/Timer.stop()
+	$GUI/LevelName.hide()
+	$GUI/LevelName/Timer.stop()
 	hideLevelName = false
 	#enable_continue(false)
+
+func reset_LevelName():
+	if get_node_or_null("Level") != null:
+		$GUI/LevelName.text = $Level.level_name
+	$GUI/LevelName.modulate.a = 1
+	$GUI/LevelName.show()
+	$GUI/LevelName/Timer.start()
+
+func _on_LevelNameTimer_timeout():
+	hideLevelName = true
 
 # World Steps
 
@@ -90,14 +103,32 @@ func _input(event):
 		elif InputMap.event_is_action(event, "ui_reload"):
 			reload_level()
 		elif InputMap.event_is_action(event, "ui_fps"):
-			#$GUI/FPS.visible = !$GUI/FPS.visible
+			$DebugGUI/FPS.visible = !$DebugGUI/FPS.visible
 			pass
+
+func _process(delta):
+	# LevelName
+	if hideLevelName:
+		$GUI/LevelName.modulate.a -= 0.5 * delta
+		if $GUI/LevelName.modulate.a <= 0:
+			$GUI/LevelName.hide()
+			hideLevelName = false
 
 func _physics_process(delta): 
 	if get_node_or_null("Level") != null:
-		# Player Circle
-		if Input.is_action_pressed("ui_select") && !has_node("PlayerCircle") && !pc_linger:
-			pc_accumulator += delta
+		if !won && Input.is_action_pressed("ui_select"):
+			# Focus Power
+			var hit
+			if $Level.FocusPower_enabled && pc_accumulator == 0:
+				var mouse = get_viewport().get_mouse_position()
+				for c in $Level/Circles.get_children():
+					if !c.merging_away && Geometry.is_point_in_circle(mouse, c.position, c.radius):
+						hit = c
+						focus_power(c, delta)
+						break
+			# Player Circle
+			if $Level.PlayerCircle_enabled && hit == null && !has_node("PlayerCircle") && !pc_linger:
+				pc_accumulator += delta
 		# Screen Edge
 		screen_checker += 1
 		if screen_checker >= SCREEN_CHECK:
@@ -106,16 +137,31 @@ func _physics_process(delta):
 			screen_checker = 0
 		update()
 
-func _draw():
-	# PlayerCircle
-	if pc_accumulator > 0:
-		var angle = deg2rad(360*(pc_accumulator / PC_WAIT))
-		var color = Color.white
-		#if !could_manifest_at(get_viewport().get_mouse_position(), pc_size):
-		#	color = Color.red
-		draw_arc(get_viewport().get_mouse_position(), Main.PC_RADIUS, 0, angle, 40, color, 2, true)
-	# Rays
+func victory_check():
 	if get_node_or_null("Level") != null:
+		var w = 0
+		var g = 0
+		for c in $Level/Circles.get_children():
+			match c.color_type:
+				Circle.ColorType.WHITE:
+					w += 1
+				Circle.ColorType.GREEN:
+					g += 1
+		if w <= 1 && g <= 1:
+			return true
+	return false
+
+func _draw():
+	# Player Circle
+	if get_rays_enabled():
+		# "Partial Circle"
+		if pc_accumulator > 0:
+			var angle = deg2rad(360*(pc_accumulator / PC_WAIT))
+			var color = Color.white
+			#if !could_manifest_at(get_viewport().get_mouse_position(), pc_size):
+			#	color = Color.red
+			draw_arc(get_viewport().get_mouse_position(), Main.PC_RADIUS, 0, angle, 40, color, 2, true)
+		# Rays
 		for c in $Level/Circles.get_children():
 			draw_line(c.position, c.ray_point_a, Color.white, 2, false)
 			if c.ray_point_b != null:
@@ -125,11 +171,44 @@ func _draw():
 
 # Player Circle
 
+func get_rays_enabled():
+	if get_node_or_null("Level") != null:
+		return $Level.PlayerCircle_enabled
+	else:
+		return false 
+
 func spawn_pc(pos):
-	PlayerCircle = PC.instance()
-	PlayerCircle.position = pos
-	add_child(PlayerCircle)
+	if get_node_or_null("Level") != null && $Level.PlayerCircle_enabled:
+		PlayerCircle = PC.instance()
+		PlayerCircle.position = pos
+		add_child(PlayerCircle)
 
 func release_pc():
 	if get_node_or_null("PlayerCircle") != null:
 		PlayerCircle.queue_free()
+
+# Resizing Circles ("Focus Power")
+
+func focus_power(circle, delta):
+	if get_node_or_null("Level") != null:
+		var valid = Array()
+		var color_type = circle.color_type
+		for c in $Level/Circles.get_children():
+			if c != circle  && c.color_type == color_type && !c.merging_away:
+				valid.append(c)
+		if valid.size() > 0:
+			var min_size = circle.color_info.get("lowest_power")
+			var max_grow = get_grow_speed()*delta
+			var spare_fade = max_grow
+			var fade = max_grow / ($Level/Circles.get_child_count()-1)
+			for c in valid:
+				if c.size-fade > min_size:
+					spare_fade -= fade
+					c.set_size(c.size-fade)
+				else:
+					spare_fade -= c.size-min_size
+					c.set_size(min_size)
+			circle.set_size(circle.size+max_grow-spare_fade)
+
+func get_grow_speed():
+	return world_speed*grow_speed_adjust

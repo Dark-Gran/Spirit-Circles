@@ -5,6 +5,8 @@
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
+level_name = "Focus Hastens Destiny"
+PlayerCircle_enabled = false
 
 [node name="Circles" type="Node2D" parent="."]
 
@@ -15,4 +17,4 @@ size = 2.0
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1220.03, 500 )
 angle = 180
-size = 5.0
+size = 15.0
