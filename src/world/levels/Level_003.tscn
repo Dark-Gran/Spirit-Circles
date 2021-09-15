@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/world/levels/Level.gd" type="Script" id=2]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+level_name = "In Boundless Peace, Infinity Becomes One"
+
+[node name="Circles" type="Node2D" parent="."]
+
+[node name="Circle" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 408.813, 196.85 )
+angle = 190
+size = 10.0
+
+[node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1679.45, 756.158 )
+angle = 90
+
+[node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 326.268, 647.672 )
+angle = 110
+size = 25.0
+
+[node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1387.37, 537.096 )
+angle = 30
+size = 12.0
+
+[node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 729.468, 346.066 )
+angle = 240
+size = 15.0
+
+[node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1342.92, 184.693 )
+angle = 90
+
+[node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 465.959, 911.181 )
+angle = 200
+
+[node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1079.41, 997.443 )
+angle = 20
+size = 16.0
+
+[node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 780.264, 641.323 )
+angle = -20
+size = 17.0
+
+[node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 980.995, 279.937 )
+angle = -40
+size = 12.0

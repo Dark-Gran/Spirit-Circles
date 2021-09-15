@@ -20,7 +20,7 @@ var won = false
 
 func _ready():
 	enable_continue(false)
-	level_id = 2
+	level_id = 3
 	move_to_level(level_id)
 
 func reload_level():
@@ -181,11 +181,12 @@ func _draw():
 			draw_arc(get_viewport().get_mouse_position(), Main.PC_RADIUS, 0, angle, 40, color, 2, true)
 		# Rays
 		for c in $Level/Circles.get_children():
-			draw_line(c.position, c.ray_point_a, Color.white, 2, false)
-			if c.ray_point_b != null:
-				draw_line(c.ray_point_a, c.ray_point_b, Color.white, 2, false)
-			#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
-			#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
+			if c.ray_point_a != null:
+				draw_line(c.position, c.ray_point_a, Color.white, 2, false)
+				if c.ray_point_b != null:
+					draw_line(c.ray_point_a, c.ray_point_b, Color.white, 2, false)
+				#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
+				#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
 
 # Player Circle
 

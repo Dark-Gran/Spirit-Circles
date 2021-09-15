@@ -71,30 +71,33 @@ func _physics_process(delta):
 	# RayCast
 	if world.get_rays_enabled():
 		var cast = velocity*Main.PREDICTION_DISTANCE
-		$RayCastA.cast_to = cast
-		$RayCastB.cast_to = cast
-		$RayCastC.cast_to = cast
-		$RayCastA.force_raycast_update()
-		$RayCastB.force_raycast_update()
-		$RayCastC.force_raycast_update()
-		if $RayCastA.is_colliding() || $RayCastB.is_colliding() || $RayCastC.is_colliding():
-			var collider
-			if $RayCastC.get_collider():
-				collider = $RayCastC.get_collider()
-			elif $RayCastB.get_collider():
-				collider = $RayCastB.get_collider()
+		if cast.length() > radius:
+			$RayCastA.cast_to = cast
+			$RayCastB.cast_to = cast
+			$RayCastC.cast_to = cast
+			$RayCastA.force_raycast_update()
+			$RayCastB.force_raycast_update()
+			$RayCastC.force_raycast_update()
+			if $RayCastA.is_colliding() || $RayCastB.is_colliding() || $RayCastC.is_colliding():
+				var collider
+				if $RayCastC.get_collider():
+					collider = $RayCastC.get_collider()
+				elif $RayCastB.get_collider():
+					collider = $RayCastB.get_collider()
+				else:
+					collider = $RayCastA.get_collider()
+				var r = (radius + Main.PC_RADIUS - RAY_TRESH)
+				var sic = Geometry.segment_intersects_circle(to_local(position), cast, to_local(collider.position), r)
+				ray_point_a = to_global(cast*sic)
+				var	remaining_cast = to_global(cast)-ray_point_a
+				var collision_normal = (ray_point_a - collider.position).normalized()
+				var bounced = remaining_cast.bounce(collision_normal)
+				ray_point_b = ray_point_a+bounced
 			else:
-				collider = $RayCastA.get_collider()
-			var r = (radius + Main.PC_RADIUS - RAY_TRESH)
-			var sic = Geometry.segment_intersects_circle(to_local(position), cast, to_local(collider.position), r)
-			ray_point_a = to_global(cast*sic)
-			var remaining_cast = to_global(cast)-ray_point_a
-			var collision_normal = (ray_point_a - collider.position).normalized()
-			var bounced = remaining_cast.bounce(collision_normal)
-			ray_point_b = ray_point_a+bounced
+				ray_point_a = to_global(cast)
+				ray_point_b = null
 		else:
-			ray_point_a = to_global(cast)
-			ray_point_b = null
+			ray_point_a = null
 
 func _on_Circle_area_entered(area): # Collided
 	if area.is_in_group("circles"):
@@ -146,7 +149,7 @@ func get_radius_shifted_by_one(): # shifted to avoid scale lower than 1
 
 func refresh_velocity():
 	if !(merging_away && size < color_info.get("lowest_power")):
-		speed = (world.get("world_speed") * color_info.get("speed")) / pow(get_radius_shifted_by_one()*0.65, 2)
+		speed = (world.get("world_speed") * color_info.get("speed")) / pow(get_radius_shifted_by_one()*0.9, 2)
 	velocity = Vector2(speed*cos(deg2rad(angle)), speed*sin(deg2rad(angle)))
 	velocity_direction = velocity.normalized()
 	refresh_raycasts()
