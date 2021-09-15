@@ -1,7 +1,7 @@
 extends Node2D
 
 var world_speed = 300
-var grow_speed_adjust = 0.02 # see get_grow_speed()
+var grow_speed_adjust = 0.05 # see get_grow_speed()
 
 const SCREEN_CHECK = 50
 var screen_checker = SCREEN_CHECK

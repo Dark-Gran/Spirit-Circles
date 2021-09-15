@@ -6,7 +6,7 @@ var ct_dict = {
 	ColorType.WHITE: {
 		"color": Color.white,
 		"speed": 1,
-		"lowest_power": 3
+		"lowest_power": 8
 	}
 }
 export (ColorType) var color_type = ColorType.WHITE
@@ -98,7 +98,7 @@ func _physics_process(delta):
 
 func _on_Circle_area_entered(area): # Collided
 	if area.is_in_group("circles"):
-		if !area.merging_away:
+		if !area.merging_away && !merging_away:
 			var humbled = area.size > size
 			# Merge
 			if humbled:
@@ -109,9 +109,9 @@ func _on_Circle_area_entered(area): # Collided
 		bounce(area)
 
 func mergeIn(circle):
+	circle.merging_away = true
 	grow_buffer += circle.size+circle.grow_buffer
 	circle.grow_buffer = 0
-	circle.merging_away = true
 
 func bounce(collider):
 	var collision_normal = (position-collider.position).normalized()
@@ -128,9 +128,24 @@ func refresh():
 	refresh_raycasts()
 
 func refresh_size():
-	$MeshInstance2D.scale = Vector2(size, size)
-	$CollisionShape2D.scale = Vector2(size, size)
-	radius = size * Main.SIZE_TO_SCALE
+	var s = get_radius_shifted_by_one()
+	$MeshInstance2D.scale = Vector2(s, s)
+	$CollisionShape2D.scale = Vector2(s, s)
+	radius = s * Main.SIZE_TO_SCALE
+
+func get_radius_shifted_by_one(): # shifted to avoid scale lower than 1
+	var s = 0
+	if size-1 > 0:
+		s = (float(size)-1)/PI
+	s += 1
+	return s
+
+func refresh_velocity():
+	if !(merging_away && size < color_info.get("lowest_power")):
+		speed = (world.get("world_speed") * color_info.get("speed")) / pow(get_radius_shifted_by_one()*0.65, 2)
+	velocity = Vector2(speed*cos(deg2rad(angle)), speed*sin(deg2rad(angle)))
+	velocity_direction = velocity.normalized()
+	refresh_raycasts()
 
 func refresh_raycasts():
 	if world.get_rays_enabled():
@@ -146,16 +161,6 @@ func refresh_raycasts():
 		$RayCastB.enabled = false
 		$RayCastC.enabled = false
 
-func refresh_velocity():
-	speed = (world.get("world_speed") * color_info.get("speed")) / pow(float(size+1)/2, 2)
-	velocity = Vector2(speed*cos(deg2rad(angle)), speed*sin(deg2rad(angle)))
-	velocity_direction = velocity.normalized()
-	refresh_raycasts()
-
-func set_size(new_size):
-	size = new_size
-	refresh()
-
 func check_edge_portal():
 	if position.x < left_portal || position.x > right_portal || position.y < top_portal || position.y > bot_portal:
 		if position.x < left_portal:
@@ -166,3 +171,7 @@ func check_edge_portal():
 			position.y = bot_portal
 		elif position.y > bot_portal:
 			position.y = top_portal
+
+func set_size(new_size):
+	size = new_size
+	refresh()

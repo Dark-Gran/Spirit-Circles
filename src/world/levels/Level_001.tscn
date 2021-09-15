@@ -11,10 +11,10 @@ PlayerCircle_enabled = false
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 695.416, 500 )
-size = 2.0
+position = Vector2( 712, 540 )
+size = 25.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1220.03, 500 )
+position = Vector2( 1208, 540 )
 angle = 180
-size = 15.0
+size = 25.0
