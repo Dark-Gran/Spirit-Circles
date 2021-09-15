@@ -34,6 +34,7 @@ const RAY_TRESH = 0.01
 var world # World -> Level -> Circles -> Circle
 
 var merging_away = false
+var grow_buffer = 0
 
 func _ready():
 	ray_point_a = position
@@ -48,6 +49,23 @@ func _ready():
 	refresh()
 
 func _physics_process(delta):
+	# Resize
+	if merging_away || grow_buffer > 0:
+		var grow_speed = world.get_grow_speed() * delta
+		if merging_away:
+			if size-grow_speed > min_size:
+				size -= grow_speed
+				refresh()
+			else:
+				queue_free()
+		elif grow_buffer > 0:
+			if grow_buffer-grow_speed > 0:
+				size += grow_speed
+				grow_buffer -= grow_speed
+			else:
+				size += grow_buffer
+				grow_buffer = 0
+			refresh()
 	# Move
 	position += velocity*delta
 	# RayCast
@@ -79,7 +97,24 @@ func _physics_process(delta):
 			ray_point_b = null
 
 func _on_Circle_area_entered(area): # Collided
-	var collision_normal = (position-area.position).normalized()
+	if area.is_in_group("circles"):
+		if !area.merging_away:
+			var humbled = area.size > size
+			# Merge
+			if humbled:
+				area.mergeIn(self)
+			else:
+				mergeIn(area)
+	else:
+		bounce(area)
+
+func mergeIn(circle):
+	grow_buffer += circle.size+circle.grow_buffer
+	circle.grow_buffer = 0
+	circle.merging_away = true
+
+func bounce(collider):
+	var collision_normal = (position-collider.position).normalized()
 	if collision_normal.dot(velocity) < 0:
 		velocity = velocity.bounce(collision_normal)
 		angle = rad2deg(velocity.angle())

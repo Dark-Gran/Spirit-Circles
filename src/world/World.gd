@@ -19,6 +19,7 @@ var won = false
 # Level Loading
 
 func _ready():
+	enable_continue(false)
 	level_id = 1
 	move_to_level(level_id)
 
@@ -66,7 +67,7 @@ func unload_level():
 	$GUI/LevelName.hide()
 	$GUI/LevelName/Timer.stop()
 	hideLevelName = false
-	#enable_continue(false)
+	enable_continue(false)
 
 func reset_LevelName():
 	if get_node_or_null("Level") != null:
@@ -77,6 +78,17 @@ func reset_LevelName():
 
 func _on_LevelNameTimer_timeout():
 	hideLevelName = true
+	
+func enable_continue(enable): # on Level-End
+	$GUI/Continue.disabled = !enable
+	if (enable):
+		$GUI/Continue.show()
+	else:
+		$GUI/Continue.hide()
+
+func _on_Continue_button_up():
+	enable_continue(false)
+	switch_level(true)
 
 # World Steps
 
@@ -104,7 +116,6 @@ func _input(event):
 			reload_level()
 		elif InputMap.event_is_action(event, "ui_fps"):
 			$DebugGUI/FPS.visible = !$DebugGUI/FPS.visible
-			pass
 
 func _process(delta):
 	# LevelName
@@ -113,6 +124,10 @@ func _process(delta):
 		if $GUI/LevelName.modulate.a <= 0:
 			$GUI/LevelName.hide()
 			hideLevelName = false
+	# Check Level-End
+	if !won && victory_check():
+		won = true
+		enable_continue(true)
 
 func _physics_process(delta): 
 	if get_node_or_null("Level") != null:

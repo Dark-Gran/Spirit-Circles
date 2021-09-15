@@ -8,7 +8,9 @@ height = 20.0
 
 [sub_resource type="CircleShape2D" id=2]
 
-[node name="Circle" type="Area2D"]
+[node name="Circle" type="Area2D" groups=[
+"circles",
+]]
 script = ExtResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
