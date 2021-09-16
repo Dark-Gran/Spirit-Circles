@@ -92,6 +92,7 @@ func enable_continue(enable): # on Level-End
 func _on_Continue_button_up():
 	enable_continue(false)
 	switch_level(true)
+	$GUI/Stopwatch.visible = false
 
 # World Steps
 
