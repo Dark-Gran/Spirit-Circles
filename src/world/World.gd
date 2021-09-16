@@ -197,7 +197,7 @@ func get_rays_enabled():
 		return false
 
 func could_spawn_pc_now():
-	return $HypoCircle.get_overlapping_areas().size() == 0
+	return !won && $HypoCircle.get_overlapping_areas().size() == 0
 
 func spawn_pc(pos):
 	if get_node_or_null("Level") != null && $Level.PlayerCircle_enabled && could_spawn_pc_now():
@@ -215,14 +215,14 @@ func focus_power(circle, delta):
 	if get_node_or_null("Level") != null:
 		var valid = Array()
 		var color_type = circle.color_type
+		var min_size = circle.color_info.get("lowest_power")
 		for c in $Level/Circles.get_children():
-			if c != circle  && c.color_type == color_type && !c.merging_away:
+			if c != circle && c.color_type == color_type && !c.merging_away && c.size > min_size:
 				valid.append(c)
 		if valid.size() > 0:
-			var min_size = circle.color_info.get("lowest_power")
 			var max_grow = get_grow_speed()*delta
 			var spare_fade = max_grow
-			var fade = max_grow / ($Level/Circles.get_child_count()-1)
+			var fade = max_grow / valid.size()
 			for c in valid:
 				if c.size-fade > min_size:
 					spare_fade -= fade
