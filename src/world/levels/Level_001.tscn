@@ -7,6 +7,7 @@
 script = ExtResource( 2 )
 level_name = "Focus Hastens Destiny"
 PlayerCircle_enabled = false
+Stopwatch_enabled = false
 
 [node name="Circles" type="Node2D" parent="."]
 

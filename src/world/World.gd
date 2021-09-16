@@ -15,6 +15,7 @@ var pc_linger = false # disables pc_accumulator right after despawn
 var level_id # World -> Level -> Circles -> Circle
 var hideLevelName = false
 var won = false
+var level_time = 0
 
 # Level Loading
 
@@ -56,6 +57,8 @@ func load_level(path):
 		add_child(Level)
 		reset_LevelName()
 		won = false
+		level_time = 0
+		$GUI/Stopwatch.visible = $Level.Stopwatch_enabled
 
 func unload_level():
 	pc_accumulator = 0
@@ -116,6 +119,9 @@ func _input(event):
 			reload_level()
 		elif InputMap.event_is_action(event, "ui_fps"):
 			$DebugGUI/FPS.visible = !$DebugGUI/FPS.visible
+		elif InputMap.event_is_action(event, "ui_accept"):
+			if won:
+				_on_Continue_button_up()
 
 func _process(delta):
 	# LevelName
@@ -124,10 +130,16 @@ func _process(delta):
 		if $GUI/LevelName.modulate.a <= 0:
 			$GUI/LevelName.hide()
 			hideLevelName = false
-	# Check Level-End
-	if !won && victory_check():
-		won = true
-		enable_continue(true)
+	if get_node_or_null("Level") != null:
+		# LevelTime
+		if $Level.Stopwatch_enabled:
+			if !won:
+				level_time += delta
+			$GUI/Stopwatch.text = String(floor(level_time))
+		# Check Level-End
+		if !won && victory_check():
+			won = true
+			enable_continue(true)
 
 func _physics_process(delta): 
 	if get_node_or_null("Level") != null:
@@ -156,18 +168,16 @@ func _physics_process(delta):
 		update()
 
 func victory_check():
-	if get_node_or_null("Level") != null:
-		var w = 0
-		var g = 0
-		for c in $Level/Circles.get_children():
-			match c.color_type:
-				Circle.ColorType.WHITE:
-					w += 1
-				Circle.ColorType.GREEN:
-					g += 1
-		if w <= 1 && g <= 1:
-			return true
-	return false
+	var w = 0
+	var g = 0
+	for c in $Level/Circles.get_children():
+		match c.color_type:
+			Circle.ColorType.WHITE:
+				w += 1
+			Circle.ColorType.GREEN:
+				g += 1
+	if w <= 1 && g <= 1:
+		return true
 
 func _draw():
 	# Player Circle
