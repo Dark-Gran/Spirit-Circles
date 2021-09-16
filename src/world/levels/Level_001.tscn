@@ -12,10 +12,10 @@ Stopwatch_enabled = false
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 712, 540 )
-size = 25.0
+position = Vector2( 662, 540 )
+size = 30.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1208, 540 )
+position = Vector2( 1258, 540 )
 angle = 180
-size = 25.0
+size = 30.0

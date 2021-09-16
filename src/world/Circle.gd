@@ -6,7 +6,7 @@ var ct_dict = {
 	ColorType.WHITE: {
 		"color": Color.white,
 		"speed": 1,
-		"lowest_power": 8
+		"lowest_power": 9
 	}
 }
 export (ColorType) var color_type = ColorType.WHITE
@@ -156,7 +156,7 @@ func get_radius_shifted_by_one(): # shifted to avoid scale lower than 1
 
 func refresh_velocity():
 	if !(merging_away && size < color_info.get("lowest_power")):
-		speed = (world.get("world_speed") * color_info.get("speed")) / pow(get_radius_shifted_by_one()*0.9, 2)
+		speed = (world.get("world_speed") * color_info.get("speed")) / pow(get_radius_shifted_by_one()/2, 2)
 	velocity = Vector2(speed*cos(deg2rad(angle)), speed*sin(deg2rad(angle)))
 	velocity_direction = velocity.normalized()
 	refresh_raycasts()
