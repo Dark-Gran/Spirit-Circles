@@ -11,22 +11,23 @@ level_name = "In Boundless Peace, Infinity Becomes One"
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 408.813, 196.85 )
-angle = 190
+angle = 210
 size = 10.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1679.45, 756.158 )
 angle = 90
+size = 12.0
 
 [node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 326.268, 647.672 )
+position = Vector2( 222.268, 637.672 )
 angle = 110
 size = 25.0
 
 [node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1387.37, 537.096 )
+position = Vector2( 1371.37, 583.096 )
 angle = 30
-size = 12.0
+size = 24.0
 
 [node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 729.468, 346.066 )
@@ -34,24 +35,24 @@ angle = 240
 size = 15.0
 
 [node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1342.92, 184.693 )
-angle = 90
+position = Vector2( 1284.92, 178.693 )
+angle = 100
 
 [node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 465.959, 911.181 )
-angle = 200
+position = Vector2( 1483.96, 979.181 )
+angle = 175
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1079.41, 997.443 )
-angle = 20
-size = 16.0
+position = Vector2( 715.41, 931.443 )
+angle = -20
+size = 19.0
 
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 780.264, 641.323 )
+position = Vector2( 916.264, 613.323 )
 angle = -20
 size = 17.0
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 980.995, 279.937 )
-angle = -40
+position = Vector2( 914.995, 219.937 )
+angle = -10
 size = 12.0
