@@ -176,17 +176,17 @@ func _draw():
 		if pc_accumulator > 0:
 			var angle = deg2rad(360*(pc_accumulator / PC_WAIT))
 			var color = Color.white
-			#if !could_manifest_at(get_viewport().get_mouse_position(), pc_size):
-			#	color = Color.red
+			if !could_spawn_pc_now():
+				color = Color.red
 			draw_arc(get_viewport().get_mouse_position(), Main.PC_RADIUS, 0, angle, 40, color, 2, true)
 		# Rays
-		for c in $Level/Circles.get_children():
-			if c.ray_point_a != null:
-				draw_line(c.position, c.ray_point_a, Color.white, 2, false)
-				if c.ray_point_b != null:
+		if could_spawn_pc_now():
+			for c in $Level/Circles.get_children():
+				if c.ray_point_a != null && c.ray_point_b != null:
+					draw_line(c.position, c.ray_point_a, Color.white, 2, false)
 					draw_line(c.ray_point_a, c.ray_point_b, Color.white, 2, false)
-				#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
-				#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
+					#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
+					#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
 
 # Player Circle
 
@@ -196,8 +196,11 @@ func get_rays_enabled():
 	else:
 		return false
 
+func could_spawn_pc_now():
+	return $HypoCircle.get_overlapping_areas().size() == 0
+
 func spawn_pc(pos):
-	if get_node_or_null("Level") != null && $Level.PlayerCircle_enabled:
+	if get_node_or_null("Level") != null && $Level.PlayerCircle_enabled && could_spawn_pc_now():
 		PlayerCircle = PC.instance()
 		PlayerCircle.position = pos
 		add_child(PlayerCircle)

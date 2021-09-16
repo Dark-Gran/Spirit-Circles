@@ -66,12 +66,11 @@ func _physics_process(delta):
 				size += grow_buffer
 				grow_buffer = 0
 			refresh()
-	# Move
-	position += velocity*delta
 	# RayCast
 	if world.get_rays_enabled():
 		var cast = velocity*Main.PREDICTION_DISTANCE
-		if cast.length() > radius:
+		var r = (radius + Main.PC_RADIUS)
+		if cast.length() > r:
 			$RayCastA.cast_to = cast
 			$RayCastB.cast_to = cast
 			$RayCastC.cast_to = cast
@@ -86,18 +85,26 @@ func _physics_process(delta):
 					collider = $RayCastB.get_collider()
 				else:
 					collider = $RayCastA.get_collider()
-				var r = (radius + Main.PC_RADIUS - RAY_TRESH)
-				var sic = Geometry.segment_intersects_circle(to_local(position), cast, to_local(collider.position), r)
-				ray_point_a = to_global(cast*sic)
-				var	remaining_cast = to_global(cast)-ray_point_a
-				var collision_normal = (ray_point_a - collider.position).normalized()
-				var bounced = remaining_cast.bounce(collision_normal)
-				ray_point_b = ray_point_a+bounced
+				var sic = Geometry.segment_intersects_circle(to_local(position), cast, to_local(collider.position), r-RAY_TRESH)
+				if sic > 0:
+					ray_point_a = to_global(cast*sic)
+					var	remaining_cast = to_global(cast)-ray_point_a
+					var collision_normal = (ray_point_a - collider.position).normalized()
+					var bounced = remaining_cast.bounce(collision_normal)
+					ray_point_b = ray_point_a+bounced
+				else:
+					null_ray_points()
 			else:
 				ray_point_a = to_global(cast)
 				ray_point_b = null
 		else:
-			ray_point_a = null
+			null_ray_points()
+	# Move
+	position += velocity*delta
+
+func null_ray_points():
+	ray_point_a = null
+	ray_point_b = null
 
 func _on_Circle_area_entered(area): # Collided
 	if area.is_in_group("circles"):

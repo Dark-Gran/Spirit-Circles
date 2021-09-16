@@ -60,8 +60,8 @@ autostart = true
 [node name="HypoCircle" type="Area2D" parent="."]
 scale = Vector2( 4, 4 )
 gravity_vec = Vector2( 0, 0 )
+monitorable = false
 collision_layer = 2
-collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HypoCircle"]
 shape = SubResource( 3 )
