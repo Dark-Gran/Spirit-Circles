@@ -10,9 +10,8 @@ height = 18.0
 
 [sub_resource type="CircleShape2D" id=3]
 
-[node name="PlayerCircle" type="Area2D"]
+[node name="PlayerCircle" type="StaticBody2D"]
 scale = Vector2( 4, 4 )
-monitoring = false
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource( 1 )

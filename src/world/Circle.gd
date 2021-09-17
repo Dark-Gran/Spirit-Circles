@@ -1,12 +1,22 @@
-extends Area2D
+extends KinematicBody2D
 class_name Circle
 
-enum ColorType {WHITE, GREEN}
+enum ColorType {WHITE, GREEN, BLUE}
 var ct_dict = {
 	ColorType.WHITE: {
 		"color": Color.white,
 		"speed": 1,
-		"lowest_power": 9
+		"lowest_power": 10
+	},
+	ColorType.BLUE: {
+		"color": Color.blue,
+		"speed": 1,
+		"lowest_power": 10
+	},
+	ColorType.GREEN: {
+		"color": Color.green,
+		"speed": 1.5,
+		"lowest_power": 4
 	}
 }
 export (ColorType) var color_type = ColorType.WHITE
@@ -14,7 +24,7 @@ export (int) var angle = 0
 export (float) var size = 1
 
 var color_info
-var min_size = 0.1 # "Technical" limit
+var min_size = 0.01 # "Technical" limit
 
 var speed = 0
 var velocity = Vector2(0, 0)
@@ -100,23 +110,39 @@ func _physics_process(delta):
 		else:
 			null_ray_points()
 	# Move
-	position += velocity*delta
+	var collision = move_and_collide(velocity*delta)
+	if collision:
+		collide(collision.collider)
 
 func null_ray_points():
 	ray_point_a = null
 	ray_point_b = null
 
-func _on_Circle_area_entered(area): # Collided
-	if area.is_in_group("circles"):
-		if !area.merging_away && !merging_away:
-			var humbled = area.size > size
+func collide(collider):
+	if collider.is_in_group("circles"):
+		if !collider.merging_away && !merging_away:
+			var humbled = collider.size > size
 			# Merge
-			if humbled:
-				area.mergeIn(self)
+			if collider.color_type == color_type:
+				if humbled:
+					collider.mergeIn(self)
+				else:
+					mergeIn(collider)
+			elif collider.color_type != ColorType.WHITE && (color_type == ColorType.WHITE || humbled):
+				color_reaction(collider, collider.color_type)
 			else:
-				mergeIn(area)
+				color_reaction(collider, color_type)
 	else:
-		bounce(area)
+		bounce(collider)
+
+func color_reaction(collider, color):
+	match color:
+		ColorType.WHITE:
+			bounce(collider)
+		ColorType.GREEN:
+			bounce(collider)
+		ColorType.BLUE:
+			dance(collider)
 
 func mergeIn(circle):
 	circle.merging_away = true
@@ -130,6 +156,13 @@ func bounce(collider):
 		angle = rad2deg(velocity.angle())
 		refresh_velocity()
 
+func dance(collider): #todo
+	var collision_normal = (position-collider.position).normalized()
+	if collision_normal.dot(velocity) < 0:
+		velocity = velocity.reflect(collision_normal)
+		angle = rad2deg(velocity.angle())
+		refresh_velocity()
+
 func refresh():
 	if size < min_size:
 		size = min_size
@@ -138,7 +171,7 @@ func refresh():
 	refresh_raycasts()
 
 func refresh_size():
-	var s = get_radius_shifted_by_one()
+	var s = float(size)/PI
 	$MeshInstance2D.scale = Vector2(s, s)
 	$CollisionShape2D.scale = Vector2(s, s)
 	radius = s * Main.SIZE_TO_SCALE
@@ -147,16 +180,9 @@ func refresh_size():
 	bot_portal = Main.DEFAULT_HEIGHT+radius
 	right_portal = Main.DEFAULT_WIDTH+radius
 
-func get_radius_shifted_by_one(): # shifted to avoid scale lower than 1
-	var s = 0
-	if size-1 > 0:
-		s = (float(size)-1)/PI
-	s += 1
-	return s
-
 func refresh_velocity():
 	if !(merging_away && size < color_info.get("lowest_power")):
-		speed = (world.get("world_speed") * color_info.get("speed")) / pow(get_radius_shifted_by_one()/2, 2)
+		speed = (world.get("world_speed") * color_info.get("speed")) / pow((float(size)/PI)/2, 2)
 	velocity = Vector2(speed*cos(deg2rad(angle)), speed*sin(deg2rad(angle)))
 	velocity_direction = velocity.normalized()
 	refresh_raycasts()

@@ -8,7 +8,7 @@ height = 20.0
 
 [sub_resource type="CircleShape2D" id=2]
 
-[node name="Circle" type="Area2D" groups=[
+[node name="Circle" type="KinematicBody2D" groups=[
 "circles",
 ]]
 script = ExtResource( 1 )
@@ -41,5 +41,3 @@ cast_to = Vector2( 0, 0 )
 collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false
-
-[connection signal="area_entered" from="." to="." method="_on_Circle_area_entered"]

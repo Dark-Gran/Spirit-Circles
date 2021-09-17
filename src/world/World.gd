@@ -1,7 +1,7 @@
 extends Node2D
 
-var world_speed = 180
-var grow_speed_adjust = 0.09 # see get_grow_speed()
+var world_speed = 150
+var grow_speed_adjust = 0.1 # see get_grow_speed()
 
 const SCREEN_CHECK = 50
 var screen_checker = SCREEN_CHECK
@@ -21,7 +21,7 @@ var level_time = 0
 
 func _ready():
 	enable_continue(false)
-	level_id = 3
+	level_id = 4
 	move_to_level(level_id)
 
 func reload_level():
