@@ -19,6 +19,8 @@ var ct_dict = {
 		"lowest_power": 4
 	}
 }
+const DANCE_STRENGTH = 0.1
+
 export (ColorType) var color_type = ColorType.WHITE
 export (int) var angle = 0
 export (float) var size = 1
@@ -160,7 +162,11 @@ func dance(collider): #todo
 	var collision_normal = (position-collider.position).normalized()
 	if collision_normal.dot(velocity) < 0:
 		velocity = velocity.reflect(collision_normal)
-		angle = rad2deg(velocity.angle())
+		var new_angle = rad2deg(velocity.angle())
+		if angle >= new_angle:
+			angle += DANCE_STRENGTH
+		else:
+			angle -= DANCE_STRENGTH
 		refresh_velocity()
 
 func refresh():
