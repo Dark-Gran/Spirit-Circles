@@ -15,8 +15,8 @@ var ct_dict = {
 	},
 	ColorType.GREEN: {
 		"color": Color.green,
-		"speed": 1.5,
-		"lowest_power": 4
+		"speed": 1.4,
+		"lowest_power": 5
 	}
 }
 const DANCE_STRENGTH = 0.1
@@ -81,6 +81,8 @@ func _physics_process(delta):
 	# RayCast
 	if world.get_rays_enabled():
 		var cast = velocity*Main.PREDICTION_DISTANCE
+		if cast.length() > Main.PREDICTION_MAX:
+			cast = cast.clamped(Main.PREDICTION_MAX)
 		var r = (radius + Main.PC_RADIUS)
 		if cast.length() > r:
 			$RayCastA.cast_to = cast
@@ -158,7 +160,7 @@ func bounce(collider):
 		angle = rad2deg(velocity.angle())
 		refresh_velocity()
 
-func dance(collider): #todo
+func dance(collider):
 	var collision_normal = (position-collider.position).normalized()
 	if collision_normal.dot(velocity) < 0:
 		velocity = velocity.reflect(collision_normal)

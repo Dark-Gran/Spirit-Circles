@@ -4,6 +4,7 @@ const DEFAULT_WIDTH = 1920
 const DEFAULT_HEIGHT = 1080
 const SIZE_TO_SCALE = 10
 const PREDICTION_DISTANCE = 3
+const PREDICTION_MAX = 350
 const PC_RADIUS = 40
 
 var current_scene = null
