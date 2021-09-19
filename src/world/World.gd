@@ -21,7 +21,7 @@ var level_time = 0
 
 func _ready():
 	enable_continue(false)
-	level_id = 4
+	level_id = 5
 	move_to_level(level_id)
 
 func reload_level():
@@ -207,7 +207,7 @@ func _draw():
 
 func get_rays_enabled():
 	if get_node_or_null("Level") != null:
-		return $Level.PlayerCircle_enabled && Input.is_action_pressed("ui_select") && !has_node("PlayerCircle") && !won
+		return $Level.PlayerCircle_enabled && Input.is_action_pressed("ui_select") && !has_node("PlayerCircle") && !won && pc_accumulator > 0
 	else:
 		return false
 
