@@ -1,5 +1,7 @@
 # SMC
   
+**WORK IN PROGRESS**  
+  
 Game based on a [previous prototype](https://github.com/Dark-Gran/SaveMeCircles).  
   
 To address performance issues of the prototype, Box2D engine (and LibGDX) has been replaced with Godot, as its "bodies" offer better support for the desired "non-newtonian" behaviour of objects (and therefore gameplay).  
