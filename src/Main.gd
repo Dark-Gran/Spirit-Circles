@@ -6,6 +6,7 @@ const SIZE_TO_SCALE = 10
 const PREDICTION_DISTANCE = 3
 const PREDICTION_MAX = 350
 const PC_RADIUS = 40
+const CIRCLE_BUTTON_MIN_RADIUS = 80
 
 var current_scene = null
 

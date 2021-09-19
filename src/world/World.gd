@@ -149,8 +149,12 @@ func _physics_process(delta):
 			var hit
 			var mouse = get_viewport().get_mouse_position()
 			if $Level.FocusPower_enabled && pc_accumulator == 0:
+				var r
 				for c in $Level/Circles.get_children():
-					if !c.merging_away && Geometry.is_point_in_circle(mouse, c.position, c.radius):
+					r = c.radius
+					if r < Main.CIRCLE_BUTTON_MIN_RADIUS:
+						r = Main.CIRCLE_BUTTON_MIN_RADIUS
+					if !c.merging_away && Geometry.is_point_in_circle(mouse, c.position, r):
 						hit = c
 						focus_power(c, delta)
 						break
