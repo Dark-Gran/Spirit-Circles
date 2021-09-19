@@ -212,7 +212,7 @@ func get_rays_enabled():
 		return false
 
 func could_spawn_pc_now():
-	return !won && $HypoCircle.get_overlapping_areas().size() == 0
+	return !won && $HypoCircle.get_overlapping_bodies().size() == 0
 
 func spawn_pc(pos):
 	if get_node_or_null("Level") != null && $Level.PlayerCircle_enabled && could_spawn_pc_now():
