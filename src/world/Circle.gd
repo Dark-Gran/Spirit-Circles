@@ -100,7 +100,7 @@ func _physics_process(delta):
 				else:
 					collider = $RayCastA.get_collider()
 				var sic = Geometry.segment_intersects_circle(to_local(position), cast, to_local(collider.position), r-RAY_TRESH)
-				if sic > 0:
+				if sic > 0 && (cast*sic).length() < (position-collider.position).length():
 					ray_point_a = to_global(cast*sic)
 					var	remaining_cast = to_global(cast)-ray_point_a
 					var collision_normal = (ray_point_a - collider.position).normalized()
