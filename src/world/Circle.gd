@@ -20,6 +20,9 @@ var ct_dict = {
 	}
 }
 const DANCE_STRENGTH = 0.1
+const PREDICTION_DISTANCE = 3
+const PREDICTION_MAX = 350
+const CIRCLE_BUTTON_MIN_RADIUS = 80
 
 export (ColorType) var color_type = ColorType.WHITE
 export (int) var angle = 0
@@ -80,9 +83,9 @@ func _physics_process(delta):
 			refresh()
 	# RayCast
 	if world.get_rays_enabled():
-		var cast = velocity*Main.PREDICTION_DISTANCE
-		if cast.length() > Main.PREDICTION_MAX:
-			cast = cast.clamped(Main.PREDICTION_MAX)
+		var cast = velocity*PREDICTION_DISTANCE
+		if cast.length() > PREDICTION_MAX:
+			cast = cast.clamped(PREDICTION_MAX)
 		var r = (radius + Main.PC_RADIUS)
 		if cast.length() > r:
 			$RayCastA.cast_to = cast
@@ -114,9 +117,14 @@ func _physics_process(delta):
 		else:
 			null_ray_points()
 	# Move
-	var collision = move_and_collide(velocity*delta)
-	if collision:
-		collide(collision.collider)
+	var movement = velocity*delta
+	while movement.length() > 0:
+		var collision = move_and_collide(movement)
+		if collision:
+			collide(collision.collider)
+			movement = collision.remainder
+		else:
+			movement = Vector2(0, 0)
 
 func null_ray_points():
 	ray_point_a = null

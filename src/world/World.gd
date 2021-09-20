@@ -152,8 +152,8 @@ func _physics_process(delta):
 				var r
 				for c in $Level/Circles.get_children():
 					r = c.radius
-					if r < Main.CIRCLE_BUTTON_MIN_RADIUS:
-						r = Main.CIRCLE_BUTTON_MIN_RADIUS
+					if r < Circle.CIRCLE_BUTTON_MIN_RADIUS:
+						r = Circle.CIRCLE_BUTTON_MIN_RADIUS
 					if !c.merging_away && Geometry.is_point_in_circle(mouse, c.position, r):
 						hit = c
 						focus_power(c, delta)
@@ -174,14 +174,17 @@ func _physics_process(delta):
 
 func victory_check():
 	var w = 0
+	var b = 0
 	var g = 0
 	for c in $Level/Circles.get_children():
 		match c.color_type:
 			Circle.ColorType.WHITE:
 				w += 1
+			Circle.ColorType.BLUE:
+				b += 1
 			Circle.ColorType.GREEN:
 				g += 1
-	if w <= 1 && g <= 1:
+	if w <= 1 && b <= 1 && g <= 1:
 		return true
 
 func _draw():
