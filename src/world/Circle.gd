@@ -147,6 +147,11 @@ func collide(collider):
 					collider.mergeIn(self)
 				else:
 					mergeIn(collider)
+			elif color_type == ColorType.RED || collider.color_type == ColorType.RED:
+				if color_type == ColorType.RED && humbled:
+					color_reaction(collider, color_type)
+				else:
+					color_reaction(collider, collider.color_type)
 			elif collider.color_type != ColorType.WHITE && (color_type == ColorType.WHITE || humbled):
 				color_reaction(collider, collider.color_type)
 			else:
@@ -162,13 +167,19 @@ func color_reaction(collider, color):
 			bounce(collider)
 		ColorType.BLUE:
 			dance(collider)
+		ColorType.RED:
+			split(collider)
 
-func mergeIn(circle):
-	circle.merging_away = true
-	circle.add_collision_exception_with(self)
-	add_collision_exception_with(circle)
-	grow_buffer += circle.size+circle.grow_buffer
-	circle.grow_buffer = 0
+func split(collider): # todo
+	collider.add_collision_exception_with(self)
+	add_collision_exception_with(collider)
+
+func mergeIn(collider):
+	collider.merging_away = true
+	collider.add_collision_exception_with(self)
+	add_collision_exception_with(collider)
+	grow_buffer += collider.size+collider.grow_buffer
+	collider.grow_buffer = 0
 
 func dance(collider):
 	var collision_normal = (position-collider.position).normalized()
