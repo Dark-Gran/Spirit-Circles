@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Circle
 
-enum ColorType {WHITE, GREEN, BLUE}
+enum ColorType {WHITE, GREEN, BLUE, RED}
 var ct_dict = {
 	ColorType.WHITE: {
 		"color": Color.white,
@@ -16,6 +16,11 @@ var ct_dict = {
 	ColorType.GREEN: {
 		"color": Color.green,
 		"speed": 1.4,
+		"lowest_power": 5
+	},
+	ColorType.RED: {
+		"color": Color.red,
+		"speed": 0.9,
 		"lowest_power": 5
 	}
 }
@@ -119,11 +124,13 @@ func _physics_process(delta):
 	# Move
 	var movement = velocity*delta
 	while movement.length() > 0:
-		var collision = move_and_collide(movement)
+		var collision = move_and_collide(movement, true, true, true)
 		if collision:
 			collide(collision.collider)
+			move_and_collide(movement)
 			movement = collision.remainder
 		else:
+			move_and_collide(movement)
 			movement = Vector2(0, 0)
 
 func null_ray_points():
@@ -158,15 +165,10 @@ func color_reaction(collider, color):
 
 func mergeIn(circle):
 	circle.merging_away = true
+	circle.add_collision_exception_with(self)
+	add_collision_exception_with(circle)
 	grow_buffer += circle.size+circle.grow_buffer
 	circle.grow_buffer = 0
-
-func bounce(collider):
-	var collision_normal = (position-collider.position).normalized()
-	if collision_normal.dot(velocity) < 0:
-		velocity = velocity.bounce(collision_normal)
-		angle = rad2deg(velocity.angle())
-		refresh_velocity()
 
 func dance(collider):
 	var collision_normal = (position-collider.position).normalized()
@@ -177,6 +179,13 @@ func dance(collider):
 			angle += DANCE_STRENGTH
 		else:
 			angle -= DANCE_STRENGTH
+		refresh_velocity()
+
+func bounce(collider):
+	var collision_normal = (position-collider.position).normalized()
+	if collision_normal.dot(velocity) < 0:
+		velocity = velocity.bounce(collision_normal)
+		angle = rad2deg(velocity.angle())
 		refresh_velocity()
 
 func refresh():
