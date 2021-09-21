@@ -37,8 +37,8 @@ var color_info
 var min_size = 0.01 # "Technical" limit
 
 var speed = 0
-var velocity = Vector2(0, 0)
-var velocity_direction = Vector2(0, 0)
+var velocity = Vector2.ZERO
+var velocity_direction = Vector2.ZERO
 var radius = size*Main.SIZE_TO_SCALE
 var pc_radius = 40
 
@@ -52,16 +52,21 @@ var ray_point_b # not present or End
 const RAY_TRESH = 0.01
 
 var world # World -> Level -> Circles -> Circle
+var level
 
 var merging_away = false
 var grow_buffer = 0
+var unbreakable = false
 
-func _ready():
+func _init():
 	ray_point_a = position
 	ray_point_b = null
 	collision_layer = 1
 	collision_mask = 1
-	world = get_parent().get_parent().get_parent()
+
+func _ready():
+	level = get_parent().get_parent()
+	world = level.get_parent()
 	color_info = ct_dict.get(color_type)
 	if size < color_info.get("lowest_power"):
 		size = color_info.get("lowest_power")
@@ -70,7 +75,7 @@ func _ready():
 
 func _physics_process(delta):
 	# Resize
-	if merging_away || grow_buffer > 0:
+	if merging_away || grow_buffer != 0:
 		var grow_speed = world.get_grow_speed() * delta
 		if merging_away:
 			if size-grow_speed > min_size:
@@ -85,6 +90,16 @@ func _physics_process(delta):
 			else:
 				size += grow_buffer
 				grow_buffer = 0
+			refresh()
+		elif grow_buffer < 0:
+			if grow_buffer+grow_speed < 0:
+				if size-grow_speed > min_size:
+					size -= grow_speed
+					grow_buffer += grow_speed
+			else:
+				if size+grow_buffer > min_size:
+					size += grow_buffer
+					grow_buffer = 0
 			refresh()
 	# RayCast
 	if world.get_rays_enabled():
@@ -131,7 +146,7 @@ func _physics_process(delta):
 			movement = collision.remainder
 		else:
 			move_and_collide(movement)
-			movement = Vector2(0, 0)
+			movement = Vector2.ZERO
 
 func null_ray_points():
 	ray_point_a = null
@@ -142,16 +157,18 @@ func collide(collider):
 		if !collider.merging_away && !merging_away:
 			var humbled = collider.size > size
 			# Merge
-			if collider.color_type == color_type:
+			if color_type == collider.color_type:
 				if humbled:
 					collider.mergeIn(self)
 				else:
 					mergeIn(collider)
+			# Split
 			elif color_type == ColorType.RED || collider.color_type == ColorType.RED:
-				if color_type == ColorType.RED && humbled:
+				if humbled:
 					color_reaction(collider, color_type)
 				else:
 					color_reaction(collider, collider.color_type)
+			# Misc
 			elif collider.color_type != ColorType.WHITE && (color_type == ColorType.WHITE || humbled):
 				color_reaction(collider, collider.color_type)
 			else:
@@ -170,9 +187,20 @@ func color_reaction(collider, color):
 		ColorType.RED:
 			split(collider)
 
-func split(collider): # todo
+func split(collider):
 	collider.add_collision_exception_with(self)
 	add_collision_exception_with(collider)
+	var toSplit = self
+	if color_type == ColorType.RED:
+		toSplit = collider
+	if !toSplit.unbreakable:
+		toSplit.unbreakable = true
+		var hs = float(toSplit.size+toSplit.grow_buffer)/2
+		if hs >= toSplit.color_info.get("lowest_power"):
+			# Resize old
+			toSplit.grow_buffer = -(toSplit.size-hs)
+			# Create new
+			level.create_circle(toSplit.position, toSplit.color_type, toSplit.angle, hs) # todo
 
 func mergeIn(collider):
 	collider.merging_away = true
@@ -228,7 +256,7 @@ func refresh_raycasts():
 	var ray = Vector2(d.y, -d.x)
 	$RayCastA.position = -ray
 	$RayCastB.position = ray
-	if get_parent().get_parent().PlayerCircle_enabled:
+	if level.PlayerCircle_enabled:
 		$RayCastA.enabled = true
 		$RayCastB.enabled = true
 		$RayCastC.enabled = true

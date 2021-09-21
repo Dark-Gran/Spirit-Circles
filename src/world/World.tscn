@@ -13,11 +13,11 @@ font_data = ExtResource( 4 )
 size = 40
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 40
 font_data = ExtResource( 3 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -66,7 +66,7 @@ margin_left = 1697.65
 margin_top = 881.01
 margin_right = 1758.65
 margin_bottom = 912.01
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 __meta__ = {
@@ -80,7 +80,7 @@ monitorable = false
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HypoCircle"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [connection signal="button_up" from="GUI/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="timeout" from="GUI/LevelName/Timer" to="." method="_on_LevelNameTimer_timeout"]
