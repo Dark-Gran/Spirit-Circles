@@ -24,18 +24,18 @@ var ct_dict = {
 		"lowest_power": 5
 	}
 }
-const DANCE_STRENGTH = 0.1
+const MIN_SIZE = 0.01 # "Technical" limit
 const PREDICTION_DISTANCE = 3
 const PREDICTION_MAX = 350
 const CIRCLE_BUTTON_MIN_RADIUS = 80
+const DANCE_STRENGTH = 0.1 # see dance()
+const SPLIT_PART_ANGLE = 15 # see split()
 
 export (ColorType) var color_type = ColorType.WHITE
 export (int) var angle = 0
 export (float) var size = 1
 
 var color_info
-var min_size = 0.01 # "Technical" limit
-
 var speed = 0
 var velocity = Vector2.ZERO
 var velocity_direction = Vector2.ZERO
@@ -57,6 +57,7 @@ var level
 var merging_away = false
 var grow_buffer = 0
 var unbreakable = false
+var shard_parent = null
 
 func _init():
 	ray_point_a = position
@@ -78,7 +79,7 @@ func _physics_process(delta):
 	if merging_away || grow_buffer != 0:
 		var grow_speed = world.get_grow_speed() * delta
 		if merging_away:
-			if size-grow_speed > min_size:
+			if size-grow_speed > MIN_SIZE:
 				size -= grow_speed
 				refresh()
 			else:
@@ -93,11 +94,11 @@ func _physics_process(delta):
 			refresh()
 		elif grow_buffer < 0:
 			if grow_buffer+grow_speed < 0:
-				if size-grow_speed > min_size:
+				if size-grow_speed > MIN_SIZE:
 					size -= grow_speed
 					grow_buffer += grow_speed
 			else:
-				if size+grow_buffer > min_size:
+				if size+grow_buffer > MIN_SIZE:
 					size += grow_buffer
 					grow_buffer = 0
 			refresh()
@@ -191,16 +192,33 @@ func split(collider):
 	collider.add_collision_exception_with(self)
 	add_collision_exception_with(collider)
 	var toSplit = self
+	var splitter = collider
 	if color_type == ColorType.RED:
 		toSplit = collider
+		splitter = self
+	# Break toSplit
 	if !toSplit.unbreakable:
 		toSplit.unbreakable = true
-		var hs = float(toSplit.size+toSplit.grow_buffer)/2
-		if hs >= toSplit.color_info.get("lowest_power"):
-			# Resize old
-			toSplit.grow_buffer = -(toSplit.size-hs)
+		var tot_size = toSplit.size+toSplit.grow_buffer
+		var half_size = float(tot_size)/2
+		if half_size >= toSplit.color_info.get("lowest_power"):
+			# Get angles between directions
+			var perpendicular = splitter.velocity_direction.rotated(deg2rad(90))
+			var angle_to_perp = floor(rad2deg(toSplit.velocity_direction.angle_to(perpendicular)))
+			# Get outcome angle
+			var mid_direction
+			if angle_to_perp > 0 || abs(angle_to_perp) == 180: # Already in direction of splitter's push = get pushed
+				mid_direction = splitter.velocity_direction + toSplit.velocity_direction
+			else: # In direction against splitter's push = move against the push (ie. "splitting opposing force only corrects it")
+				mid_direction = toSplit.velocity_direction - splitter.velocity_direction
+			var mid_angle = rad2deg(mid_direction.angle())
+			# Update old
+			toSplit.grow_buffer = -(toSplit.size-half_size)
+			toSplit.angle = mid_angle - SPLIT_PART_ANGLE
+			refresh()
 			# Create new
-			level.create_circle(toSplit.position, toSplit.color_type, toSplit.angle, hs) # todo
+			var opposite_angle = mid_angle + SPLIT_PART_ANGLE
+			level.create_circle(toSplit.position, toSplit.color_type, opposite_angle, toSplit.size, toSplit.grow_buffer, toSplit)
 
 func mergeIn(collider):
 	collider.merging_away = true
@@ -228,8 +246,8 @@ func bounce(collider):
 		refresh_velocity()
 
 func refresh():
-	if size < min_size:
-		size = min_size
+	if size < MIN_SIZE:
+		size = MIN_SIZE
 	refresh_size()
 	refresh_velocity()
 	refresh_raycasts()

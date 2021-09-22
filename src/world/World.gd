@@ -1,6 +1,6 @@
 extends Node2D
 
-var world_speed = 150
+var world_speed = 120
 var grow_speed_adjust = 0.1 # see get_grow_speed()
 
 const SCREEN_CHECK = 50
@@ -123,6 +123,8 @@ func _input(event):
 		elif InputMap.event_is_action(event, "ui_accept"):
 			if won:
 				_on_Continue_button_up()
+		elif InputMap.event_is_action(event, "toggle_fullscreen"):
+			OS.window_fullscreen = !OS.window_fullscreen
 
 func _process(delta):
 	# LevelName
@@ -173,9 +175,10 @@ func _physics_process(delta):
 		update()
 
 func victory_check():
-	var w = 0
-	var b = 0
-	var g = 0
+	var w: int = 0
+	var b: int = 0
+	var g: int = 0
+	var r: int = 0
 	for c in $Level/Circles.get_children():
 		match c.color_type:
 			Circle.ColorType.WHITE:
@@ -184,8 +187,9 @@ func victory_check():
 				b += 1
 			Circle.ColorType.GREEN:
 				g += 1
-	if w <= 1 && b <= 1 && g <= 1:
-		return true
+			Circle.ColorType.RED:
+				r += 1
+	return w <= 1 && b <= 1 && g <= 1 && r <= 1
 
 func _draw():
 	# Player Circle
