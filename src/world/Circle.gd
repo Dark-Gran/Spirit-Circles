@@ -229,34 +229,34 @@ func split(collider):
 		splitter = self
 	splitter.add_to_ignore_while_overlapping(toSplit)
 	toSplit.add_to_ignore_while_overlapping(splitter)
-	# Break toSplit
-	if !toSplit.unbreakable:
+	# Get outcome angle
+	var perpendicular = splitter.velocity_direction.rotated(deg2rad(90))
+	var angle_to_perp = floor(rad2deg(toSplit.velocity_direction.angle_to(perpendicular)))
+	var mid_direction = splitter.velocity_direction + toSplit.velocity_direction # "Get pushed by splitter"
+	var mid_angle = rad2deg(mid_direction.angle())
+	# Update toSplit
+	var tot_size = toSplit.size+toSplit.grow_buffer
+	var half_size = float(tot_size)/2
+	if !toSplit.unbreakable && half_size >= toSplit.color_info.get("lowest_power"): # Break toSplit if big enough
 		toSplit.unbreakable = true
-		var tot_size = toSplit.size+toSplit.grow_buffer
-		var half_size = float(tot_size)/2
-		if half_size >= toSplit.color_info.get("lowest_power"):
-			# Get angles between directions
-			var perpendicular = splitter.velocity_direction.rotated(deg2rad(90))
-			var angle_to_perp = floor(rad2deg(toSplit.velocity_direction.angle_to(perpendicular)))
-			# Get outcome angle
-			var mid_direction
-			if angle_to_perp > 0 || abs(angle_to_perp) == 180: # Already in direction of splitter's push = get pushed
-				mid_direction = splitter.velocity_direction + toSplit.velocity_direction
-			else: # In direction against splitter's push = move against the push (ie. "splitting opposing force only corrects it")
-				mid_direction = toSplit.velocity_direction - splitter.velocity_direction
-			var mid_angle = rad2deg(mid_direction.angle())
-			# Update old
-			toSplit.grow_buffer = -(toSplit.size-half_size)
-			toSplit.angle = mid_angle - SPLIT_PART_ANGLE
-			refresh()
-			# Create new
-			var opposite_angle = mid_angle + SPLIT_PART_ANGLE
-			var new_circle = level.create_circle(toSplit.position, toSplit.color_type, opposite_angle, toSplit.size, toSplit.grow_buffer)
-			new_circle.unbreakable = true
-			new_circle.add_to_ignore_while_overlapping(toSplit)
-			toSplit.add_to_ignore_while_overlapping(new_circle)
-			new_circle.add_to_ignore_while_overlapping(splitter)
-			splitter.add_to_ignore_while_overlapping(new_circle)
+		if angle_to_perp <= 0 && abs(angle_to_perp) != 180: # In direction against splitter's push = move against the push (ie. "splitting opposing force only corrects it")
+			mid_direction = toSplit.velocity_direction - splitter.velocity_direction
+			mid_angle = rad2deg(mid_direction.angle())
+		# Update old
+		toSplit.grow_buffer = -(toSplit.size-half_size)
+		toSplit.angle = mid_angle - SPLIT_PART_ANGLE
+		refresh()
+		# Create new
+		var opposite_angle = mid_angle + SPLIT_PART_ANGLE
+		var new_circle = level.create_circle(toSplit.position, toSplit.color_type, opposite_angle, toSplit.size, toSplit.grow_buffer)
+		new_circle.unbreakable = true
+		new_circle.add_to_ignore_while_overlapping(toSplit)
+		toSplit.add_to_ignore_while_overlapping(new_circle)
+		new_circle.add_to_ignore_while_overlapping(splitter)
+		splitter.add_to_ignore_while_overlapping(new_circle)
+	else: # Redirect toSplit if too small
+		toSplit.angle = mid_angle
+		toSplit.refresh()
 
 func add_to_ignore_while_overlapping(i):
 	add_collision_exception_with(i)
