@@ -57,7 +57,7 @@ var level
 var merging_away = false
 var grow_buffer = 0
 var unbreakable = false
-var shard_parent = null
+var ignored_while_overlapping = Array()
 
 func _init():
 	ray_point_a = position
@@ -102,6 +102,16 @@ func _physics_process(delta):
 					size += grow_buffer
 					grow_buffer = 0
 			refresh()
+	# Reset breakability
+	if unbreakable && grow_buffer == 0:
+		unbreakable = false
+	if ignored_while_overlapping.size() > 0:
+		var not_to_ignore_anymore = Array()
+		for i in ignored_while_overlapping:
+			if !Main.circles_overlap(self, i):
+				not_to_ignore_anymore.append(i)
+		for i in not_to_ignore_anymore:
+			remove_from_ignore_while_overlapping(i)
 	# RayCast
 	if world.get_rays_enabled():
 		var cast = velocity*PREDICTION_DISTANCE
@@ -149,9 +159,7 @@ func _physics_process(delta):
 			move_and_collide(movement)
 			movement = Vector2.ZERO
 
-func null_ray_points():
-	ray_point_a = null
-	ray_point_b = null
+# COLLISIONS
 
 func collide(collider):
 	if collider.is_in_group("circles"):
@@ -188,14 +196,39 @@ func color_reaction(collider, color):
 		ColorType.RED:
 			split(collider)
 
-func split(collider):
+func bounce(collider):
+	var collision_normal = (position-collider.position).normalized()
+	if collision_normal.dot(velocity) < 0:
+		velocity = velocity.bounce(collision_normal)
+		angle = rad2deg(velocity.angle())
+		refresh_velocity()
+
+func mergeIn(collider):
+	collider.merging_away = true
 	collider.add_collision_exception_with(self)
 	add_collision_exception_with(collider)
+	grow_buffer += collider.size+collider.grow_buffer
+	collider.grow_buffer = 0
+
+func dance(collider):
+	var collision_normal = (position-collider.position).normalized()
+	if collision_normal.dot(velocity) < 0:
+		velocity = velocity.reflect(collision_normal)
+		var new_angle = rad2deg(velocity.angle())
+		if angle >= new_angle:
+			angle += DANCE_STRENGTH
+		else:
+			angle -= DANCE_STRENGTH
+		refresh_velocity()
+
+func split(collider):
 	var toSplit = self
 	var splitter = collider
 	if color_type == ColorType.RED:
 		toSplit = collider
 		splitter = self
+	splitter.add_to_ignore_while_overlapping(toSplit)
+	toSplit.add_to_ignore_while_overlapping(splitter)
 	# Break toSplit
 	if !toSplit.unbreakable:
 		toSplit.unbreakable = true
@@ -218,32 +251,22 @@ func split(collider):
 			refresh()
 			# Create new
 			var opposite_angle = mid_angle + SPLIT_PART_ANGLE
-			level.create_circle(toSplit.position, toSplit.color_type, opposite_angle, toSplit.size, toSplit.grow_buffer, toSplit)
+			var new_circle = level.create_circle(toSplit.position, toSplit.color_type, opposite_angle, toSplit.size, toSplit.grow_buffer)
+			new_circle.unbreakable = true
+			new_circle.add_to_ignore_while_overlapping(toSplit)
+			toSplit.add_to_ignore_while_overlapping(new_circle)
+			new_circle.add_to_ignore_while_overlapping(splitter)
+			splitter.add_to_ignore_while_overlapping(new_circle)
 
-func mergeIn(collider):
-	collider.merging_away = true
-	collider.add_collision_exception_with(self)
-	add_collision_exception_with(collider)
-	grow_buffer += collider.size+collider.grow_buffer
-	collider.grow_buffer = 0
+func add_to_ignore_while_overlapping(i):
+	add_collision_exception_with(i)
+	ignored_while_overlapping.append(i)
 
-func dance(collider):
-	var collision_normal = (position-collider.position).normalized()
-	if collision_normal.dot(velocity) < 0:
-		velocity = velocity.reflect(collision_normal)
-		var new_angle = rad2deg(velocity.angle())
-		if angle >= new_angle:
-			angle += DANCE_STRENGTH
-		else:
-			angle -= DANCE_STRENGTH
-		refresh_velocity()
+func remove_from_ignore_while_overlapping(i):
+	remove_collision_exception_with(i)
+	ignored_while_overlapping.erase(i)
 
-func bounce(collider):
-	var collision_normal = (position-collider.position).normalized()
-	if collision_normal.dot(velocity) < 0:
-		velocity = velocity.bounce(collision_normal)
-		angle = rad2deg(velocity.angle())
-		refresh_velocity()
+# REFRESHERS
 
 func refresh():
 	if size < MIN_SIZE:
@@ -294,6 +317,12 @@ func check_edge_portal():
 		elif position.y > bot_portal:
 			position.y = top_portal
 
+# MISC
+
 func set_size(new_size):
 	size = new_size
 	refresh()
+
+func null_ray_points():
+	ray_point_a = null
+	ray_point_b = null
