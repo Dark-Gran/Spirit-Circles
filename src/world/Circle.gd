@@ -39,8 +39,7 @@ var color_info
 var speed = 0
 var velocity = Vector2.ZERO
 var velocity_direction = Vector2.ZERO
-var radius = size*Main.SIZE_TO_SCALE
-var pc_radius = 40
+var radius = (float(size)/PI)*Main.SIZE_TO_SCALE
 
 var top_portal = 0
 var left_portal = 0
@@ -117,7 +116,7 @@ func _physics_process(delta):
 		var cast = velocity*PREDICTION_DISTANCE
 		if cast.length() > PREDICTION_MAX:
 			cast = cast.clamped(PREDICTION_MAX)
-		var r = (radius + Main.PC_RADIUS)
+		var r = radius + Main.PC_RADIUS
 		if cast.length() > r:
 			$RayCastA.cast_to = cast
 			$RayCastB.cast_to = cast
@@ -279,7 +278,7 @@ func refresh_size():
 	var s = float(size)/PI
 	$MeshInstance2D.scale = Vector2(s, s)
 	$CollisionShape2D.scale = Vector2(s, s)
-	radius = s * Main.SIZE_TO_SCALE
+	radius = s*Main.SIZE_TO_SCALE
 	top_portal = -radius
 	left_portal = -radius
 	bot_portal = Main.DEFAULT_HEIGHT+radius

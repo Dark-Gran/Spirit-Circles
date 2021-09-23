@@ -16,4 +16,5 @@ func create_circle(pos, color_type, angle, size, buffer):
 	c.size = size
 	c.grow_buffer = buffer
 	$Circles.add_child(c)
+	c.refresh()
 	return c
