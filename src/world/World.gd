@@ -239,14 +239,14 @@ func focus_power(circle, delta):
 		var color_type = circle.color_type
 		var min_size = circle.color_info.get("lowest_power")
 		for c in $Level/Circles.get_children():
-			if c != circle && c.color_type == color_type && !c.merging_away && c.size > min_size:
+			if c != circle && c.color_type == color_type && !c.merging_away && c.size > min_size && c.size+c.grow_buffer > min_size:
 				valid.append(c)
 		if valid.size() > 0:
 			var max_grow = get_grow_speed()*delta
 			var spare_fade = max_grow
 			var fade = max_grow / valid.size()
 			for c in valid:
-				if c.size-fade > min_size:
+				if c.size-fade > min_size && c.size+c.grow_buffer > min_size:
 					spare_fade -= fade
 					c.set_size(c.size-fade)
 				else:

@@ -4,7 +4,6 @@ const DEFAULT_WIDTH = 1920
 const DEFAULT_HEIGHT = 1080
 const SIZE_TO_SCALE = 10
 const PC_RADIUS = 40
-const CIRCLE_OVERLAP_FIX = 1 # see circles_overlap()
 
 var current_scene = null
 
@@ -22,9 +21,3 @@ func _deferred_goto_scene(path):
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene(current_scene)
-
-func circles_overlap(c1, c2):
-	var r1 = c1.radius+CIRCLE_OVERLAP_FIX
-	var r2 = c2.radius+CIRCLE_OVERLAP_FIX
-	var distance = sqrt(pow(c2.position.y-c1.position.y, 2) + pow(c2.position.x-c1.position.x, 2))
-	return distance <= r1+r2

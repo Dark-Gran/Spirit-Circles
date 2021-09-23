@@ -27,7 +27,8 @@ var ct_dict = {
 const MIN_SIZE = 0.01 # "Technical" limit
 const PREDICTION_DISTANCE = 3
 const PREDICTION_MAX = 350
-const CIRCLE_BUTTON_MIN_RADIUS = 80
+const CIRCLE_BUTTON_MIN_RADIUS = 60
+const CIRCLE_OVERLAP_FIX = 1 # see circles_overlap()
 const DANCE_STRENGTH = 0.1 # see dance()
 const SPLIT_PART_ANGLE = 15 # see split()
 
@@ -107,7 +108,7 @@ func _physics_process(delta):
 	if ignored_while_overlapping.size() > 0:
 		var not_to_ignore_anymore = Array()
 		for i in ignored_while_overlapping:
-			if !Main.circles_overlap(self, i):
+			if !circles_overlap(self, i):
 				not_to_ignore_anymore.append(i)
 		for i in not_to_ignore_anymore:
 			remove_from_ignore_while_overlapping(i)
@@ -181,6 +182,9 @@ func collide(collider):
 				color_reaction(collider, collider.color_type)
 			else:
 				color_reaction(collider, color_type)
+		else:
+			collider.add_collision_exception_with(self)
+			add_collision_exception_with(collider)
 	else:
 		bounce(collider)
 
@@ -325,3 +329,9 @@ func set_size(new_size):
 func null_ray_points():
 	ray_point_a = null
 	ray_point_b = null
+
+func circles_overlap(c1, c2):
+	var r1 = c1.radius+CIRCLE_OVERLAP_FIX
+	var r2 = c2.radius+CIRCLE_OVERLAP_FIX
+	var distance = sqrt(pow(c2.position.y-c1.position.y, 2) + pow(c2.position.x-c1.position.x, 2))
+	return distance <= r1+r2
