@@ -29,6 +29,7 @@ const PREDICTION_DISTANCE = 3
 const PREDICTION_MAX = 350
 const CIRCLE_BUTTON_MIN_RADIUS = 60
 const CIRCLE_OVERLAP_FIX = 1 # see circles_overlap()
+const MAX_MOVE_ATTEMPTS = 5 # see process() "Move"
 const DANCE_STRENGTH = 0.1 # see dance()
 const SPLIT_PART_ANGLE = 15 # see split()
 
@@ -149,7 +150,8 @@ func _physics_process(delta):
 			null_ray_points()
 	# Move
 	var movement = velocity*delta
-	while movement.length() > 0:
+	var i = 0
+	while movement.length() > 0 && i <= MAX_MOVE_ATTEMPTS:
 		var collision = move_and_collide(movement, true, true, true)
 		if collision:
 			collide(collision)
@@ -158,6 +160,7 @@ func _physics_process(delta):
 		else:
 			move_and_collide(movement)
 			movement = Vector2.ZERO
+		i += 1
 
 # COLLISIONS
 
