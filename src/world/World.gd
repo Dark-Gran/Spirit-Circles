@@ -21,7 +21,7 @@ var level_time = 0
 
 func _ready():
 	enable_continue(false)
-	level_id = 6
+	level_id = 1
 	move_to_level(level_id)
 
 func reload_level():
