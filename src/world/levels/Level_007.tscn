@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/world/levels/Level.gd" type="Script" id=2]
-[ext_resource path="res://src/world/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/world/obstacles/Wall_0.tscn" type="PackedScene" id=3]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -10,73 +10,73 @@ script = ExtResource( 2 )
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 335.685, 417.102 )
-color_type = 1
-size = 11.0
+position = Vector2( 408.813, 196.85 )
+color_type = 2
+angle = 210
+size = 10.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 974.064, 948.953 )
+position = Vector2( 1679.45, 754.039 )
 color_type = 1
 angle = 90
-size = 8.0
+size = 18.0
 
 [node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 746.757, 605.687 )
-color_type = 2
-size = 11.0
+position = Vector2( 222.268, 637.672 )
+angle = 110
+size = 24.0
 
 [node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1550.41, 800.628 )
+position = Vector2( 1699.8, 335.181 )
 color_type = 2
-angle = -90
-size = 8.0
+angle = 30
+size = 24.0
+
+[node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 729.468, 346.066 )
+angle = 240
+size = 15.0
+
+[node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1284.92, 178.693 )
+angle = 100
+
+[node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1483.96, 974.943 )
+angle = 175
+
+[node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 715.41, 931.443 )
+color_type = 2
+angle = -20
+size = 19.0
+
+[node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 780.145, 613.323 )
+color_type = 1
+
+[node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1044.25, 283.505 )
+color_type = 1
+angle = -10
+size = 12.0
+
+[node name="Circle11" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1081.07, 498.338 )
+color_type = 2
+angle = 150
+size = 24.0
+
+[node name="Circle12" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 192.603, 351.617 )
+color_type = 1
+angle = 15
+size = 22.0
 
 [node name="Statics" type="Node2D" parent="."]
 
 [node name="Wall" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 582.173, 138.212 )
-scale = Vector2( 4, 20 )
+position = Vector2( 516.757, 536.435 )
 
 [node name="Wall2" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 582.173, 1120.93 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall3" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1287.29, -55.7883 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall4" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1287.29, 934.928 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall5" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( -1.82739, 138.212 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall6" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( -1.82739, 934.928 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall7" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1918.17, 138.212 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall8" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1918.17, 934.928 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall9" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 582.173, 524.212 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall10" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( -1.82739, 694.928 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall11" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1287.29, 537.212 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall12" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1918.17, 694.928 )
-scale = Vector2( 4, 20 )
+position = Vector2( 1412.76, 536.435 )

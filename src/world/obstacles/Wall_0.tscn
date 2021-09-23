@@ -8,7 +8,14 @@ size = Vector3( 20, 20, 2 )
 [node name="Wall" type="StaticBody2D"]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2( 4, 25 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+scale = Vector2( 3.5, 24.5 )
 mesh = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 4, 25 )
 shape = SubResource( 2 )

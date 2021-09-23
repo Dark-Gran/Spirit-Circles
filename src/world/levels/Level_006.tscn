@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/world/levels/Level.gd" type="Script" id=2]
-[ext_resource path="res://src/world/Wall.tscn" type="PackedScene" id=3]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -10,58 +9,60 @@ script = ExtResource( 2 )
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 408.813, 196.85 )
+position = Vector2( 213.783, 144.525 )
+color_type = 1
 angle = 210
 size = 10.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1679.45, 756.158 )
+position = Vector2( 1282.25, 663.4 )
+color_type = 2
 angle = 90
 size = 12.0
 
 [node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 222.268, 637.672 )
+position = Vector2( 248.43, 632.915 )
+color_type = 1
 angle = 110
 size = 25.0
 
 [node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1559.95, 356.371 )
+position = Vector2( 1678.39, 534.708 )
+color_type = 2
 angle = 30
 size = 24.0
 
 [node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 729.468, 346.066 )
+position = Vector2( 1048.18, 417.418 )
+color_type = 2
 angle = 240
 size = 15.0
 
 [node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1284.92, 178.693 )
+position = Vector2( 1553.68, 143.017 )
+color_type = 2
 angle = 100
 
 [node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1483.96, 979.181 )
+position = Vector2( 1434.01, 891.18 )
+color_type = 1
 angle = 175
+size = 17.0
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 715.41, 931.443 )
+color_type = 2
 angle = -20
 size = 19.0
 
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 916.264, 613.323 )
-size = 17.0
+position = Vector2( 744.469, 534.835 )
+color_type = 1
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 914.995, 219.937 )
+position = Vector2( 1079.11, 253.235 )
+color_type = 1
 angle = -10
 size = 12.0
 
 [node name="Statics" type="Node2D" parent="."]
-
-[node name="Wall" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 614.489, 561.516 )
-scale = Vector2( 4, 20 )
-
-[node name="Wall2" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1296.78, 567.872 )
-scale = Vector2( 4, 20 )
