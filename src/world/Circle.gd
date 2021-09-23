@@ -152,7 +152,7 @@ func _physics_process(delta):
 	while movement.length() > 0:
 		var collision = move_and_collide(movement, true, true, true)
 		if collision:
-			collide(collision.collider)
+			collide(collision)
 			move_and_collide(movement)
 			movement = collision.remainder
 		else:
@@ -161,7 +161,8 @@ func _physics_process(delta):
 
 # COLLISIONS
 
-func collide(collider):
+func collide(collision):
+	var collider = collision.collider
 	if collider.is_in_group("circles"):
 		if !collider.merging_away && !merging_away:
 			var humbled = collider.size > size
@@ -174,35 +175,34 @@ func collide(collider):
 			# Split
 			elif color_type == ColorType.RED || collider.color_type == ColorType.RED:
 				if humbled:
-					color_reaction(collider, color_type)
+					color_reaction(collider, color_type, collision)
 				else:
-					color_reaction(collider, collider.color_type)
+					color_reaction(collider, collider.color_type, collision)
 			# Misc
 			elif collider.color_type != ColorType.WHITE && (color_type == ColorType.WHITE || humbled):
-				color_reaction(collider, collider.color_type)
+				color_reaction(collider, collider.color_type, collision)
 			else:
-				color_reaction(collider, color_type)
+				color_reaction(collider, color_type, collision)
 		else:
 			collider.add_collision_exception_with(self)
 			add_collision_exception_with(collider)
 	else:
-		bounce(collider)
+		bounce(collision)
 
-func color_reaction(collider, color):
+func color_reaction(collider, color, collision):
 	match color:
 		ColorType.WHITE:
-			bounce(collider)
+			bounce(collision)
 		ColorType.GREEN:
-			bounce(collider)
+			bounce(collision)
 		ColorType.BLUE:
 			dance(collider)
 		ColorType.RED:
 			split(collider)
 
-func bounce(collider):
-	var collision_normal = (position-collider.position).normalized()
-	if collision_normal.dot(velocity) < 0:
-		velocity = velocity.bounce(collision_normal)
+func bounce(collision):
+	if collision.normal.dot(velocity) < 0:
+		velocity = velocity.bounce(collision.normal)
 		angle = rad2deg(velocity.angle())
 		refresh_velocity()
 
