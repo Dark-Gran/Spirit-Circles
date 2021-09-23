@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/world/levels/Level.gd" type="Script" id=2]
+[ext_resource path="res://src/world/Wall.tscn" type="PackedScene" id=3]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Circles" type="Node2D" parent="."]
+
+[node name="Circle" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 335.685, 417.102 )
+color_type = 1
+size = 11.0
+
+[node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 974.064, 948.953 )
+color_type = 1
+angle = 90
+size = 8.0
+
+[node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 746.757, 605.687 )
+color_type = 2
+size = 11.0
+
+[node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1550.41, 800.628 )
+color_type = 2
+angle = -90
+size = 8.0
+
+[node name="Statics" type="Node2D" parent="."]
+
+[node name="Wall" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 582.173, 138.212 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall2" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 582.173, 1120.93 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall3" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1287.29, -55.7883 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall4" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1287.29, 934.928 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall5" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( -1.82739, 138.212 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall6" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( -1.82739, 934.928 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall7" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1918.17, 138.212 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall8" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1918.17, 934.928 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall9" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 582.173, 524.212 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall10" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( -1.82739, 694.928 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall11" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1287.29, 537.212 )
+scale = Vector2( 4, 20 )
+
+[node name="Wall12" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1918.17, 694.928 )
+scale = Vector2( 4, 20 )
