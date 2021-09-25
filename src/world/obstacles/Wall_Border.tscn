@@ -30,25 +30,25 @@ mesh = SubResource( 1 )
 [node name="MeshInstance2D5" type="MeshInstance2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 0, 540 )
-scale = Vector2( 3.5, 53.5 )
+scale = Vector2( 3.5, 60 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance2D6" type="MeshInstance2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 960, 0 )
-scale = Vector2( 95.5, 3.5 )
+scale = Vector2( 100, 3.5 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance2D7" type="MeshInstance2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 960, 1080 )
-scale = Vector2( 95.5, 3.5 )
+scale = Vector2( 100, 3.5 )
 mesh = SubResource( 1 )
 
 [node name="MeshInstance2D8" type="MeshInstance2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 1920, 540 )
-scale = Vector2( 3.5, 53.5 )
+scale = Vector2( 3.5, 60 )
 mesh = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
