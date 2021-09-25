@@ -9,6 +9,24 @@
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="Statics" type="Node2D" parent="."]
+
+[node name="Beam" parent="Statics" instance=ExtResource( 5 )]
+position = Vector2( 960, 540 )
+scale = Vector2( 1, 1.246 )
+
+[node name="Wall" parent="Statics" instance=ExtResource( 4 )]
+position = Vector2( 0, 540 )
+
+[node name="Wall2" parent="Statics" instance=ExtResource( 4 )]
+position = Vector2( 1920, 540 )
+
+[node name="Wall3" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 960, 1080 )
+
+[node name="Wall4" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 960, 0 )
+
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
@@ -74,21 +92,3 @@ position = Vector2( 321.667, 574.142 )
 color_type = 1
 angle = 15
 size = 22.0
-
-[node name="Statics" type="Node2D" parent="."]
-
-[node name="Beam" parent="Statics" instance=ExtResource( 5 )]
-position = Vector2( 960, 540 )
-scale = Vector2( 1, 1.246 )
-
-[node name="Wall" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 0, 540 )
-
-[node name="Wall2" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 1920, 540 )
-
-[node name="Wall3" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 960, 1080 )
-
-[node name="Wall4" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 960, 0 )
