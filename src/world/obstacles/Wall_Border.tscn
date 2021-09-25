@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 20, 20, 2 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+[node name="Wall" type="KinematicBody2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2( 0, 540 )
+scale = Vector2( 4, 54 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+position = Vector2( 960, 0 )
+scale = Vector2( 96, 4 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="."]
+position = Vector2( 960, 1080 )
+scale = Vector2( 96, 4 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
+position = Vector2( 1920, 540 )
+scale = Vector2( 4, 54 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 0, 540 )
+scale = Vector2( 3.5, 53.5 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D6" type="MeshInstance2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 960, 0 )
+scale = Vector2( 95.5, 3.5 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D7" type="MeshInstance2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 960, 1080 )
+scale = Vector2( 95.5, 3.5 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D8" type="MeshInstance2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1920, 540 )
+scale = Vector2( 3.5, 53.5 )
+mesh = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 540 )
+scale = Vector2( 4, 54 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 1920, 540 )
+scale = Vector2( 4, 54 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2( 960, 0 )
+scale = Vector2( 96, 4 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2( 960, 1080 )
+scale = Vector2( 96, 4 )
+shape = SubResource( 2 )

@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/world/levels/Level_010.gd" type="Script" id=2]
+[ext_resource path="res://src/world/obstacles/Wall_Border.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/world/obstacles/Wall_Cross_1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/world/obstacles/Button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=7]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Circles" type="Node2D" parent="."]
+
+[node name="Circle" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 444.489, 192.093 )
+color_type = 2
+angle = 210
+size = 10.0
+
+[node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1679.45, 754.039 )
+color_type = 1
+angle = 90
+size = 18.0
+
+[node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 186.592, 761.349 )
+angle = 110
+size = 24.0
+
+[node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1699.8, 335.181 )
+color_type = 2
+angle = 30
+size = 24.0
+
+[node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 708.062, 362.715 )
+angle = 45
+size = 15.0
+
+[node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1284.92, 178.693 )
+angle = 100
+
+[node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1483.96, 977.321 )
+angle = 175
+
+[node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 715.41, 931.443 )
+color_type = 2
+angle = -20
+size = 19.0
+
+[node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 575.601, 715.595 )
+color_type = 1
+
+[node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1194.09, 373.885 )
+color_type = 1
+angle = -10
+size = 12.0
+
+[node name="Circle11" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 1297.51, 786.126 )
+color_type = 2
+angle = 150
+size = 24.0
+
+[node name="Circle12" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 285.361, 373.023 )
+color_type = 1
+angle = 15
+size = 22.0
+
+[node name="Statics" type="Node2D" parent="."]
+
+[node name="Beams" type="Node2D" parent="Statics"]
+
+[node name="Beam" parent="Statics/Beams" instance=ExtResource( 7 )]
+position = Vector2( 960, 911.138 )
+scale = Vector2( 1.6, 0.7 )
+color_type = 2
+
+[node name="Beam2" parent="Statics/Beams" instance=ExtResource( 7 )]
+position = Vector2( 960, 183.138 )
+scale = Vector2( 1.6, 0.7 )
+color_type = 2
+
+[node name="Beam3" parent="Statics/Beams" instance=ExtResource( 7 )]
+position = Vector2( 370.939, 540 )
+rotation = 1.5708
+scale = Vector2( 1.6, 2 )
+color_type = 1
+
+[node name="Beam4" parent="Statics/Beams" instance=ExtResource( 7 )]
+position = Vector2( 1574.49, 540 )
+rotation = 1.5708
+scale = Vector2( 1.6, 2 )
+color_type = 1
+
+[node name="Wall3" parent="Statics" instance=ExtResource( 5 )]
+position = Vector2( 960, 540 )
+
+[node name="Wall" parent="Statics" instance=ExtResource( 3 )]
+
+[node name="Button" parent="Statics" instance=ExtResource( 6 )]
+position = Vector2( 960, 540 )
