@@ -106,11 +106,17 @@ func _physics_process(delta):
 	# Reset breakability
 	if unbreakable && grow_buffer == 0:
 		unbreakable = false
+	# Reset collison-exceptions
 	if ignored_while_overlapping.size() > 0:
 		var not_to_ignore_anymore = Array()
 		for i in ignored_while_overlapping:
-			if !circles_overlap(self, i):
-				not_to_ignore_anymore.append(i)
+			if i.is_in_group("circles"):
+				if !circles_overlap(self, i):
+					not_to_ignore_anymore.append(i)
+			else:
+				if i.get_node_or_null("CollisionShape2D") != null:
+					if !$CollisionShape2D.shape.collide($CollisionShape2D.transform, i.get_node("CollisionShape2D").shape, i.get_node("CollisionShape2D").transform):
+						not_to_ignore_anymore.append(i)
 		for i in not_to_ignore_anymore:
 			remove_from_ignore_while_overlapping(i)
 	# RayCast
@@ -154,8 +160,8 @@ func _physics_process(delta):
 	while movement.length() > 0 && i <= MAX_MOVE_ATTEMPTS:
 		var collision = move_and_collide(movement, true, true, true)
 		if collision:
+			move_and_collide(collision.travel)
 			collide(collision)
-			move_and_collide(movement)
 			movement = collision.remainder
 		else:
 			move_and_collide(movement)
@@ -189,6 +195,13 @@ func collide(collision):
 		else:
 			collider.add_collision_exception_with(self)
 			add_collision_exception_with(collider)
+	elif collider.is_in_group("beams"):
+		if merging_away || color_type == collider.color_type:
+			add_to_ignore_while_overlapping(collider)
+		elif collider.color_type == ColorType.WHITE:
+			color_reaction(collider, color_type, collision)
+		else:
+			color_reaction(collider, collider.color_type, collision)
 	else:
 		bounce(collision)
 
@@ -236,9 +249,12 @@ func split(collider):
 	splitter.add_to_ignore_while_overlapping(toSplit)
 	toSplit.add_to_ignore_while_overlapping(splitter)
 	# Get outcome angle
-	var perpendicular = splitter.velocity_direction.rotated(deg2rad(90))
+	var splitter_direction = Vector2.ZERO
+	if splitter.is_in_group("circles"):
+		splitter_direction = splitter.velocity_direction
+	var perpendicular = splitter_direction.rotated(deg2rad(90))
 	var angle_to_perp = floor(rad2deg(toSplit.velocity_direction.angle_to(perpendicular)))
-	var mid_direction = splitter.velocity_direction + toSplit.velocity_direction # "Get pushed by splitter"
+	var mid_direction = splitter_direction + toSplit.velocity_direction # "Get pushed by splitter"
 	var mid_angle = rad2deg(mid_direction.angle())
 	# Update toSplit
 	var tot_size = toSplit.size+toSplit.grow_buffer
@@ -246,7 +262,7 @@ func split(collider):
 	if !toSplit.unbreakable && half_size >= toSplit.color_info.get("lowest_power"): # Break toSplit if big enough
 		toSplit.unbreakable = true
 		if angle_to_perp <= 0 && abs(angle_to_perp) != 180: # In direction against splitter's push = move against the push (ie. "splitting opposing force only corrects it")
-			mid_direction = toSplit.velocity_direction - splitter.velocity_direction
+			mid_direction = toSplit.velocity_direction - splitter_direction
 			mid_angle = rad2deg(mid_direction.angle())
 		# Update old
 		toSplit.grow_buffer = -(toSplit.size-half_size)

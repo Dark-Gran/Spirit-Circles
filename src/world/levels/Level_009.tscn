@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/world/levels/Level.gd" type="Script" id=2]
 [ext_resource path="res://src/world/obstacles/Wall_0.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/world/obstacles/Wall_2.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=5]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -17,7 +18,7 @@ angle = 210
 size = 10.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1719.5, 829.697 )
+position = Vector2( 1335.62, 825.207 )
 color_type = 1
 angle = 90
 size = 18.0
@@ -43,11 +44,11 @@ position = Vector2( 1556.4, 125.287 )
 angle = 100
 
 [node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1568.52, 979.394 )
+position = Vector2( 1058.92, 649.39 )
 angle = 175
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1214.88, 883.793 )
+position = Vector2( 1592.03, 865.834 )
 color_type = 2
 angle = -20
 size = 19.0
@@ -63,7 +64,7 @@ angle = -10
 size = 12.0
 
 [node name="Circle11" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 960.427, 504.688 )
+position = Vector2( 674.821, 456.858 )
 color_type = 2
 angle = 150
 size = 24.0
@@ -75,6 +76,10 @@ angle = 15
 size = 22.0
 
 [node name="Statics" type="Node2D" parent="."]
+
+[node name="Beam" parent="Statics" instance=ExtResource( 5 )]
+position = Vector2( 960, 540 )
+scale = Vector2( 1, 1.246 )
 
 [node name="Wall" parent="Statics" instance=ExtResource( 4 )]
 position = Vector2( 0, 540 )
