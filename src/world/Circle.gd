@@ -107,7 +107,7 @@ func _physics_process(delta):
 	if unbreakable && grow_buffer == 0:
 		unbreakable = false
 	# Reset collison-exceptions
-	if ignored_while_overlapping.size() > 0:
+	if !merging_away && ignored_while_overlapping.size() > 0:
 		var not_to_ignore_anymore = Array()
 		for i in ignored_while_overlapping:
 			if i.is_in_group("circles"):
@@ -115,7 +115,7 @@ func _physics_process(delta):
 					not_to_ignore_anymore.append(i)
 			else:
 				if i.get_node_or_null("CollisionShape2D") != null:
-					if !$CollisionShape2D.shape.collide($CollisionShape2D.transform, i.get_node("CollisionShape2D").shape, i.get_node("CollisionShape2D").transform):
+					if !$CollisionShape2D.shape.collide_with_motion($CollisionShape2D.global_transform, velocity*delta, i.get_node("CollisionShape2D").shape, i.get_node("CollisionShape2D").global_transform, Vector2.ZERO):
 						not_to_ignore_anymore.append(i)
 		for i in not_to_ignore_anymore:
 			remove_from_ignore_while_overlapping(i)
@@ -212,7 +212,7 @@ func color_reaction(collider, color, collision):
 		ColorType.GREEN:
 			bounce(collision)
 		ColorType.BLUE:
-			dance(collider)
+			dance(collider, collision)
 		ColorType.RED:
 			split(collider)
 
@@ -229,10 +229,9 @@ func mergeIn(collider):
 	grow_buffer += collider.size+collider.grow_buffer
 	collider.grow_buffer = 0
 
-func dance(collider):
-	var collision_normal = (position-collider.position).normalized()
-	if collision_normal.dot(velocity) < 0:
-		velocity = velocity.reflect(collision_normal)
+func dance(collider, collision):
+	if collision.normal.dot(velocity) < 0:
+		velocity = velocity.reflect(collision.normal)
 		var new_angle = rad2deg(velocity.angle())
 		if angle >= new_angle:
 			angle += DANCE_STRENGTH
