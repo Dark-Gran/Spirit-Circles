@@ -117,6 +117,8 @@ func _physics_process(delta):
 				if i.get_node_or_null("CollisionShape2D") != null:
 					if !$CollisionShape2D.shape.collide_with_motion($CollisionShape2D.global_transform, velocity*delta, i.get_node("CollisionShape2D").shape, i.get_node("CollisionShape2D").global_transform, Vector2.ZERO):
 						not_to_ignore_anymore.append(i)
+						if i.is_in_group("beams"):
+							i.circles_inside.erase(self)
 		for i in not_to_ignore_anymore:
 			remove_from_ignore_while_overlapping(i)
 	# RayCast
@@ -160,8 +162,8 @@ func _physics_process(delta):
 	while movement.length() > 0 && i <= MAX_MOVE_ATTEMPTS:
 		var collision = move_and_collide(movement, true, true, true)
 		if collision:
-			move_and_collide(collision.travel)
 			collide(collision)
+			move_and_collide(collision.travel)
 			movement = collision.remainder
 		else:
 			move_and_collide(movement)
@@ -198,6 +200,7 @@ func collide(collision):
 	elif collider.is_in_group("beams"):
 		if merging_away || color_type == collider.color_type:
 			add_to_ignore_while_overlapping(collider)
+			collider.circles_inside.append(self)
 		elif collider.color_type == ColorType.WHITE:
 			color_reaction(collider, color_type, collision)
 		else:
