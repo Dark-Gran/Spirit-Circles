@@ -8,6 +8,7 @@
 [ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=7]
 
 [node name="Level" type="Node2D"]
+show_behind_parent = true
 script = ExtResource( 2 )
 
 [node name="Circles" type="Node2D" parent="."]
