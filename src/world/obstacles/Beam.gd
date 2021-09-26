@@ -31,15 +31,13 @@ func _physics_process(delta):
 	if switch_queued:
 		switch_queued = false
 		refresh()
-		notify_circles()
-
-func notify_circles():
 	for c in circles_inside:
-		c.remove_collision_exception_with(self)
-		var collision = c.move_and_collide(Vector2.ZERO, true, true, true)
-		c.add_collision_exception_with(self)
-		if collision:
-			c.collide(collision)
+		if c.color_type != color_type:
+			c.remove_collision_exception_with(self)
+			var collision = c.move_and_collide(Vector2.ZERO, true, true, true)
+			c.add_collision_exception_with(self)
+			if collision:
+				c.collide(collision)
 
 func add_circle_inside(circle):
 	if !circles_inside.has(circle):
