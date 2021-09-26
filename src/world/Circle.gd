@@ -107,11 +107,11 @@ func _physics_process(delta):
 	if unbreakable && grow_buffer == 0:
 		unbreakable = false
 	# Reset collison-exceptions
-	if !merging_away && ignored_while_overlapping.size() > 0:
+	if ignored_while_overlapping.size() > 0:
 		var not_to_ignore_anymore = Array()
 		for i in ignored_while_overlapping:
 			if i.is_in_group("circles"):
-				if !circles_overlap(self, i):
+				if !merging_away && !circles_overlap(self, i):
 					not_to_ignore_anymore.append(i)
 			else:
 				if i.get_node_or_null("CollisionShape2D") != null:
@@ -200,7 +200,7 @@ func collide(collision):
 	elif collider.is_in_group("beams"):
 		if merging_away || color_type == collider.color_type:
 			add_to_ignore_while_overlapping(collider)
-			collider.circles_inside.append(self)
+			collider.add_circle_inside(self)
 		elif collider.color_type == ColorType.WHITE:
 			color_reaction(collider, color_type, collision)
 		else:
@@ -283,8 +283,9 @@ func split(collider):
 		toSplit.refresh()
 
 func add_to_ignore_while_overlapping(i):
-	add_collision_exception_with(i)
-	ignored_while_overlapping.append(i)
+	if !ignored_while_overlapping.has(i):
+		add_collision_exception_with(i)
+		ignored_while_overlapping.append(i)
 
 func remove_from_ignore_while_overlapping(i):
 	remove_collision_exception_with(i)
