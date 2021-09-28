@@ -32,6 +32,7 @@ const CIRCLE_OVERLAP_FIX = 1 # see circles_overlap()
 const MAX_MOVE_ATTEMPTS = 5 # see process() "Move"
 const DANCE_STRENGTH = 0.1 # see dance()
 const SPLIT_PART_ANGLE = 15 # see split()
+const STUCK_CAP = 3 # see process() "Stuck"
 
 export (ColorType) var color_type = ColorType.WHITE
 export (int) var angle = 0
@@ -108,6 +109,7 @@ func _physics_process(delta):
 	# Reset breakability
 	if unbreakable && grow_buffer == 0:
 		unbreakable = false
+		stuck_timer = 0
 	# Reset collison-exceptions
 	if ignored_while_overlapping.size() > 0:
 		var not_to_ignore_anymore = Array()
@@ -117,7 +119,7 @@ func _physics_process(delta):
 					not_to_ignore_anymore.append(i)
 			else:
 				if i.get_node_or_null("CollisionShape2D") != null:
-					if !$CollisionShape2D.shape.collide_with_motion($CollisionShape2D.global_transform, velocity*delta, i.get_node("CollisionShape2D").shape, i.get_node("CollisionShape2D").global_transform, Vector2.ZERO):
+					if !bodies_collide_with_motion(self, i, velocity*delta, Vector2.ZERO):
 						not_to_ignore_anymore.append(i)
 						if i.is_in_group("beams"):
 							i.circles_inside.erase(self)
@@ -160,29 +162,36 @@ func _physics_process(delta):
 			null_ray_points()
 	# Move
 	var movement = velocity*delta
-	var i = 0
-	while movement.length() > 0 && i <= MAX_MOVE_ATTEMPTS:
-		var collision = move_and_collide(movement, true, true, true)
+	var r = 0
+	var collision
+	while movement.length() > 0 && r <= MAX_MOVE_ATTEMPTS:
+		collision = move_and_collide(movement, true, true, true)
 		if collision:
 			collide(collision)
-			if get_collision_exceptions().has(collision.collider):
-				move_and_collide(movement)
-				break
+			move_and_collide(collision.travel)
+			var rad_angle = deg2rad(angle)
+			if rad_angle < collision.remainder.angle():
+				movement = collision.remainder.rotated(rad_angle-collision.remainder.angle())
 			else:
-				move_and_collide(collision.travel)
-				var rad_angle = deg2rad(angle)
-				if rad_angle < collision.travel.angle():
-					movement = collision.remainder.rotated(rad_angle-collision.travel.angle())
-				else:
-					movement = collision.remainder.rotated(collision.travel.angle()-rad_angle)
+				movement = collision.remainder.rotated(collision.remainder.angle()-rad_angle)
 		else:
 			move_and_collide(movement)
 			break
-		i += 1
+		r += 1
 	# Stuck in wall -> Split
-	pass
+	if !unbreakable:
+		if $StuckDetector.get_overlapping_bodies().size() > 1:
+			stuck_timer += delta
+			if stuck_timer > STUCK_CAP:
+				stuck_timer = 0
+				split_on_stuck($StuckDetector.get_overlapping_bodies())
+		elif stuck_timer > 0:
+			stuck_timer = 0
 
 # COLLISIONS
+
+func bodies_collide_with_motion(a, b, motion_a, motion_b):
+	return a.get_node("CollisionShape2D").shape.collide_with_motion(a.get_node("CollisionShape2D").global_transform, motion_a, b.get_node("CollisionShape2D").shape, b.get_node("CollisionShape2D").global_transform, motion_b)
 
 func collide(collision):
 	var collider = collision.collider
@@ -260,11 +269,11 @@ func split(collider):
 	if color_type == ColorType.RED:
 		toSplit = collider
 		splitter = self
-	splitter.add_to_ignore_while_overlapping(toSplit)
-	toSplit.add_to_ignore_while_overlapping(splitter)
 	# Get outcome angle
+	toSplit.add_to_ignore_while_overlapping(splitter)
 	var splitter_direction = Vector2.ZERO
 	if splitter.is_in_group("circles"):
+		splitter.add_to_ignore_while_overlapping(toSplit)
 		splitter_direction = splitter.velocity_direction
 	var perpendicular = splitter_direction.rotated(deg2rad(90))
 	var angle_to_perp = floor(rad2deg(toSplit.velocity_direction.angle_to(perpendicular)))
@@ -289,10 +298,23 @@ func split(collider):
 		new_circle.add_to_ignore_while_overlapping(toSplit)
 		toSplit.add_to_ignore_while_overlapping(new_circle)
 		new_circle.add_to_ignore_while_overlapping(splitter)
-		splitter.add_to_ignore_while_overlapping(new_circle)
+		if splitter.is_in_group("circles"):
+			splitter.add_to_ignore_while_overlapping(new_circle)
+		return new_circle
 	else: # Redirect toSplit if too small
 		toSplit.angle = mid_angle
 		toSplit.refresh()
+		return null
+
+func split_on_stuck(overlaps):
+	if overlaps.size() > 0:
+		var new_circle = split(overlaps[0])
+		if new_circle:
+			for o in overlaps:
+				o.add_collision_exception_with(self)
+				add_to_ignore_while_overlapping(o)
+				o.add_collision_exception_with(new_circle)
+				new_circle.add_to_ignore_while_overlapping(o)
 
 func add_to_ignore_while_overlapping(i):
 	if !ignored_while_overlapping.has(i):
@@ -302,6 +324,8 @@ func add_to_ignore_while_overlapping(i):
 func remove_from_ignore_while_overlapping(i):
 	remove_collision_exception_with(i)
 	ignored_while_overlapping.erase(i)
+	if !i.is_in_group("circles"):
+		i.remove_collision_exception_with(self)
 
 # REFRESHERS
 
@@ -314,8 +338,10 @@ func refresh():
 
 func refresh_size():
 	var s = float(size)/PI
-	$MeshInstance2D.scale = Vector2(s, s)
-	$CollisionShape2D.scale = Vector2(s, s)
+	var new_scale = Vector2(s, s)
+	$MeshInstance2D.scale = new_scale
+	$CollisionShape2D.scale = new_scale
+	$StuckDetector.scale = new_scale
 	radius = s*Main.SIZE_TO_SCALE
 	top_portal = -radius
 	left_portal = -radius
