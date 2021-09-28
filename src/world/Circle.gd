@@ -170,7 +170,11 @@ func _physics_process(delta):
 				break
 			else:
 				move_and_collide(collision.travel)
-				movement = collision.remainder.rotated(collision.travel.angle()-deg2rad(angle))
+				var rad_angle = deg2rad(angle)
+				if rad_angle < collision.travel.angle():
+					movement = collision.remainder.rotated(rad_angle-collision.travel.angle())
+				else:
+					movement = collision.remainder.rotated(collision.travel.angle()-rad_angle)
 		else:
 			move_and_collide(movement)
 			break
