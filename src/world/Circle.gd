@@ -60,6 +60,8 @@ var grow_buffer = 0
 var unbreakable = false
 var ignored_while_overlapping = Array()
 
+var stuck_timer = 0
+
 func _init():
 	ray_point_a = position
 	ray_point_b = null
@@ -163,12 +165,18 @@ func _physics_process(delta):
 		var collision = move_and_collide(movement, true, true, true)
 		if collision:
 			collide(collision)
-			move_and_collide(collision.travel)
-			movement = collision.remainder
+			if get_collision_exceptions().has(collision.collider):
+				move_and_collide(movement)
+				break
+			else:
+				move_and_collide(collision.travel)
+				movement = collision.remainder.rotated(collision.travel.angle()-deg2rad(angle))
 		else:
 			move_and_collide(movement)
-			movement = Vector2.ZERO
+			break
 		i += 1
+	# Stuck in wall -> Split
+	pass
 
 # COLLISIONS
 

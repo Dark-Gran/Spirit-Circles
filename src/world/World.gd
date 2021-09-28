@@ -58,6 +58,7 @@ func load_level(path):
 		reset_LevelName()
 		won = false
 		level_time = 0
+		screen_checker = SCREEN_CHECK
 		$GUI/Stopwatch.visible = $Level.Stopwatch_enabled
 
 func unload_level():

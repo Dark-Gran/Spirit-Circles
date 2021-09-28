@@ -31,7 +31,7 @@ func _physics_process(delta):
 	if switch_queued:
 		switch_queued = false
 		refresh()
-	for c in circles_inside:
+	for c in circles_inside: # todo check on-deleted
 		if c.color_type != color_type:
 			c.remove_collision_exception_with(self)
 			var collision = c.move_and_collide(Vector2.ZERO, true, true, true)
