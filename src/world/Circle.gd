@@ -315,6 +315,8 @@ func split_on_stuck(overlaps):
 				add_to_ignore_while_overlapping(o)
 				o.add_collision_exception_with(new_circle)
 				new_circle.add_to_ignore_while_overlapping(o)
+				if o.is_in_group("beams"):
+					o.add_circle_inside(new_circle)
 
 func add_to_ignore_while_overlapping(i):
 	if !ignored_while_overlapping.has(i):

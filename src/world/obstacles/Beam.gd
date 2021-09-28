@@ -31,13 +31,20 @@ func _physics_process(delta):
 	if switch_queued:
 		switch_queued = false
 		refresh()
-	for c in circles_inside: # todo check on-deleted
-		if c.color_type != color_type:
+	var to_remove = Array()
+	for c in circles_inside:
+		if c.merging_away:
+			to_remove.append(c)
+		elif c.color_type != color_type:
 			c.remove_collision_exception_with(self)
+			remove_collision_exception_with(c)
 			var collision = c.move_and_collide(Vector2.ZERO, true, true, true)
 			c.add_collision_exception_with(self)
+			add_collision_exception_with(c)
 			if collision:
 				c.collide(collision)
+	for c in to_remove:
+		circles_inside.erase(c)
 
 func add_circle_inside(circle):
 	if !circles_inside.has(circle):
