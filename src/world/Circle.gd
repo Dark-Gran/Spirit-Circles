@@ -31,7 +31,7 @@ const CIRCLE_BUTTON_MIN_RADIUS = 60
 const CIRCLE_OVERLAP_FIX = 1 # see circles_overlap()
 const MAX_MOVE_ATTEMPTS = 5 # see process() "Move"
 const DANCE_STRENGTH = 0.1 # see dance()
-const SPLIT_PART_ANGLE = 15 # see split()
+const SPLIT_PART_ANGLE = 20 # see split()
 const STUCK_CAP = 3 # see process() "Stuck"
 
 export (ColorType) var color_type = ColorType.WHITE
