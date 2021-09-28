@@ -168,12 +168,16 @@ func _physics_process(delta):
 		collision = move_and_collide(movement, true, true, true)
 		if collision:
 			collide(collision)
-			move_and_collide(collision.travel)
-			var rad_angle = deg2rad(angle)
-			if rad_angle < collision.remainder.angle():
-				movement = collision.remainder.rotated(rad_angle-collision.remainder.angle())
+			if "color_type" in collision.collider && collision.collider.color_type == color_type:
+				move_and_collide(movement)
+				break
 			else:
-				movement = collision.remainder.rotated(collision.remainder.angle()-rad_angle)
+				move_and_collide(collision.travel)
+				var rad_angle = deg2rad(angle)
+				if rad_angle < collision.remainder.angle():
+					movement = collision.remainder.rotated(rad_angle-collision.remainder.angle())
+				else:
+					movement = collision.remainder.rotated(collision.remainder.angle()-rad_angle)
 		else:
 			move_and_collide(movement)
 			break
