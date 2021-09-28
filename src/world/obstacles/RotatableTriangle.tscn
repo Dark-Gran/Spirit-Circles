@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/world/obstacles/Rotatable.gd" type="Script" id=1]
+
+[sub_resource type="PrismMesh" id=1]
+left_to_right = 0.0
+size = Vector3( 20, 20, 2 )
+
+[node name="RotatableTriangle" type="KinematicBody2D"]
+scale = Vector2( 16, 16 )
+script = ExtResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -0.238, -0.238 )
+scale = Vector2( 0.94, 0.94 )
+mesh = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -10, 10, -10, -10, 10, -10 )
