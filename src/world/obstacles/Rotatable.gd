@@ -1,6 +1,7 @@
 extends Switchable
 
 export (PoolIntArray) var angles
+export (bool) var reversed
 
 var next_angle
 
@@ -19,7 +20,7 @@ func _physics_process(delta):
 			rotation = deg2rad(round(current_state))
 		else:
 			var rot = ROT_SPEED * delta
-			if current_state > upcoming_state && (options.size() == 2 || upcoming_state >= 0):
+			if (upcoming_state >= 0 && reversed) || (!reversed && current_state > upcoming_state && (options.size() == 2 || upcoming_state >= 0)):
 				rot *= -1
 			rotate(deg2rad(rot))
 			current_state = rad2deg(transform.get_rotation())
