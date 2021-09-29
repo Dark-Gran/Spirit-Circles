@@ -168,7 +168,7 @@ func _physics_process(delta):
 		collision = move_and_collide(movement, true, true, true)
 		if collision:
 			collide(collision)
-			if "color_type" in collision.collider && collision.collider.color_type == color_type:
+			if should_ignore_collision(collision.collider, self):
 				move_and_collide(movement)
 				break
 			else:
@@ -194,6 +194,9 @@ func _physics_process(delta):
 
 # COLLISIONS
 
+func should_ignore_collision(a, b):
+	return "color_type" in a && "color_type" in b && (a.color_type == b.color_type || a.color_type == ColorType.RED || b.color_type == ColorType.RED)
+
 func bodies_collide_with_motion(a, b, motion_a, motion_b):
 	return a.get_node("CollisionShape2D").shape.collide_with_motion(a.get_node("CollisionShape2D").global_transform, motion_a, b.get_node("CollisionShape2D").shape, b.get_node("CollisionShape2D").global_transform, motion_b)
 
@@ -201,7 +204,7 @@ func collide(collision):
 	var collider = collision.collider
 	if collider.is_in_group("circles"):
 		if !collider.merging_away && !merging_away:
-			var humbled = collider.size > size
+			var humbled = size <= collider.size
 			# Merge
 			if color_type == collider.color_type:
 				if humbled:
