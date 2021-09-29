@@ -21,7 +21,7 @@ var level_time = 0
 
 func _ready():
 	enable_continue(false)
-	level_id = 11
+	level_id = 12
 	move_to_level(level_id)
 
 func reload_level():
@@ -190,6 +190,8 @@ func victory_check():
 				g += 1
 			Circle.ColorType.RED:
 				r += 1
+		if c.stuck_timer > 0: # no victory unless no circles are stuck
+			w += 2
 	return w <= 1 && b <= 1 && g <= 1 && r <= 1
 
 func _draw():
