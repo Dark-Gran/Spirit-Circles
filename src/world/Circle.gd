@@ -229,7 +229,7 @@ func collide(collision):
 		if merging_away || color_type == collider.color_type:
 			add_to_ignore_while_overlapping(collider)
 			collider.add_circle_inside(self)
-		elif collider.color_type == ColorType.WHITE:
+		elif collider.color_type == ColorType.WHITE && color_type != ColorType.RED:
 			color_reaction(collider, color_type, collision)
 		else:
 			color_reaction(collider, collider.color_type, collision)
