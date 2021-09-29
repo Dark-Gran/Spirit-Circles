@@ -13,9 +13,7 @@ func switch():
 		var new_state = get_next_after(upcoming_state, options)
 		if new_state != null:
 			upcoming_state = new_state
-			return true
-	return false
-
+			
 func get_next_after(current, list):
 	if list.size() <= 1:
 		return null
