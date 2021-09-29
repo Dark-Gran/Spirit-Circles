@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Switchable
 
 export (Circle.ColorType) var color_type = Circle.ColorType.WHITE
 
@@ -8,29 +8,22 @@ var circles_inside = Array()
 var switch_queued = false
 
 func _ready():
+	current_state = color_type
+	options = possible_colors
 	refresh()
+	._ready()
 
 func refresh():
 	$MeshInstance2D.modulate = Circle.ct_dict.get(color_type).get("color")
 	$MeshInstance2D.modulate.a = 0.4*$MeshInstance2D.modulate.a
 
-func switch():
-	var found = false
-	for p in possible_colors:
-		if found:
-			color_type = p
-			switch_queued = true
-			return found
-		elif p == color_type:
-			found = true
-	color_type = possible_colors[0]
-	switch_queued = true
-	return found
-
 func _physics_process(delta):
-	if switch_queued:
-		switch_queued = false
+	# Check state
+	if current_state != upcoming_state:
+		current_state = upcoming_state
+		color_type = upcoming_state
 		refresh()
+	# Check circles
 	var to_remove = Array()
 	for c in circles_inside:
 		if c.merging_away:

@@ -1,39 +1,25 @@
-extends KinematicBody2D
+extends Switchable
 
 export (PoolIntArray) var angles
 
-var angle
-var upcoming_angle
-var new_angle
+var next_angle
 
-const ROT_SPEED = 50
+const ROT_SPEED = 30
 
 func _ready():
-	angle = round(rad2deg(transform.get_rotation()))
-	upcoming_angle = angle
-	if angles.size() == 0:
-		angles.append(angle)
-
-func switch():
-	var found = false
-	for a in angles:
-		if found:
-			upcoming_angle = a
-			return found
-		elif a == upcoming_angle:
-			found = true
-	upcoming_angle = angles[0]
-	return found
+	current_state = round(rad2deg(transform.get_rotation()))
+	options = angles
+	._ready()
 
 func _physics_process(delta):
-	if new_angle != upcoming_angle:
-		new_angle = upcoming_angle
-	if angle != upcoming_angle:
-		if round(angle) == upcoming_angle: # todo smoother stop
-			rotation = deg2rad(round(angle))
+	if next_angle != upcoming_state:
+		next_angle = upcoming_state
+	if current_state != upcoming_state:
+		if round(current_state) == upcoming_state: # todo smoother stop
+			rotation = deg2rad(round(current_state))
 		else:
 			var rot = ROT_SPEED * delta
-			if angle > upcoming_angle:
+			if current_state > upcoming_state:
 				rot *= -1
 			rotate(deg2rad(rot))
-			angle = rad2deg(transform.get_rotation())
+			current_state = rad2deg(transform.get_rotation())

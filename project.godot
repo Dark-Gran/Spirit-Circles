@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Level",
 "language": "GDScript",
 "path": "res://src/world/levels/Level.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Switchable",
+"language": "GDScript",
+"path": "res://src/world/obstacles/Switchable.gd"
 } ]
 _global_script_class_icons={
 "Circle": "",
 "GitAPI": "",
-"Level": ""
+"Level": "",
+"Switchable": ""
 }
 
 [application]
