@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Circle
 
-enum ColorType {WHITE, GREEN, BLUE, RED}
+enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
 	ColorType.WHITE: {
 		"color": Color.white,

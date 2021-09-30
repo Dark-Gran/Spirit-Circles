@@ -84,24 +84,24 @@ size = 22.0
 [node name="Beam" parent="Statics/Beams" instance=ExtResource( 7 )]
 position = Vector2( 960, 911.138 )
 scale = Vector2( 1.6, 0.7 )
-color_type = 2
+color_type = 1
 
 [node name="Beam2" parent="Statics/Beams" instance=ExtResource( 7 )]
 position = Vector2( 960, 183.138 )
 scale = Vector2( 1.6, 0.7 )
-color_type = 2
+color_type = 1
 
 [node name="Beam3" parent="Statics/Beams" instance=ExtResource( 7 )]
 position = Vector2( 370.939, 540 )
 rotation = 1.5708
 scale = Vector2( 1.6, 2 )
-color_type = 1
+color_type = 2
 
 [node name="Beam4" parent="Statics/Beams" instance=ExtResource( 7 )]
 position = Vector2( 1574.49, 540 )
 rotation = 1.5708
 scale = Vector2( 1.6, 2 )
-color_type = 1
+color_type = 2
 
 [node name="Wall3" parent="Statics" instance=ExtResource( 5 )]
 position = Vector2( 960, 540 )
