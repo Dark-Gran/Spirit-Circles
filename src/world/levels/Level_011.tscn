@@ -16,7 +16,7 @@ script = ExtResource( 2 )
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 155.423, 225.576 )
-color_type = 2
+color_type = 1
 angle = 210
 size = 10.0
 
@@ -58,7 +58,7 @@ size = 19.0
 
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 838.429, 635.189 )
-color_type = 1
+color_type = 2
 
 [node name="Statics" type="Node2D" parent="."]
 

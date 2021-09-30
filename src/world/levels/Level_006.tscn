@@ -9,60 +9,60 @@ script = ExtResource( 2 )
 
 [node name="Circles" type="Node2D" parent="."]
 
-[node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 213.783, 144.525 )
+[node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 715.41, 931.443 )
 color_type = 1
-angle = 210
-size = 10.0
+angle = -20
+size = 19.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1282.25, 663.4 )
-color_type = 2
+color_type = 1
 angle = 90
 size = 12.0
 
-[node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 248.43, 632.915 )
-color_type = 1
-angle = 110
-size = 25.0
-
 [node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1678.39, 534.708 )
-color_type = 2
+color_type = 1
 angle = 30
 size = 24.0
 
 [node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1048.18, 417.418 )
-color_type = 2
+color_type = 1
 angle = 240
 size = 15.0
 
 [node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1553.68, 143.017 )
-color_type = 2
+color_type = 1
 angle = 100
 
 [node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1434.01, 891.18 )
-color_type = 1
+color_type = 2
 angle = 175
 size = 17.0
 
-[node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 715.41, 931.443 )
-color_type = 2
-angle = -20
-size = 19.0
-
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 744.469, 534.835 )
-color_type = 1
+color_type = 2
+
+[node name="Circle" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 213.783, 144.525 )
+color_type = 2
+angle = 210
+size = 10.0
+
+[node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
+position = Vector2( 248.43, 632.915 )
+color_type = 2
+angle = 110
+size = 25.0
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1079.11, 253.235 )
-color_type = 1
+color_type = 2
 angle = -10
 size = 12.0
 

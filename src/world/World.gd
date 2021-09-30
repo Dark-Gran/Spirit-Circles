@@ -20,8 +20,9 @@ var level_time = 0
 # Level Loading
 
 func _ready():
+	$DebugGUI/FPS.visible = false
 	enable_continue(false)
-	level_id = 20
+	level_id = 1
 	move_to_level(level_id)
 
 func reload_level():

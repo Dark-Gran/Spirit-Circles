@@ -57,7 +57,7 @@ size = 19.0
 
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 331.353, 653.182 )
-color_type = 1
+color_type = 2
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1607.57, 429.665 )
@@ -67,7 +67,7 @@ size = 12.0
 
 [node name="Circle11" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 506.452, 468.083 )
-color_type = 2
+color_type = 1
 angle = 150
 size = 24.0
 
