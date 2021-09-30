@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/world/obstacles/DiscoBall.gd" type="Script" id=2]
+
+[sub_resource type="SphereMesh" id=1]
+rings = 3
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( -25, 0, -17.677, 2.829, 0, 4, 17.677, 2.829, 25, 0, 17.677, -2.829, 0, -4, -17.677, -2.829 )
+
+[node name="DiscoBall" type="KinematicBody2D"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Beams" type="Node2D" parent="."]
+
+[node name="Beam" parent="Beams" instance=ExtResource( 1 )]
+rotation = 0.389208
+scale = Vector2( 1, 5 )
+
+[node name="Beam3" parent="Beams" instance=ExtResource( 1 )]
+rotation = 1.1781
+scale = Vector2( 1, 5 )
+
+[node name="Beam4" parent="Beams" instance=ExtResource( 1 )]
+rotation = -1.1781
+scale = Vector2( 1, 5 )
+
+[node name="Beam2" parent="Beams" instance=ExtResource( 1 )]
+rotation = -0.389208
+scale = Vector2( 1, 5 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2( 100, 100 )
+mesh = SubResource( 1 )
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+scale = Vector2( 93.5, 93.5 )
+mesh = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 4, 25 )
+shape = SubResource( 2 )
