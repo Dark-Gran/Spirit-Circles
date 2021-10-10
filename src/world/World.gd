@@ -23,7 +23,7 @@ var level_time = 0
 func _ready():
 	$DebugGUI/FPS.visible = false
 	enable_continue(false)
-	level_id = 20
+	level_id = 11
 	move_to_level(level_id)
 
 func reload_level():
@@ -168,12 +168,18 @@ func _physics_process(delta):
 						hit = c
 						focus_power(c, delta)
 						break
-			# Player Circle
+			# Player Circle - input
 			if $Level.PlayerCircle_enabled && hit == null && !has_node("PlayerCircle") && !pc_linger:
 				pc_accumulator += delta
 			# Hypothetical Circle
 			if pc_accumulator > 0:
 				$HypoCircle.position = mouse
+		# Player Circle - update
+		if has_node("PlayerCircle"):
+			if $PlayerCircle/Area2D.get_overlapping_bodies().size() > 1:
+				for b in $PlayerCircle/Area2D.get_overlapping_bodies():
+					if !b.is_in_group("beams") && !b.is_in_group("circles") && !b.is_in_group("pc"):
+						release_pc()
 		# Screen Edge
 		screen_checker += 1
 		if screen_checker >= SCREEN_CHECK:

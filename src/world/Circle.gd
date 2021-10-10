@@ -184,7 +184,11 @@ func _physics_process(delta):
 		r += 1
 	# Stuck in wall -> Split
 	if !unbreakable:
-		if $StuckDetector.get_overlapping_bodies().size() > 1:
+		var i = 0
+		for b in $StuckDetector.get_overlapping_bodies():
+			if !b.is_in_group("beams") && !b.is_in_group("circles"):
+				i += 1
+		if i > 1:
 			stuck_timer += delta
 			if stuck_timer > STUCK_CAP:
 				stuck_timer = 0
