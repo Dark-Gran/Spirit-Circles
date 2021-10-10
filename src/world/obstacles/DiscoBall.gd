@@ -21,4 +21,4 @@ func _physics_process(delta):
 		3:
 			rot = speed
 	if rot != 0:
-		rotate(rot*delta)
+		rotation += rot*delta

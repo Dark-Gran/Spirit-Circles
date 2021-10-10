@@ -9,7 +9,9 @@ rings = 3
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( -25, 0, -17.677, 2.829, 0, 4, 17.677, 2.829, 25, 0, 17.677, -2.829, 0, -4, -17.677, -2.829 )
 
-[node name="DiscoBall" type="KinematicBody2D"]
+[node name="DiscoBall" type="KinematicBody2D" groups=[
+"discoball",
+]]
 collision_layer = 5
 collision_mask = 0
 script = ExtResource( 2 )
