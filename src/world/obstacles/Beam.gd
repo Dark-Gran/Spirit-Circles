@@ -29,7 +29,7 @@ func _physics_process(delta):
 	# Check circles
 	var to_remove = Array()
 	for c in circles_inside:
-		if c.merging_away || c == null:
+		if c == null || !is_instance_valid(c):
 			to_remove.append(c)
 		elif c.color_type != color_type:
 			c.remove_collision_exception_with(self)
@@ -43,9 +43,17 @@ func _physics_process(delta):
 		circles_inside.erase(c)
 	# DiscoBall
 	if discoball:
-		for o in $Area2D.get_overlapping_bodies():
-			if o.is_in_group("circles") && !circles_inside.has(o):
-				circles_inside.append(o)
+		for c in $Area2D.get_overlapping_bodies():
+			if c.is_in_group("circles") && !circles_inside.has(c):
+				if color_type == Circle.ColorType.RED || color_type == c.color_type:
+					c.add_collision_exception_with(self)
+					add_collision_exception_with(c)
+					circles_inside.append(c)
+					#c.add_to_ignore_while_overlapping(self)
+				else:
+					var collision = c.move_and_collide(Vector2.ZERO, true, true, true)
+					if collision:
+						c.collide(collision)
 
 func add_circle_inside(circle):
 	if !circles_inside.has(circle):
