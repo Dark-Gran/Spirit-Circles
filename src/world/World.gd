@@ -6,6 +6,7 @@ var grow_speed_adjust = 0.1 # see get_grow_speed()
 const SCREEN_CHECK = 50
 var screen_checker = SCREEN_CHECK
 
+var ready = false
 var PC = preload("res://src/world/PlayerCircle.tscn")
 var PlayerCircle
 const PC_WAIT = 1
@@ -22,7 +23,7 @@ var level_time = 0
 func _ready():
 	$DebugGUI/FPS.visible = false
 	enable_continue(false)
-	level_id = 1
+	level_id = 20
 	move_to_level(level_id)
 
 func reload_level():
@@ -39,6 +40,7 @@ func switch_level(forward):
 	move_to_level(level_id+change)
 
 func move_to_level(id):
+	ready = false
 	var base = "res://src/world/levels/Level_" # 001.tscn
 	var idstr = String(id)
 	match idstr.length():
@@ -51,6 +53,8 @@ func move_to_level(id):
 		unload_level()
 		level_id = id
 		call_deferred("load_level", path)
+	else:
+		ready = true
 
 func load_level(path):
 	var Level = load(path).instance()
@@ -61,6 +65,7 @@ func load_level(path):
 		level_time = 0
 		screen_checker = SCREEN_CHECK
 		$GUI/Stopwatch.visible = $Level.Stopwatch_enabled
+	ready = true
 
 func unload_level():
 	pc_accumulator = 0
@@ -99,34 +104,35 @@ func _on_Continue_button_up():
 # World Steps
 
 func _input(event):
-	# Player Circle
-	if get_node_or_null("Level") != null:
-		if InputMap.event_is_action(event, "ui_select"):
-			if !has_node("PlayerCircle"):
-				if !event.is_pressed():
-					if pc_accumulator >= PC_WAIT:
-						spawn_pc(get_viewport().get_mouse_position())
+	if ready:
+		# Player Circle
+		if get_node_or_null("Level") != null:
+			if InputMap.event_is_action(event, "ui_select"):
+				if !has_node("PlayerCircle"):
+					if !event.is_pressed():
+						if pc_accumulator >= PC_WAIT:
+							spawn_pc(get_viewport().get_mouse_position())
+						pc_accumulator = 0
+					pc_linger = false
+				elif Geometry.is_point_in_circle(get_viewport().get_mouse_position(), $PlayerCircle.position, Main.PC_RADIUS):
+					release_pc()
 					pc_accumulator = 0
-				pc_linger = false
-			elif Geometry.is_point_in_circle(get_viewport().get_mouse_position(), $PlayerCircle.position, Main.PC_RADIUS):
-				release_pc()
-				pc_accumulator = 0
-				pc_linger = true
-	# Controls
-	if event.is_pressed():
-		if InputMap.event_is_action(event, "ui_left"):
-			switch_level(false)
-		elif InputMap.event_is_action(event, "ui_right"):
-			switch_level(true)
-		elif InputMap.event_is_action(event, "ui_reload"):
-			reload_level()
-		elif InputMap.event_is_action(event, "ui_fps"):
-			$DebugGUI/FPS.visible = !$DebugGUI/FPS.visible
-		elif InputMap.event_is_action(event, "ui_accept"):
-			if won:
-				_on_Continue_button_up()
-		elif InputMap.event_is_action(event, "toggle_fullscreen"):
-			OS.window_fullscreen = !OS.window_fullscreen
+					pc_linger = true
+		# Controls
+		if event.is_pressed():
+			if InputMap.event_is_action(event, "ui_left"):
+				switch_level(false)
+			elif InputMap.event_is_action(event, "ui_right"):
+				switch_level(true)
+			elif InputMap.event_is_action(event, "ui_reload"):
+				reload_level()
+			elif InputMap.event_is_action(event, "ui_fps"):
+				$DebugGUI/FPS.visible = !$DebugGUI/FPS.visible
+			elif InputMap.event_is_action(event, "ui_accept"):
+				if won:
+					_on_Continue_button_up()
+			elif InputMap.event_is_action(event, "toggle_fullscreen"):
+				OS.window_fullscreen = !OS.window_fullscreen
 
 func _process(delta):
 	# LevelName

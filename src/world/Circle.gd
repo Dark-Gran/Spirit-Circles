@@ -109,22 +109,22 @@ func _physics_process(delta):
 	# Reset breakability
 	if unbreakable && grow_buffer == 0:
 		unbreakable = false
+		$CollisionShape2D.disabled = false
 		stuck_timer = 0
 	# Reset collison-exceptions
-	if ignored_while_overlapping.size() > 0:
-		var not_to_ignore_anymore = Array()
-		for i in ignored_while_overlapping:
-			if i.is_in_group("circles"):
-				if !merging_away && !circles_overlap(self, i):
-					not_to_ignore_anymore.append(i)
-			else:
-				if i.get_node_or_null("CollisionShape2D") != null:
-					if !bodies_collide_with_motion(self, i, velocity*delta, Vector2.ZERO):
+	if grow_buffer == 0: # possibly in-future: debug red beams without this line (note: issues with collide_with_motion()/overlaps_body()?)
+		if ignored_while_overlapping.size() > 0:
+			var not_to_ignore_anymore = Array()
+			for i in ignored_while_overlapping:
+				if i.is_in_group("circles"):
+					if merging_away || !circles_overlap(self, i):
 						not_to_ignore_anymore.append(i)
-						if i.is_in_group("beams"):
-							i.circles_inside.erase(self)
-		for i in not_to_ignore_anymore:
-			remove_from_ignore_while_overlapping(i)
+				else:
+					if !$StuckDetector.overlaps_body(i):
+					#if i.get_node_or_null("CollisionShape2D") != null && !Main.bodies_collide_with_motion(self, i, Vector2.ZERO, Vector2.ZERO):
+						not_to_ignore_anymore.append(i)
+			for i in not_to_ignore_anymore:
+				remove_from_ignore_while_overlapping(i)
 	# RayCast
 	if world.get_rays_enabled():
 		var cast = velocity*PREDICTION_DISTANCE
@@ -197,9 +197,6 @@ func _physics_process(delta):
 func should_ignore_collision(a, b):
 	return "color_type" in a && "color_type" in b && (a.color_type == b.color_type || a.color_type == ColorType.RED || b.color_type == ColorType.RED)
 
-func bodies_collide_with_motion(a, b, motion_a, motion_b):
-	return a.get_node("CollisionShape2D").shape.collide_with_motion(a.get_node("CollisionShape2D").global_transform, motion_a, b.get_node("CollisionShape2D").shape, b.get_node("CollisionShape2D").global_transform, motion_b)
-
 func collide(collision):
 	var collider = collision.collider
 	if collider.is_in_group("circles"):
@@ -207,10 +204,11 @@ func collide(collision):
 			var humbled = size <= collider.size
 			# Merge
 			if color_type == collider.color_type:
-				if humbled:
-					collider.mergeIn(self)
-				else:
-					mergeIn(collider)
+				if !collider.unbreakable && !unbreakable:
+					if humbled:
+						collider.mergeIn(self)
+					else:
+						mergeIn(collider)
 			# Split
 			elif color_type == ColorType.RED || collider.color_type == ColorType.RED:
 				if humbled:
@@ -307,10 +305,15 @@ func split(collider):
 		new_circle.add_to_ignore_while_overlapping(splitter)
 		if splitter.is_in_group("circles"):
 			splitter.add_to_ignore_while_overlapping(new_circle)
+		if collider.is_in_group("beams"):
+			collider.add_circle_inside(new_circle)
+			collider.add_circle_inside(toSplit)
 		return new_circle
 	else: # Redirect toSplit if too small
 		toSplit.angle = mid_angle
 		toSplit.refresh()
+		if collider.is_in_group("beams"):
+			collider.add_circle_inside(toSplit)
 		return null
 
 func split_on_stuck(overlaps):
@@ -335,6 +338,8 @@ func remove_from_ignore_while_overlapping(i):
 	ignored_while_overlapping.erase(i)
 	if !i.is_in_group("circles"):
 		i.remove_collision_exception_with(self)
+		if i.is_in_group("beams"):
+			i.circles_inside.erase(self)
 
 # REFRESHERS
 

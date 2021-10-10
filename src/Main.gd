@@ -21,3 +21,6 @@ func _deferred_goto_scene(path):
 	current_scene = s.instance()
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene(current_scene)
+
+func bodies_collide_with_motion(a, b, motion_a, motion_b):
+	return a.get_node("CollisionShape2D").shape.collide_with_motion(a.get_node("CollisionShape2D").global_transform, motion_a, b.get_node("CollisionShape2D").shape, b.get_node("CollisionShape2D").global_transform, motion_b)

@@ -26,7 +26,7 @@ func _physics_process(delta):
 	# Check circles
 	var to_remove = Array()
 	for c in circles_inside:
-		if c.merging_away:
+		if c.merging_away || c == null:
 			to_remove.append(c)
 		elif c.color_type != color_type:
 			c.remove_collision_exception_with(self)
@@ -34,7 +34,7 @@ func _physics_process(delta):
 			var collision = c.move_and_collide(Vector2.ZERO, true, true, true)
 			c.add_collision_exception_with(self)
 			add_collision_exception_with(c)
-			if collision:
+			if collision && collision.collider == self:
 				c.collide(collision)
 	for c in to_remove:
 		circles_inside.erase(c)
