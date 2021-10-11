@@ -116,13 +116,16 @@ func _physics_process(delta):
 		if ignored_while_overlapping.size() > 0:
 			var not_to_ignore_anymore = Array()
 			for i in ignored_while_overlapping:
-				if i.is_in_group("circles"):
-					if merging_away || !circles_overlap(self, i):
-						not_to_ignore_anymore.append(i)
+				if i != null && is_instance_valid(i):
+					if i.is_in_group("circles"):
+						if merging_away || !circles_overlap(self, i):
+							not_to_ignore_anymore.append(i)
+					else:
+						if !$StuckDetector.overlaps_body(i):
+						#if i.get_node_or_null("CollisionShape2D") != null && !Main.bodies_collide_with_motion(self, i, Vector2.ZERO, Vector2.ZERO):
+							not_to_ignore_anymore.append(i)
 				else:
-					if !$StuckDetector.overlaps_body(i):
-					#if i.get_node_or_null("CollisionShape2D") != null && !Main.bodies_collide_with_motion(self, i, Vector2.ZERO, Vector2.ZERO):
-						not_to_ignore_anymore.append(i)
+					not_to_ignore_anymore.append(i)
 			for i in not_to_ignore_anymore:
 				remove_from_ignore_while_overlapping(i)
 	# RayCast
