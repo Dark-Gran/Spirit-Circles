@@ -177,9 +177,12 @@ func _physics_process(delta):
 		# Player Circle - update
 		if has_node("PlayerCircle"):
 			if $PlayerCircle/Area2D.get_overlapping_bodies().size() > 1:
+				var i = 0
 				for b in $PlayerCircle/Area2D.get_overlapping_bodies():
-					if !b.is_in_group("beams") && !b.is_in_group("circles") && !b.is_in_group("pc"):
-						release_pc()
+					if !b.is_in_group("circles") && !b.is_in_group("pc"):
+						i += 1
+				if i > 0:
+					release_pc()
 		# Screen Edge
 		screen_checker += 1
 		if screen_checker >= SCREEN_CHECK:

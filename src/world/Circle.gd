@@ -250,7 +250,7 @@ func color_reaction(collider, color, collision):
 		ColorType.BLUE:
 			dance(collider, collision)
 		ColorType.RED:
-			split(collider)
+			split(collider, collision)
 
 func bounce(collision):
 	if collision.normal.dot(velocity) < 0:
@@ -275,7 +275,7 @@ func dance(collider, collision):
 			angle -= DANCE_STRENGTH
 		refresh_velocity()
 
-func split(collider):
+func split(collider, collision):
 	var toSplit = self
 	var splitter = collider
 	if color_type == ColorType.RED:
@@ -316,7 +316,7 @@ func split(collider):
 			collider.add_circle_inside(new_circle)
 			collider.add_circle_inside(toSplit)
 		return new_circle
-	else: # Redirect toSplit if too small
+	elif !toSplit.unbreakable: # Redirect toSplit if too small
 		toSplit.angle = mid_angle
 		toSplit.refresh()
 		if collider.is_in_group("beams"):
@@ -325,7 +325,7 @@ func split(collider):
 
 func split_on_stuck(overlaps):
 	if overlaps.size() > 0:
-		var new_circle = split(overlaps[0])
+		var new_circle = split(overlaps[0], null)
 		if new_circle:
 			for o in overlaps:
 				o.add_collision_exception_with(self)

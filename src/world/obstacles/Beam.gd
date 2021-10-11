@@ -59,7 +59,7 @@ func _physics_process(delta):
 		for c in circles_inside:
 			if c != null && is_instance_valid(c):
 				if !$Area2D.get_overlapping_bodies().has(c):
-					if color_type == Circle.ColorType.RED || c.color_type == Circle.ColorType.RED:
+					if color_type == c.color_type || color_type == Circle.ColorType.RED:
 						if !c.ignored_while_overlapping.has(self):
 							c.add_to_ignore_while_overlapping(self)
 					to_remove.append(c)

@@ -22,5 +22,17 @@ func _deferred_goto_scene(path):
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene(current_scene)
 
+func fix_angle(angle):
+	while angle > 360:
+		angle -= 360
+	while angle <= -360:
+		angle += 360
+	return angle
+
+#if angle_difference > 180:
+#	angle_difference = -(360-angle_difference)
+#elif angle_difference <= -180:
+#	angle_difference = 360+angle_difference
+
 #func bodies_collide_with_motion(a, b, motion_a, motion_b):
 #	return a.get_node("CollisionShape2D").shape.collide_with_motion(a.get_node("CollisionShape2D").global_transform, motion_a, b.get_node("CollisionShape2D").shape, b.get_node("CollisionShape2D").global_transform, motion_b)
