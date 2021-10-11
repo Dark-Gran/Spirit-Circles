@@ -343,10 +343,11 @@ func add_to_ignore_while_overlapping(i):
 func remove_from_ignore_while_overlapping(i):
 	remove_collision_exception_with(i)
 	ignored_while_overlapping.erase(i)
-	if !i.is_in_group("circles"):
-		i.remove_collision_exception_with(self)
-		if i.is_in_group("beams"):
-			i.circles_inside.erase(self)
+	if i != null && is_instance_valid(i):
+		if !i.is_in_group("circles"):
+			i.remove_collision_exception_with(self)
+			if i.is_in_group("beams"):
+				i.circles_inside.erase(self)
 
 # REFRESHERS
 
