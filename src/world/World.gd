@@ -179,7 +179,6 @@ func _physics_process(delta):
 			if $PlayerCircle/Area2D.get_overlapping_bodies().size() > 1:
 				var i = 0
 				for b in $PlayerCircle/Area2D.get_overlapping_bodies():
-					print(b.is_in_group("circles"))
 					if !b.is_in_group("circles") && !b.is_in_group("pc"):
 						i += 1
 				if i > 0:
