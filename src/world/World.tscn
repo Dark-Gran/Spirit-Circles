@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/world/World.gd" type="Script" id=1]
 [ext_resource path="res://src/DebugGUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/BAHNSCHRIFT.TTF" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/verdanab.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://src/world/ScoreBox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 34
@@ -62,16 +63,18 @@ one_shot = true
 autostart = true
 
 [node name="Stopwatch" type="Label" parent="GUI"]
-margin_left = 1697.65
+margin_left = 1665.65
 margin_top = 881.01
-margin_right = 1758.65
-margin_bottom = 912.01
+margin_right = 1726.65
+margin_bottom = 922.01
 custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ScoreBox" parent="GUI" instance=ExtResource( 5 )]
 
 [node name="HypoCircle" type="Area2D" parent="."]
 scale = Vector2( 4, 4 )

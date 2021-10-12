@@ -17,13 +17,17 @@ var level_id # World -> Level -> Circles -> Circle
 var hideLevelName = false
 var won = false
 var level_time = 0
+var level_times = Array()
+const MAX_LEVEL = 20
 
 # Level Loading
 
 func _ready():
+	for i in MAX_LEVEL:
+		level_times.append(0)
 	$DebugGUI/FPS.visible = false
 	enable_continue(false)
-	level_id = 20
+	level_id = 1
 	move_to_level(level_id)
 
 func reload_level():
@@ -40,6 +44,7 @@ func switch_level(forward):
 	move_to_level(level_id+change)
 
 func move_to_level(id):
+	$GUI/ScoreBox.set_visibility(false, level_times)
 	ready = false
 	var base = "res://src/world/levels/Level_" # 001.tscn
 	var idstr = String(id)
@@ -128,6 +133,8 @@ func _input(event):
 				reload_level()
 			elif InputMap.event_is_action(event, "ui_fps"):
 				$DebugGUI/FPS.visible = !$DebugGUI/FPS.visible
+			elif InputMap.event_is_action(event, "ui_times"):
+				$GUI/ScoreBox.switch_visibility(level_times)
 			elif InputMap.event_is_action(event, "ui_accept"):
 				if won:
 					_on_Continue_button_up()
@@ -143,14 +150,19 @@ func _process(delta):
 			hideLevelName = false
 	if get_node_or_null("Level") != null:
 		# LevelTime
+		if !won:
+			level_time += delta
 		if $Level.Stopwatch_enabled:
-			if !won:
-				level_time += delta
 			$GUI/Stopwatch.text = String(floor(level_time))
 		# Check Level-End
 		if !won && victory_check():
 			won = true
-			enable_continue(true)
+			if level_id > 0 && level_id-1 < level_times.size():
+				level_times[level_id-1] = level_time
+			if level_id == MAX_LEVEL:
+				$GUI/ScoreBox.set_visibility(true, level_times)
+			else:
+				enable_continue(true)
 
 func _physics_process(delta): 
 	if get_node_or_null("Level") != null:
