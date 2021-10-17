@@ -84,7 +84,7 @@ color_type = 3
 [node name="Beam" parent="Statics/Beams" instance=ExtResource( 6 )]
 position = Vector2( 960, 540 )
 scale = Vector2( 2.821, 1.666 )
-color_type = 2
+color_type = 3
 
 [node name="Rotatables" type="Node2D" parent="Statics"]
 
