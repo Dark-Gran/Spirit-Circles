@@ -15,6 +15,7 @@ script = ExtResource( 2 )
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 188.007, 293.231 )
+color_type = 3
 angle = 210
 size = 10.0
 
@@ -22,7 +23,7 @@ size = 10.0
 position = Vector2( 1631.5, 610.229 )
 color_type = 1
 angle = 90
-size = 18.0
+size = 20.0
 
 [node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1393.94, 724.574 )
@@ -46,23 +47,25 @@ angle = 100
 
 [node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1234.76, 849.845 )
+color_type = 3
 angle = 185
 size = 8.0
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 424.738, 817.572 )
-color_type = 2
+color_type = 3
 angle = 30
 size = 20.0
 
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 268.786, 608.566 )
+color_type = 2
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1165.2, 306.184 )
 color_type = 1
 angle = -10
-size = 12.0
+size = 10.0
 
 [node name="Circle11" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 1175.78, 471.266 )

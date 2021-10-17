@@ -15,28 +15,28 @@ script = ExtResource( 2 )
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 155.423, 225.576 )
+position = Vector2( 67.423, 89.576 )
 color_type = 2
 angle = 210
 size = 10.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1456.75, 323.274 )
+position = Vector2( 1456.75, 443.274 )
 color_type = 1
 angle = 90
 size = 18.0
 
 [node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1261.65, 914.379 )
+position = Vector2( 1277.65, 930.379 )
 angle = 110
 size = 24.0
 
 [node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 281.087, 734.157 )
+position = Vector2( 249.087, 694.157 )
 angle = 110
 
 [node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1742.88, 432.381 )
+position = Vector2( 1766.88, 456.381 )
 color_type = 2
 angle = 30
 size = 24.0
@@ -47,7 +47,7 @@ angle = 240
 size = 15.0
 
 [node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1568.68, 760.431 )
+position = Vector2( 1464.68, 688.431 )
 color_type = 1
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
@@ -61,7 +61,7 @@ position = Vector2( 838.429, 635.189 )
 color_type = 1
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 413.41, 369.783 )
+position = Vector2( 461.41, 433.783 )
 color_type = 3
 angle = 210
 size = 10.0
@@ -101,7 +101,7 @@ angles = PoolIntArray( 180, 90, 0, -90 )
 reversed = true
 
 [node name="RotatableTriangle3" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 159, 157 )
+position = Vector2( 159, 149 )
 rotation = 3.14159
 angles = PoolIntArray( 180, -90, 0, 90 )
 

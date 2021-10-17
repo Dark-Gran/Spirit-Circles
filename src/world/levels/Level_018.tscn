@@ -15,13 +15,13 @@ script = ExtResource( 2 )
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 155.423, 225.576 )
+position = Vector2( 155.423, 185.576 )
 color_type = 2
 angle = 210
 size = 10.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1456.75, 323.274 )
+position = Vector2( 1620.75, 169.274 )
 color_type = 1
 angle = 90
 size = 18.0
@@ -32,22 +32,22 @@ angle = 110
 size = 24.0
 
 [node name="Circle7" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 281.087, 734.157 )
+position = Vector2( 281.087, 638.157 )
 angle = 110
 
 [node name="Circle4" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1742.88, 432.381 )
+position = Vector2( 1632.88, 506.381 )
 color_type = 2
 angle = 30
 size = 24.0
 
 [node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 618.483, 161.194 )
+position = Vector2( 594.483, 161.194 )
 angle = 240
 size = 15.0
 
 [node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1568.68, 760.431 )
+position = Vector2( 1568.68, 880.431 )
 color_type = 1
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
@@ -61,19 +61,19 @@ position = Vector2( 997.819, 969.683 )
 color_type = 1
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 413.41, 369.783 )
+position = Vector2( 365.41, 433.783 )
 color_type = 3
 angle = 210
 size = 10.0
 
 [node name="Circle11" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1460.16, 928.775 )
+position = Vector2( 1540.16, 968.775 )
 color_type = 3
 angle = 185
 size = 8.0
 
 [node name="Circle12" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 494.189, 685.118 )
+position = Vector2( 590.189, 661.118 )
 color_type = 3
 
 [node name="Statics" type="Node2D" parent="."]
@@ -83,92 +83,90 @@ color_type = 3
 [node name="Beam" parent="Statics/Beams" instance=ExtResource( 8 )]
 position = Vector2( 489.231, 540 )
 scale = Vector2( 1.6, 2.241 )
-color_type = 2
 
 [node name="Beam2" parent="Statics/Beams" instance=ExtResource( 8 )]
 position = Vector2( 1449.23, 540 )
 scale = Vector2( 1.6, 2.241 )
-color_type = 2
 
 [node name="Rotatables" type="Node2D" parent="Statics"]
 
 [node name="RotatableTriangle" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 800.857, 163.759 )
+position = Vector2( 803.857, 164 )
 rotation = -1.5708
 angles = PoolIntArray( 180, 90, 0, -90 )
 reversed = true
 
 [node name="RotatableTriangle2" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1124.75, 163.759 )
+position = Vector2( 1121.75, 164 )
 rotation = 3.14159
 angles = PoolIntArray( 180, -90, 0, 90 )
 
 [node name="RotatableTriangle3" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 800.857, 918.759 )
+position = Vector2( 803.857, 918 )
 angles = PoolIntArray( 180, -90, 0, 90 )
 
 [node name="RotatableTriangle4" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1124.75, 918.759 )
+position = Vector2( 1121.75, 918 )
 rotation = 1.5708
 angles = PoolIntArray( 180, 90, 0, -90 )
 reversed = true
 
 [node name="Wall3" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 240.368, 322.833 )
+position = Vector2( 244.368, 322.833 )
 rotation = 1.5708
 
 [node name="Wall5" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 240.368, 757.833 )
+position = Vector2( 244.368, 757.833 )
 rotation = 1.5708
 
 [node name="Wall11" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1685.37, 757.833 )
+position = Vector2( 1682.37, 757.833 )
 rotation = 1.5708
 
 [node name="Wall13" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 240.368, 1077.83 )
+position = Vector2( 244.368, 1077.83 )
 rotation = 1.5708
 
 [node name="Wall14" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1685.37, 1077.83 )
+position = Vector2( 1682.37, 1077.83 )
 rotation = 1.5708
 
 [node name="Wall6" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 238.226, 1.60529 )
+position = Vector2( 244.226, 1.60529 )
 rotation = 1.5708
 
 [node name="Wall7" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1685.37, 322.833 )
+position = Vector2( 1682.37, 322.833 )
 rotation = 1.5708
 
 [node name="Wall8" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1685.75, 4.12512 )
+position = Vector2( 1681.75, 4.12512 )
 rotation = 1.5708
 
 [node name="Wall4" parent="Statics" instance=ExtResource( 6 )]
-position = Vector2( -65.5158, 757.94 )
+position = Vector2( -61.5158, 757.94 )
 rotation = 1.5708
 
 [node name="Wall10" parent="Statics" instance=ExtResource( 6 )]
-position = Vector2( -65.5158, 325.94 )
+position = Vector2( -61.5158, 325.94 )
 rotation = 1.5708
 
 [node name="Wall9" parent="Statics" instance=ExtResource( 6 )]
-position = Vector2( 1988.52, 760.46 )
+position = Vector2( 1985.52, 760.46 )
 rotation = 1.5708
 
 [node name="Wall12" parent="Statics" instance=ExtResource( 6 )]
-position = Vector2( 1988.52, 320.46 )
+position = Vector2( 1985.52, 320.46 )
 rotation = 1.5708
 
 [node name="Button" parent="Statics" instance=ExtResource( 7 )]
-position = Vector2( 86.4841, 757.94 )
+position = Vector2( 90.4841, 757.94 )
 
 [node name="Button2" parent="Statics" instance=ExtResource( 7 )]
-position = Vector2( 1836.52, 760.46 )
+position = Vector2( 1833.52, 760.46 )
 
 [node name="Button3" parent="Statics" instance=ExtResource( 7 )]
-position = Vector2( 86.4842, 325.94 )
+position = Vector2( 90.4842, 325.94 )
 
 [node name="Button4" parent="Statics" instance=ExtResource( 7 )]
-position = Vector2( 1836.52, 320.46 )
+position = Vector2( 1833.52, 320.46 )

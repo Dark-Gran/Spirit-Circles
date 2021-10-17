@@ -16,7 +16,7 @@ angle = 210
 size = 10.0
 
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 489.116, 722.78 )
+position = Vector2( 513.116, 722.78 )
 angle = -20
 size = 17.0
 
@@ -25,7 +25,7 @@ position = Vector2( 1398.53, 426.558 )
 angle = 175
 
 [node name="Circle10" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 501.195, 185.231 )
+position = Vector2( 1129.81, 188.406 )
 angle = -10
 size = 12.0
 
@@ -40,7 +40,7 @@ color_type = 2
 angle = 100
 
 [node name="Circle5" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1210.02, 212.582 )
+position = Vector2( 521.087, 196.708 )
 color_type = 2
 angle = 240
 size = 15.0
@@ -58,7 +58,7 @@ angle = 110
 size = 25.0
 
 [node name="Circle2" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 662.302, 449.145 )
+position = Vector2( 686.302, 449.145 )
 color_type = 2
 angle = 90
 size = 12.0

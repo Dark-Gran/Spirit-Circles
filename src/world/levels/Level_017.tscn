@@ -16,7 +16,7 @@ script = ExtResource( 1 )
 [node name="Circles" type="Node2D" parent="."]
 
 [node name="Circle" parent="Circles" instance=ExtResource( 2 )]
-position = Vector2( 155.423, 225.576 )
+position = Vector2( 155.423, 153.576 )
 color_type = 2
 angle = 210
 size = 10.0
@@ -28,7 +28,7 @@ angle = 90
 size = 18.0
 
 [node name="Circle3" parent="Circles" instance=ExtResource( 2 )]
-position = Vector2( 1261.65, 914.379 )
+position = Vector2( 1277.65, 858.379 )
 angle = 110
 size = 24.0
 
@@ -37,13 +37,13 @@ position = Vector2( 281.087, 734.157 )
 angle = 110
 
 [node name="Circle4" parent="Circles" instance=ExtResource( 2 )]
-position = Vector2( 1742.88, 432.381 )
+position = Vector2( 1718.88, 456.381 )
 color_type = 2
 angle = 30
 size = 24.0
 
 [node name="Circle5" parent="Circles" instance=ExtResource( 2 )]
-position = Vector2( 618.483, 161.194 )
+position = Vector2( 618.483, 193.194 )
 angle = 240
 size = 15.0
 
@@ -84,7 +84,7 @@ color_type = 3
 [node name="Beam" parent="Statics/Beams" instance=ExtResource( 6 )]
 position = Vector2( 960, 540 )
 scale = Vector2( 2.821, 1.666 )
-color_type = 1
+color_type = 2
 
 [node name="Rotatables" type="Node2D" parent="Statics"]
 
