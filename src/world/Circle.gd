@@ -362,6 +362,7 @@ func refresh_size():
 	var s = float(size)/PI
 	var new_scale = Vector2(s, s)
 	$MeshInstance2D.scale = new_scale
+	$Particles2D.scale = new_scale
 	$CollisionShape2D.scale = new_scale
 	$StuckDetector.scale = new_scale
 	radius = s*Main.SIZE_TO_SCALE
