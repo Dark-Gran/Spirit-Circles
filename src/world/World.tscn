@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/world/World.gd" type="Script" id=1]
 [ext_resource path="res://src/DebugGUI.tscn" type="PackedScene" id=2]
@@ -19,6 +19,13 @@ size = 40
 font_data = ExtResource( 3 )
 
 [sub_resource type="CircleShape2D" id=4]
+
+[sub_resource type="Environment" id=5]
+background_mode = 4
+glow_intensity = 1.0
+glow_strength = 0.69
+glow_blend_mode = 0
+glow_bicubic_upscale = true
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -84,6 +91,9 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HypoCircle"]
 shape = SubResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 5 )
 
 [connection signal="button_up" from="GUI/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="timeout" from="GUI/LevelName/Timer" to="." method="_on_LevelNameTimer_timeout"]

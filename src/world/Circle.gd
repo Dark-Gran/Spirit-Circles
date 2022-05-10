@@ -75,7 +75,7 @@ func _ready():
 	color_info = ct_dict.get(color_type)
 	if size < color_info.get("lowest_power"):
 		size = color_info.get("lowest_power")
-	$MeshInstance2D.modulate = color_info.get("color")
+	$Sprite.modulate = color_info.get("color")
 	refresh()
 
 func _physics_process(delta):
@@ -361,7 +361,7 @@ func refresh():
 func refresh_size():
 	var s = float(size)/PI
 	var new_scale = Vector2(s, s)
-	$MeshInstance2D.scale = new_scale
+	$Sprite.scale = new_scale * 0.058 # taken from directly from circles Sprite, depends on texture size (to be changed?)
 	$Particles2D.scale = new_scale
 	$CollisionShape2D.scale = new_scale
 	$StuckDetector.scale = new_scale
