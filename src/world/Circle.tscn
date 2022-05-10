@@ -1,31 +1,32 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/world/Circle.gd" type="Script" id=1]
 [ext_resource path="res://assets/circle.png" type="Texture" id=2]
 [ext_resource path="res://assets/circle_shader.gdshader" type="Shader" id=3]
+[ext_resource path="res://assets/little_white_64.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 
-[sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.333333, 0.542636, 1 )
-colors = PoolColorArray( 0, 0, 0, 0, 1, 0.175781, 0.175781, 1, 1, 0, 0, 1, 0, 0, 0, 0 )
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.163399, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=4]
-emission_shape = 1
-emission_sphere_radius = 10.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
+spread = 180.0
 gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.1
+initial_velocity = 15.0
+orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-damping = 1.0
-scale = 5.0
-scale_random = 0.5
-color_ramp = SubResource( 3 )
+damping = 10.0
+scale = 0.15
+scale_random = 0.12
+color_ramp = SubResource( 7 )
 
 [sub_resource type="CircleShape2D" id=5]
 
@@ -40,14 +41,15 @@ scale = Vector2( 0.092, 0.092 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-z_index = 1
-emitting = false
-amount = 10
-speed_scale = 0.5
+z_index = -1
+amount = 16
+speed_scale = 0.2
 visibility_rect = Rect2( -50, -50, 100, 100 )
 process_material = SubResource( 4 )
+texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 5 )
 
 [node name="RayCastA" type="RayCast2D" parent="."]
