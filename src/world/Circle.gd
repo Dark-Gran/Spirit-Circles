@@ -34,6 +34,8 @@ const DANCE_STRENGTH = 0.1 # see dance()
 const SPLIT_PART_ANGLE = 20 # see split()
 const STUCK_CAP = 3 # see process() "Stuck"
 
+var default_sprite_scale # taken directly from sprite
+
 export (ColorType) var color_type = ColorType.WHITE
 export (int) var angle = 0
 export (float) var size = 1
@@ -76,6 +78,7 @@ func _ready():
 	if size < color_info.get("lowest_power"):
 		size = color_info.get("lowest_power")
 	$Sprite.modulate = color_info.get("color")
+	default_sprite_scale = $Sprite.scale
 	refresh()
 
 func _physics_process(delta):
@@ -361,7 +364,7 @@ func refresh():
 func refresh_size():
 	var s = float(size)/PI
 	var new_scale = Vector2(s, s)
-	$Sprite.scale = new_scale * 0.058 # taken from directly from circles Sprite, depends on texture size (to be changed?)
+	$Sprite.scale = new_scale * default_sprite_scale
 	$Particles2D.scale = new_scale
 	$CollisionShape2D.scale = new_scale
 	$StuckDetector.scale = new_scale
