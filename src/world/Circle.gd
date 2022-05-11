@@ -65,6 +65,7 @@ var merging_away = false
 var grow_buffer = 0
 var unbreakable = false
 var ignored_while_overlapping = Array()
+var particle_alpha = 1
 
 var stuck_timer = 0
 
@@ -84,7 +85,7 @@ func _ready():
 	default_sprite_scale = $Sprite.scale
 	create_particles()
 	refresh()
-
+	
 func create_particles():
 	var particles
 	match (color_type):
@@ -94,6 +95,9 @@ func create_particles():
 			particles = ParticlesBlue.instance()
 	if particles != null:
 		add_child(particles)
+
+func _process(delta):
+	refresh_particle_alpha(delta)
 
 func _physics_process(delta):
 	# Resize
@@ -374,6 +378,25 @@ func refresh():
 	refresh_size()
 	refresh_velocity()
 	refresh_raycasts()
+	refresh_particles()
+
+func refresh_particles():
+	if has_node("Particles"):
+		if color_type == ColorType.BLUE:
+			if size < 14:
+				particle_alpha = 0.4
+			else:
+				particle_alpha = 1
+
+func refresh_particle_alpha(delta):
+	if has_node("Particles") && $Particles/Particles2D.modulate.a != particle_alpha:
+		if ($Particles/Particles2D.modulate.a > particle_alpha && $Particles/Particles2D.modulate.a-delta > particle_alpha) || ($Particles/Particles2D.modulate.a < particle_alpha && $Particles/Particles2D.modulate.a+delta < particle_alpha):
+			if $Particles/Particles2D.modulate.a > particle_alpha:
+				$Particles/Particles2D.modulate.a -= delta
+			else:
+				$Particles/Particles2D.modulate.a += delta
+		else:
+			$Particles/Particles2D.modulate.a = particle_alpha
 
 func refresh_size():
 	var s = float(size)/PI
