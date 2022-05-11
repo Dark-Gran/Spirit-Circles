@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Circle
 
 var ParticlesWhite = preload("res://src/world/circle_particles/ParticlesWhite.tscn")
+var ParticlesBlue = preload("res://src/world/circle_particles/ParticlesBlue.tscn")
 
 enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
@@ -12,7 +13,7 @@ const ct_dict = {
 	},
 	ColorType.BLUE: {
 		"color": Color.blue,
-		"speed": 1,
+		"speed": 0.8,
 		"lowest_power": 10
 	},
 	ColorType.GREEN: {
@@ -89,6 +90,8 @@ func create_particles():
 	match (color_type):
 		ColorType.WHITE:
 			particles = ParticlesWhite.instance()
+		ColorType.BLUE:
+			particles = ParticlesBlue.instance()
 	if particles != null:
 		add_child(particles)
 
