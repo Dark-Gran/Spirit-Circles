@@ -3,6 +3,7 @@ class_name Circle
 
 var ParticlesWhite = preload("res://src/world/circle_particles/ParticlesWhite.tscn")
 var ParticlesBlue = preload("res://src/world/circle_particles/ParticlesBlue.tscn")
+var ParticlesGreen = preload("res://src/world/circle_particles/ParticlesGreen.tscn")
 
 enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
@@ -93,6 +94,8 @@ func create_particles():
 			particles = ParticlesWhite.instance()
 		ColorType.BLUE:
 			particles = ParticlesBlue.instance()
+		ColorType.GREEN:
+			particles = ParticlesGreen.instance()
 	if particles != null:
 		add_child(particles)
 
