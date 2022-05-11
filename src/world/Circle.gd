@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Circle
 
+var ParticlesWhite = preload("res://src/world/circle_particles/ParticlesWhite.tscn")
+
 enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
 	ColorType.WHITE: {
@@ -79,7 +81,16 @@ func _ready():
 		size = color_info.get("lowest_power")
 	$Sprite.modulate = color_info.get("color")
 	default_sprite_scale = $Sprite.scale
+	create_particles()
 	refresh()
+
+func create_particles():
+	var particles
+	match (color_type):
+		ColorType.WHITE:
+			particles = ParticlesWhite.instance()
+	if particles != null:
+		add_child(particles)
 
 func _physics_process(delta):
 	# Resize
@@ -365,7 +376,8 @@ func refresh_size():
 	var s = float(size)/PI
 	var new_scale = Vector2(s, s)
 	$Sprite.scale = new_scale * default_sprite_scale
-	$Particles2D.scale = new_scale
+	if (has_node("Particles")):
+		$Particles.scale = new_scale
 	$CollisionShape2D.scale = new_scale
 	$StuckDetector.scale = new_scale
 	radius = s*Main.SIZE_TO_SCALE
