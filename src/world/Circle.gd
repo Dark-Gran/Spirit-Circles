@@ -386,11 +386,10 @@ func refresh():
 
 func refresh_particles():
 	if has_node("Particles") && !merging_away:
-		if color_type == ColorType.BLUE:
-			if size < 14:
-				particle_alpha = 0.4
-			else:
-				particle_alpha = 1
+		if (color_type == ColorType.BLUE && size < 14): #  || (color_type == ColorType.GREEN && size < 7)
+			particle_alpha = 0.4
+		else:
+			particle_alpha = 1
 
 func refresh_particle_alpha(delta):
 	if has_node("Particles"):
@@ -402,7 +401,10 @@ func refresh_particle_alpha(delta):
 			_:
 				particles = $Particles
 			ColorType.GREEN:
-				particles = $Particles/Particles2D4
+				if merging_away:
+					particles = $Particles/Particles2D4
+				else:
+					particles = $Particles/Particles2D2
 		if particles != null && particles.modulate.a != particle_alpha:
 			if (particles.modulate.a > particle_alpha && particles.modulate.a-change > particle_alpha) || (particles.modulate.a < particle_alpha && particles.modulate.a+change < particle_alpha):
 				if particles.modulate.a > particle_alpha:
