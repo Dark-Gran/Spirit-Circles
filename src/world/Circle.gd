@@ -18,7 +18,7 @@ const ct_dict = {
 		"lowest_power": 10
 	},
 	ColorType.GREEN: {
-		"color": Color(0, 0.8, 0), # todo color-palette
+		"color": Color(0, 0.78, 0), # todo color-palette
 		"speed": 1.4,
 		"lowest_power": 5
 	},
@@ -393,8 +393,8 @@ func refresh_particles():
 				s = 14
 				a = 0.4
 			ColorType.GREEN:
-				s = 20
-				a = 0.6
+				s = 18
+				a = 0.4
 		if size < s:
 			particle_alpha = a
 		else:
