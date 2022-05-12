@@ -4,12 +4,12 @@
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.163399, 1 )
-colors = PoolColorArray( 0, 1, 0, 1, 0, 1, 0, 0 )
+colors = PoolColorArray( 0, 0.7, 0, 1, 0, 0.7, 0, 0 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -23,15 +23,15 @@ scale_random = 0.12
 color_ramp = SubResource( 2 )
 
 [sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.48366, 1 )
-colors = PoolColorArray( 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 )
+offsets = PoolRealArray( 0.0387597, 0.503876, 1 )
+colors = PoolColorArray( 0, 0.921569, 0, 0.105882, 0, 0.921569, 0, 1, 0, 0.921569, 0, 0 )
 
 [sub_resource type="GradientTexture" id=5]
 gradient = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=6]
 emission_shape = 1
-emission_sphere_radius = 9.0
+emission_sphere_radius = 8.4
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -41,17 +41,17 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 10.0
 scale = 0.02
-scale_random = 0.09
+scale_random = 0.07
 color_ramp = SubResource( 5 )
 
 [sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0.601307, 1 )
-colors = PoolColorArray( 0, 1, 0, 0.478431, 0, 1, 0.0800781, 0 )
+offsets = PoolRealArray( 0, 0.488372, 1 )
+colors = PoolColorArray( 0, 0.7, 0, 0, 0, 0.7, 0, 1, 0, 0.7, 0, 0 )
 
 [sub_resource type="GradientTexture" id=8]
 gradient = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=9]
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -59,7 +59,7 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 29.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-damping = 42.0
+damping = 43.0
 scale = 0.02
 color_ramp = SubResource( 8 )
 
@@ -85,15 +85,17 @@ amount = 16
 preprocess = 6.0
 speed_scale = 0.2
 visibility_rect = Rect2( -50, -50, 100, 100 )
-process_material = SubResource( 13 )
+process_material = SubResource( 3 )
 texture = ExtResource( 1 )
 
 [node name="Particles2D2" type="Particles2D" parent="."]
 amount = 32
+lifetime = 0.5
 preprocess = 6.0
 speed_scale = 0.2
+explosiveness = 0.4
 visibility_rect = Rect2( -50, -50, 100, 100 )
-process_material = SubResource( 11 )
+process_material = SubResource( 6 )
 texture = ExtResource( 1 )
 
 [node name="Particles2D3" type="Particles2D" parent="."]
@@ -103,7 +105,7 @@ lifetime = 0.8
 preprocess = 6.0
 speed_scale = 0.2
 visibility_rect = Rect2( -50, -50, 100, 100 )
-process_material = SubResource( 12 )
+process_material = SubResource( 9 )
 texture = ExtResource( 1 )
 
 [node name="Particles2D4" type="Particles2D" parent="."]
