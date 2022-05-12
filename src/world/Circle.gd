@@ -284,6 +284,7 @@ func bounce(collision):
 
 func mergeIn(collider):
 	collider.merging_away = true
+	collider.particle_alpha = 0
 	collider.add_collision_exception_with(self)
 	add_collision_exception_with(collider)
 	grow_buffer += collider.size+collider.grow_buffer
@@ -384,7 +385,7 @@ func refresh():
 	refresh_particles()
 
 func refresh_particles():
-	if has_node("Particles"):
+	if has_node("Particles") && !merging_away:
 		if color_type == ColorType.BLUE:
 			if size < 14:
 				particle_alpha = 0.4
@@ -392,14 +393,24 @@ func refresh_particles():
 				particle_alpha = 1
 
 func refresh_particle_alpha(delta):
-	if has_node("Particles") && $Particles/Particles2D.modulate.a != particle_alpha:
-		if ($Particles/Particles2D.modulate.a > particle_alpha && $Particles/Particles2D.modulate.a-delta > particle_alpha) || ($Particles/Particles2D.modulate.a < particle_alpha && $Particles/Particles2D.modulate.a+delta < particle_alpha):
-			if $Particles/Particles2D.modulate.a > particle_alpha:
-				$Particles/Particles2D.modulate.a -= delta
+	if has_node("Particles"):
+		var change = delta
+		var particles
+		if merging_away:
+			change *= 2
+		match color_type:
+			_:
+				particles = $Particles
+			ColorType.GREEN:
+				particles = $Particles/Particles2D4
+		if particles != null && particles.modulate.a != particle_alpha:
+			if (particles.modulate.a > particle_alpha && particles.modulate.a-change > particle_alpha) || (particles.modulate.a < particle_alpha && particles.modulate.a+change < particle_alpha):
+				if particles.modulate.a > particle_alpha:
+					particles.modulate.a -= change
+				else:
+					particles.modulate.a += change
 			else:
-				$Particles/Particles2D.modulate.a += delta
-		else:
-			$Particles/Particles2D.modulate.a = particle_alpha
+				particles.modulate.a = particle_alpha
 
 func refresh_size():
 	var s = float(size)/PI
