@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/circle.png" type="Texture" id=1]
+[ext_resource path="res://assets/circle_blur_shader.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/blur_start = 0.3
+shader_param/blur = 5.0
+shader_param/ramp_factor = 4.0
+
+[node name="Glows" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.00784314, 1, 0, 1 )
+material = SubResource( 1 )
+scale = Vector2( 0.09, 0.09 )
+z_index = -1
+texture = ExtResource( 1 )

@@ -6,6 +6,7 @@ var ParticlesBlue = preload("res://src/world/circle_effects/ParticlesBlue.tscn")
 var ParticlesGreen = preload("res://src/world/circle_effects/ParticlesGreen.tscn")
 var ParticlesRed = preload("res://src/world/circle_effects/ParticlesRed.tscn")
 var GlowBlue = preload("res://src/world/circle_effects/GlowBlue.tscn")
+var GlowGreen = preload("res://src/world/circle_effects/GlowGreen.tscn")
 
 enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
@@ -100,6 +101,7 @@ func create_effects():
 			glow = GlowBlue.instance()
 		ColorType.GREEN:
 			particles = ParticlesGreen.instance()
+			glow = GlowGreen.instance()
 		ColorType.RED:
 			particles = ParticlesRed.instance()
 	if particles != null:
@@ -292,6 +294,10 @@ func bounce(collision):
 
 func mergeIn(collider):
 	collider.merging_away = true
+	collider.get_node("Particles").z_index = -2
+	if (collider.has_node("Glows")):
+		collider.get_node("Glows").z_index = -2
+	collider.get_node("Sprite").z_index = -2
 	collider.particle_alpha = 0
 	collider.add_collision_exception_with(self)
 	add_collision_exception_with(collider)
@@ -403,8 +409,8 @@ func refresh_particles():
 				s = 14
 				a = 0.6
 			ColorType.GREEN:
-				s = 15
-				a = 0.2
+				s = 40
+				a = 0.5
 				s2 = 7.5
 				a2 = 0.1
 			ColorType.RED:
