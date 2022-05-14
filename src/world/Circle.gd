@@ -18,7 +18,7 @@ const ct_dict = {
 		"lowest_power": 10
 	},
 	ColorType.GREEN: {
-		"color": Color(0, 0.78, 0), # todo color-palette
+		"color": Color(0, 0.55, 0), # todo color-palette
 		"speed": 1.4,
 		"lowest_power": 5
 	},
@@ -387,15 +387,21 @@ func refresh():
 func refresh_particles():
 	if has_node("Particles") && !merging_away:
 		var s: float = 0
+		var s2: float = 0
 		var a: float = 1
+		var a2: float = 1
 		match color_type:
 			ColorType.BLUE:
 				s = 14
 				a = 0.4
 			ColorType.GREEN:
-				s = 18
-				a = 0.4
-		if size < s:
+				s = 15
+				a = 0.2
+				s2 = 7.5
+				a2 = 0.1
+		if size < s2:
+			particle_alpha = a2
+		elif size < s:
 			particle_alpha = a
 		else:
 			particle_alpha = 1
@@ -405,14 +411,14 @@ func refresh_particle_alpha(delta):
 		var change = delta
 		var particles
 		match color_type:
-			_:
-				particles = $Particles
 			ColorType.GREEN:
 				if merging_away:
-					particles = $Particles/Particles2D4
+					particles = $Particles/Particles2D2
 					change *= 2
 				else:
-					particles = $Particles/Particles2D2
+					particles = $Particles/Inner
+			_:
+				particles = $Particles
 		if particles != null && particles.modulate.a != particle_alpha:
 			if (particles.modulate.a > particle_alpha && particles.modulate.a-change > particle_alpha) || (particles.modulate.a < particle_alpha && particles.modulate.a+change < particle_alpha):
 				if particles.modulate.a > particle_alpha:
