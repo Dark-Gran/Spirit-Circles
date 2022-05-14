@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/world/Circle.gd" type="Script" id=1]
 [ext_resource path="res://assets/circle.png" type="Texture" id=2]
 [ext_resource path="res://assets/circle_blur_shader.gdshader" type="Shader" id=3]
+[ext_resource path="res://assets/circle_blur_shader_2.gdshader" type="Shader" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -10,7 +11,12 @@ shader_param/blur_start = 0.3
 shader_param/blur = 5.0
 shader_param/ramp_factor = 4.0
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 4 )
+shader_param/radius = 0.43
+shader_param/noise_strength = 0.0
+
+[sub_resource type="CircleShape2D" id=2]
 
 [node name="Circle" type="KinematicBody2D" groups=[
 "circles",
@@ -23,9 +29,17 @@ material = SubResource( 1 )
 scale = Vector2( 0.092, 0.092 )
 texture = ExtResource( 2 )
 
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0, 0.152941, 1, 1 )
+material = SubResource( 3 )
+scale = Vector2( 0.09, 0.09 )
+z_index = -1
+texture = ExtResource( 2 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="RayCastA" type="RayCast2D" parent="."]
 visible = false
@@ -62,4 +76,4 @@ collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StuckDetector"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 2 )
