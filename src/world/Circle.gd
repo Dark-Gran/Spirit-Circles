@@ -401,7 +401,7 @@ func refresh_particles():
 		match color_type:
 			ColorType.BLUE:
 				s = 14
-				a = 0.4
+				a = 0.6
 			ColorType.GREEN:
 				s = 15
 				a = 0.2
@@ -431,14 +431,19 @@ func refresh_particle_alpha(delta):
 				particles = $Particles/Inner
 		else:
 			particles = $Particles
+			if color_type == ColorType.BLUE:
+				smooth_modulate_a($Glows/Sprite, change, particle_alpha)
 		if particles != null && particles.modulate.a != particle_alpha:
-			if (particles.modulate.a > particle_alpha && particles.modulate.a-change > particle_alpha) || (particles.modulate.a < particle_alpha && particles.modulate.a+change < particle_alpha):
-				if particles.modulate.a > particle_alpha:
-					particles.modulate.a -= change
-				else:
-					particles.modulate.a += change
-			else:
-				particles.modulate.a = particle_alpha
+			smooth_modulate_a(particles, change, particle_alpha)
+
+func smooth_modulate_a(modulee, change, target_a):
+	if (modulee.modulate.a > target_a && modulee.modulate.a-change > target_a) || (modulee.modulate.a < target_a && modulee.modulate.a+change < target_a):
+		if modulee.modulate.a > target_a:
+			modulee.modulate.a -= change
+		else:
+				modulee.modulate.a += change
+	else:
+		modulee.modulate.a = target_a
 
 func refresh_size():
 	var s = float(size)/PI
