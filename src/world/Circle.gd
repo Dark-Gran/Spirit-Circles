@@ -4,6 +4,7 @@ class_name Circle
 var ParticlesWhite = preload("res://src/world/circle_particles/ParticlesWhite.tscn")
 var ParticlesBlue = preload("res://src/world/circle_particles/ParticlesBlue.tscn")
 var ParticlesGreen = preload("res://src/world/circle_particles/ParticlesGreen.tscn")
+var ParticlesRed = preload("res://src/world/circle_particles/ParticlesRed.tscn")
 
 enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
@@ -96,6 +97,8 @@ func create_particles():
 			particles = ParticlesBlue.instance()
 		ColorType.GREEN:
 			particles = ParticlesGreen.instance()
+		ColorType.RED:
+			particles = ParticlesRed.instance()
 	if particles != null:
 		add_child(particles)
 
@@ -399,6 +402,11 @@ func refresh_particles():
 				a = 0.2
 				s2 = 7.5
 				a2 = 0.1
+			ColorType.RED:
+				s = 35
+				a = 0.85
+				s2 = 6
+				a2 = 0.7
 		if size < s2:
 			particle_alpha = a2
 		elif size < s:
@@ -410,15 +418,14 @@ func refresh_particle_alpha(delta):
 	if has_node("Particles"):
 		var change = delta
 		var particles
-		match color_type:
-			ColorType.GREEN:
-				if merging_away:
-					particles = $Particles/Particles2D2
-					change *= 2
-				else:
-					particles = $Particles/Inner
-			_:
-				particles = $Particles
+		if color_type == ColorType.GREEN || color_type == ColorType.RED:
+			if merging_away:
+				particles = $Particles/Particles2D2
+				change *= 2
+			else:
+				particles = $Particles/Inner
+		else:
+			particles = $Particles
 		if particles != null && particles.modulate.a != particle_alpha:
 			if (particles.modulate.a > particle_alpha && particles.modulate.a-change > particle_alpha) || (particles.modulate.a < particle_alpha && particles.modulate.a+change < particle_alpha):
 				if particles.modulate.a > particle_alpha:
