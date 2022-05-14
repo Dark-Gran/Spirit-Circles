@@ -1,10 +1,11 @@
 extends KinematicBody2D
 class_name Circle
 
-var ParticlesWhite = preload("res://src/world/circle_particles/ParticlesWhite.tscn")
-var ParticlesBlue = preload("res://src/world/circle_particles/ParticlesBlue.tscn")
-var ParticlesGreen = preload("res://src/world/circle_particles/ParticlesGreen.tscn")
-var ParticlesRed = preload("res://src/world/circle_particles/ParticlesRed.tscn")
+var ParticlesWhite = preload("res://src/world/circle_effects/ParticlesWhite.tscn")
+var ParticlesBlue = preload("res://src/world/circle_effects/ParticlesBlue.tscn")
+var ParticlesGreen = preload("res://src/world/circle_effects/ParticlesGreen.tscn")
+var ParticlesRed = preload("res://src/world/circle_effects/ParticlesRed.tscn")
+var GlowBlue = preload("res://src/world/circle_effects/GlowBlue.tscn")
 
 enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
@@ -85,22 +86,26 @@ func _ready():
 		size = color_info.get("lowest_power")
 	$Sprite.modulate = color_info.get("color")
 	default_sprite_scale = $Sprite.scale
-	create_particles()
+	create_effects()
 	refresh()
 	
-func create_particles():
+func create_effects():
 	var particles
+	var glow
 	match (color_type):
 		ColorType.WHITE:
 			particles = ParticlesWhite.instance()
 		ColorType.BLUE:
 			particles = ParticlesBlue.instance()
+			glow = GlowBlue.instance()
 		ColorType.GREEN:
 			particles = ParticlesGreen.instance()
 		ColorType.RED:
 			particles = ParticlesRed.instance()
 	if particles != null:
 		add_child(particles)
+	if glow != null:
+		add_child(glow)
 
 func _process(delta):
 	refresh_particle_alpha(delta)
@@ -441,6 +446,8 @@ func refresh_size():
 	$Sprite.scale = new_scale * default_sprite_scale
 	if (has_node("Particles")):
 		$Particles.scale = new_scale
+	if (has_node("Glows")):
+		$Glows.scale = new_scale
 	$CollisionShape2D.scale = new_scale
 	$StuckDetector.scale = new_scale
 	radius = s*Main.SIZE_TO_SCALE
