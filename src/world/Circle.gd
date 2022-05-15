@@ -410,9 +410,9 @@ func refresh_particles():
 				a = 0.6
 			ColorType.GREEN:
 				s = 40
-				a = 0.5
+				a = 0.7
 				s2 = 7.5
-				a2 = 0.1
+				a2 = 0.2
 			ColorType.RED:
 				s = 35
 				a = 0.85
