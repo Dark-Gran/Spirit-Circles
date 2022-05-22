@@ -296,8 +296,8 @@ func mergeIn(collider):
 	collider.merging_away = true
 	collider.get_node("Particles").z_index = -2
 	if (collider.has_node("Glows")):
-		collider.get_node("Glows").z_index = -2
-	collider.get_node("Sprite").z_index = -2
+		collider.get_node("Glows").z_index = -4
+	collider.get_node("Sprite").z_index = -3
 	collider.particle_alpha = 0
 	collider.add_collision_exception_with(self)
 	add_collision_exception_with(collider)

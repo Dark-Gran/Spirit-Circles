@@ -45,7 +45,7 @@ color_ramp = SubResource( 5 )
 
 [sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.503268, 1 )
-colors = PoolColorArray( 0, 0.313726, 0, 0, 0, 0.313726, 0, 0.294118, 0, 0.313726, 0, 0 )
+colors = PoolColorArray( 0, 0.313726, 0, 0, 0, 0.313726, 0, 0.470588, 0, 0.313726, 0, 0 )
 
 [sub_resource type="GradientTexture" id=12]
 gradient = SubResource( 11 )
@@ -67,7 +67,7 @@ hue_variation_random = 0.75
 
 [sub_resource type="Gradient" id=14]
 offsets = PoolRealArray( 0, 0.503876, 1 )
-colors = PoolColorArray( 0, 0.254902, 0, 0, 0, 0.254902, 0, 0.294118, 0, 0.254902, 0, 0 )
+colors = PoolColorArray( 0, 0.254902, 0, 0, 0, 0.254902, 0, 0.392157, 0, 0.254902, 0, 0 )
 
 [sub_resource type="GradientTexture" id=15]
 gradient = SubResource( 14 )
