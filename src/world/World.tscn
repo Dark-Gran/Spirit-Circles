@@ -22,9 +22,7 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="Environment" id=5]
 background_mode = 4
-glow_intensity = 1.0
-glow_strength = 0.69
-glow_blend_mode = 0
+glow_hdr_threshold = 0.73
 glow_bicubic_upscale = true
 
 [node name="World" type="Node2D"]
