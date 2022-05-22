@@ -8,7 +8,7 @@
 offsets = PoolRealArray( 0, 0.457364, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.109804, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture" id=7]
 gradient = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
@@ -23,7 +23,7 @@ initial_velocity_random = 0.59
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 7 )
 hue_variation = 0.1
 hue_variation_random = 0.56
 
@@ -39,7 +39,7 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 7 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
@@ -55,7 +55,7 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 7 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
