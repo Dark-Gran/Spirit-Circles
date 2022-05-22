@@ -414,10 +414,10 @@ func refresh_particles():
 				s2 = 7.5
 				a2 = 0.2
 			ColorType.RED:
-				s = 35
-				a = 0.85
-				s2 = 6
-				a2 = 0.7
+				s = 20
+				a = 0.75
+				s2 = 7.5
+				a2 = 0.25
 		if size < s2:
 			particle_alpha = a2
 		elif size < s:
