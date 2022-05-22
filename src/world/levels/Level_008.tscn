@@ -80,6 +80,18 @@ size = 22.0
 [node name="Wall4" parent="Statics" instance=ExtResource( 3 )]
 position = Vector2( 1380, 1291.94 )
 
+[node name="Wall5" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1920, 162.983 )
+
+[node name="Wall6" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 0, 162.983 )
+
+[node name="Wall7" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 0, 842.983 )
+
+[node name="Wall8" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 1920, 842.983 )
+
 [node name="Wall3" parent="Statics" instance=ExtResource( 3 )]
 position = Vector2( 677.53, -198.98 )
 
@@ -88,15 +100,3 @@ position = Vector2( 1380, 316.188 )
 
 [node name="Wall_long6" parent="Statics" instance=ExtResource( 4 )]
 position = Vector2( 677.53, 777.009 )
-
-[node name="Wall_long2" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 1920, 1132.63 )
-
-[node name="Wall_long4" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 1920, -68.999 )
-
-[node name="Wall_long5" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 0, 1132.63 )
-
-[node name="Wall_long7" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 0, -68.999 )

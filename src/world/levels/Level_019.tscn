@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/world/levels/Level_019.gd" type="Script" id=2]
 [ext_resource path="res://src/world/obstacles/Wall_2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/world/obstacles/Wall_3.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/world/obstacles/RotatableTriangle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/world/obstacles/Wall_Wide_1.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/world/obstacles/Button.tscn" type="PackedScene" id=8]
@@ -161,22 +160,6 @@ position = Vector2( 1491, 902 )
 rotation = -1.5708
 angles = PoolIntArray( 180, -90, 0, 90 )
 
-[node name="Wall" parent="Statics" instance=ExtResource( 5 )]
-position = Vector2( 681.447, 720.804 )
-rotation = 1.5708
-
-[node name="Wall4" parent="Statics" instance=ExtResource( 5 )]
-position = Vector2( 681.447, 1080 )
-rotation = 1.5708
-
-[node name="Wall5" parent="Statics" instance=ExtResource( 5 )]
-position = Vector2( 681.447, 0 )
-rotation = 1.5708
-
-[node name="Wall3" parent="Statics" instance=ExtResource( 5 )]
-position = Vector2( 681.447, 361.804 )
-rotation = 1.5708
-
 [node name="Wall2" parent="Statics" instance=ExtResource( 7 )]
 position = Vector2( 1808, 900 )
 
@@ -191,3 +174,19 @@ position = Vector2( 0, 540 )
 
 [node name="Wall7" parent="Statics" instance=ExtResource( 3 )]
 position = Vector2( 1920, 540 )
+
+[node name="Wall9" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 624, 1080 )
+rotation = 1.5708
+
+[node name="Wall11" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 624, 361.804 )
+rotation = 1.5708
+
+[node name="Wall12" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 624, 0 )
+rotation = 1.5708
+
+[node name="Wall10" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 624, 720.804 )
+rotation = 1.5708
