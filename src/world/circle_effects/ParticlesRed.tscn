@@ -74,8 +74,8 @@ damping = 10.0
 scale = 0.15
 scale_random = 0.12
 color_ramp = SubResource( 17 )
-hue_variation = 0.15
-hue_variation_random = 0.4
+hue_variation = 0.09
+hue_variation_random = 0.41
 
 [node name="Particles" type="Node2D"]
 
