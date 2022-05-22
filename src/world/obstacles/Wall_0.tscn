@@ -4,14 +4,14 @@
 [ext_resource path="res://assets/shine.png" type="Texture" id=2]
 [ext_resource path="res://assets/shine2.png" type="Texture" id=3]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.457364, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.109804, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 150, 1 )
 flag_disable_z = true
@@ -23,13 +23,13 @@ initial_velocity_random = 0.59
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.1
 hue_variation_random = 0.56
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 2
-emission_box_extents = Vector3( 1, 170, 1 )
+emission_box_extents = Vector3( 1, 160, 1 )
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -39,13 +39,13 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
-emission_box_extents = Vector3( 1, 170, 1 )
+emission_box_extents = Vector3( 1, 160, 1 )
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
@@ -55,11 +55,11 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=6]
 
 [node name="Wall" type="KinematicBody2D"]
 collision_layer = 5
@@ -72,24 +72,24 @@ texture = ExtResource( 1 )
 position = Vector2( 0, -96 )
 lifetime = 2.0
 preprocess = 6.0
-process_material = SubResource( 5 )
+process_material = SubResource( 3 )
 texture = ExtResource( 3 )
 
 [node name="Particles2D2" type="Particles2D" parent="Sprite"]
-position = Vector2( 0, 96 )
+position = Vector2( 0, 88 )
 lifetime = 5.0
 preprocess = 6.0
-process_material = SubResource( 6 )
+process_material = SubResource( 4 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D3" type="Particles2D" parent="Sprite"]
-position = Vector2( 0, -96 )
+position = Vector2( 0, -80 )
 lifetime = 5.0
 preprocess = 6.0
-process_material = SubResource( 7 )
+process_material = SubResource( 5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 scale = Vector2( 4, 25 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
