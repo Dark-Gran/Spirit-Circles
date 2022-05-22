@@ -417,13 +417,22 @@ func refresh_particles():
 				s = 20
 				a = 0.75
 				s2 = 7.5
-				a2 = 0.25
+				a2 = 0.2
 		if size < s2:
 			particle_alpha = a2
+			if color_type == ColorType.GREEN || color_type == ColorType.RED:
+				$Particles/Particles2D3.emitting = false
+				$Particles/Particles2D4.emitting = false
 		elif size < s:
 			particle_alpha = a
+			if color_type == ColorType.GREEN || color_type == ColorType.RED:
+				$Particles/Particles2D3.emitting = true
+				$Particles/Particles2D4.emitting = false
 		else:
 			particle_alpha = 1
+			if color_type == ColorType.GREEN || color_type == ColorType.RED:
+				$Particles/Particles2D3.emitting = true
+				$Particles/Particles2D4.emitting = true
 
 func refresh_particle_alpha(delta):
 	if has_node("Particles"):
