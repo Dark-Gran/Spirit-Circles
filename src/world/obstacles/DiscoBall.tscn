@@ -7,23 +7,23 @@
 [ext_resource path="res://assets/shine.png" type="Texture" id=5]
 [ext_resource path="res://assets/mask_octagon.png" type="Texture" id=6]
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -25, 0, -17.677, 2.829, 0, 4, 17.677, 2.829, 25, 0, 17.677, -2.829, 0, -4, -17.677, -2.829 )
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="SphereMesh" id=2]
 rings = 3
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 2
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.457364, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.109804, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=6]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 150, 1 )
 flag_disable_z = true
@@ -35,11 +35,11 @@ initial_velocity_random = 0.59
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 5 )
 hue_variation = 0.1
 hue_variation_random = 0.56
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=7]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 160, 1 )
 flag_disable_z = true
@@ -51,11 +51,11 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 5 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 160, 1 )
 flag_disable_z = true
@@ -67,7 +67,7 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 5 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
@@ -79,7 +79,6 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Beams" type="Node2D" parent="."]
-visible = false
 
 [node name="Beam" parent="Beams" instance=ExtResource( 1 )]
 rotation = 0.389208
@@ -98,14 +97,13 @@ rotation = -0.389208
 scale = Vector2( 1, 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 scale = Vector2( 4, 25 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 scale = Vector2( 100, 100 )
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -117,30 +115,30 @@ range_item_cull_mask = 2
 
 [node name="Particles2D" type="Particles2D" parent="Sprite"]
 light_mask = 2
-material = SubResource( 8 )
+material = SubResource( 3 )
 position = Vector2( 0, -32 )
 scale = Vector2( 2.488, 0.5 )
 lifetime = 2.0
 preprocess = 6.0
-process_material = SubResource( 5 )
+process_material = SubResource( 6 )
 texture = ExtResource( 4 )
 
 [node name="Particles2D2" type="Particles2D" parent="Sprite"]
 light_mask = 2
-material = SubResource( 8 )
+material = SubResource( 3 )
 position = Vector2( 0, 24 )
 scale = Vector2( 2.488, 0.5 )
 lifetime = 5.0
 preprocess = 6.0
-process_material = SubResource( 6 )
+process_material = SubResource( 7 )
 texture = ExtResource( 5 )
 
 [node name="Particles2D3" type="Particles2D" parent="Sprite"]
 light_mask = 2
-material = SubResource( 8 )
+material = SubResource( 3 )
 position = Vector2( 0, -16 )
 scale = Vector2( 2.488, 0.5 )
 lifetime = 5.0
 preprocess = 6.0
-process_material = SubResource( 7 )
+process_material = SubResource( 8 )
 texture = ExtResource( 5 )
