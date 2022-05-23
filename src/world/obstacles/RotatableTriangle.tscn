@@ -9,17 +9,17 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -10, 10, -10, -10, 10, -10 )
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=2]
 light_mode = 2
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.457364, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.109804, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 130, 1 )
 flag_disable_z = true
@@ -31,18 +31,18 @@ initial_velocity_random = 0.59
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 4 )
 hue_variation = 0.1
 hue_variation_random = 0.56
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.457364, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.109804, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 130, 1 )
 flag_disable_z = true
@@ -54,11 +54,11 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 7 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=9]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 130, 1 )
 flag_disable_z = true
@@ -70,7 +70,7 @@ initial_velocity_random = 0.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.23
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 7 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
@@ -97,33 +97,36 @@ range_item_cull_mask = 2
 
 [node name="Particles2D" type="Particles2D" parent="Sprite"]
 light_mask = 2
-material = SubResource( 9 )
+material = SubResource( 2 )
 position = Vector2( 460.676, 102.915 )
 rotation = 0.785398
 scale = Vector2( 2.6, 1 )
 lifetime = 2.0
 preprocess = 6.0
-process_material = SubResource( 4 )
+speed_scale = 0.7
+process_material = SubResource( 5 )
 texture = ExtResource( 4 )
 
 [node name="Particles2D2" type="Particles2D" parent="Sprite"]
 light_mask = 2
-material = SubResource( 9 )
+material = SubResource( 2 )
 position = Vector2( 369.508, 194.984 )
 rotation = 0.785398
 scale = Vector2( 2.6, 1 )
 lifetime = 5.0
 preprocess = 6.0
-process_material = SubResource( 7 )
+speed_scale = 0.7
+process_material = SubResource( 8 )
 texture = ExtResource( 3 )
 
 [node name="Particles2D3" type="Particles2D" parent="Sprite"]
 light_mask = 2
-material = SubResource( 9 )
+material = SubResource( 2 )
 position = Vector2( 445.508, 118.984 )
 rotation = 0.785398
 scale = Vector2( 2.6, 1 )
 lifetime = 5.0
 preprocess = 6.0
-process_material = SubResource( 8 )
+speed_scale = 0.7
+process_material = SubResource( 9 )
 texture = ExtResource( 3 )
