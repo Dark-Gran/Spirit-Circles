@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/world/obstacles/Beam.gd" type="Script" id=1]
 [ext_resource path="res://assets/beam_glow.png" type="Texture" id=2]
@@ -28,7 +28,24 @@ orbit_velocity_random = 0.0
 linear_accel_random = 1.0
 damping = 10.0
 damping_random = 0.5
-scale = 0.1
+scale = 0.07
+color_ramp = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 2
+emission_box_extents = Vector3( 27, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 130.0
+initial_velocity_random = 0.25
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel_random = 1.0
+damping = 10.0
+damping_random = 0.5
+scale = 0.07
 color_ramp = SubResource( 5 )
 
 [sub_resource type="ParticlesMaterial" id=6]
@@ -45,7 +62,7 @@ orbit_velocity_random = 0.0
 linear_accel_random = 1.0
 damping = 10.0
 damping_random = 0.5
-scale = 0.1
+scale = 0.07
 color_ramp = SubResource( 5 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -62,8 +79,8 @@ scale = Vector2( 0.6, 5 )
 mesh = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.995362, -0.622063 )
-scale = Vector2( 0.737219, 0.959643 )
+position = Vector2( 0.00689459, -1.25328 )
+scale = Vector2( 0.732445, 0.97512 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
@@ -71,9 +88,17 @@ position = Vector2( -5.96046e-08, -250 )
 amount = 16
 lifetime = 5.0
 preprocess = 6.0
-speed_scale = 2.0
 randomness = 1.0
 process_material = SubResource( 3 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D3" type="Particles2D" parent="."]
+position = Vector2( -5.96046e-08, -250 )
+amount = 2
+lifetime = 5.0
+preprocess = 6.0
+speed_scale = 3.0
+process_material = SubResource( 7 )
 texture = ExtResource( 3 )
 
 [node name="Particles2D2" type="Particles2D" parent="."]
@@ -81,8 +106,16 @@ position = Vector2( -5.96046e-08, 248 )
 amount = 16
 lifetime = 5.0
 preprocess = 6.0
-speed_scale = 2.0
 randomness = 1.0
+process_material = SubResource( 6 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D4" type="Particles2D" parent="."]
+position = Vector2( -5.96046e-08, 248 )
+amount = 2
+lifetime = 5.0
+preprocess = 5.5
+speed_scale = 3.0
 process_material = SubResource( 6 )
 texture = ExtResource( 3 )
 

@@ -17,10 +17,15 @@ func _ready():
 	._ready()
 
 func refresh():
-	$MeshInstance2D.modulate = Circle.ct_dict.get(color_type).get("color")
-	$Sprite.modulate = Circle.ct_dict.get(color_type).get("color")
-	$Particles2D.modulate = Circle.ct_dict.get(color_type).get("color")
-	$Particles2D2.modulate = Circle.ct_dict.get(color_type).get("color")
+	var color = Circle.ct_dict.get(color_type).get("color")
+	if color_type == Circle.ColorType.GREEN:
+		color = Color(0, 0.8, 0)
+	$MeshInstance2D.modulate = color
+	$Sprite.modulate = color
+	$Particles2D.modulate = color
+	$Particles2D2.modulate = color
+	$Particles2D3.modulate = color
+	$Particles2D4.modulate = color
 	$MeshInstance2D.modulate.a = 0.5
 
 func _physics_process(delta):
