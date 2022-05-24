@@ -17,8 +17,11 @@ func _ready():
 	._ready()
 
 func refresh():
+	$MeshInstance2D.modulate = Circle.ct_dict.get(color_type).get("color")
 	$Sprite.modulate = Circle.ct_dict.get(color_type).get("color")
-	$Sprite.modulate.a = 0.7*$Sprite.modulate.a
+	$Particles2D.modulate = Circle.ct_dict.get(color_type).get("color")
+	$Particles2D2.modulate = Circle.ct_dict.get(color_type).get("color")
+	$MeshInstance2D.modulate.a = 0.5
 
 func _physics_process(delta):
 	# Check state
