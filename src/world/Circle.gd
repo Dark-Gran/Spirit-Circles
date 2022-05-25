@@ -291,6 +291,7 @@ func bounce(collision):
 		velocity = velocity.bounce(collision.normal)
 		angle = rad2deg(velocity.angle())
 		refresh_velocity()
+	world.new_bounce_particles(collision.position, color_type)
 
 func mergeIn(collider):
 	collider.merging_away = true

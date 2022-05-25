@@ -27,7 +27,7 @@ func _ready():
 		level_times.append(0)
 	$DebugGUI/FPS.visible = false
 	enable_continue(false)
-	level_id = 20
+	level_id = 11
 	move_to_level(level_id)
 
 func reload_level():
@@ -73,6 +73,8 @@ func load_level(path):
 	ready = true
 
 func unload_level():
+	for emitter in get_tree().get_nodes_in_group("one_shot_emitters"):
+		emitter.queue_free()
 	pc_accumulator = 0
 	pc_linger = false
 	release_pc()
@@ -165,6 +167,7 @@ func _process(delta):
 				enable_continue(true)
 
 func _physics_process(delta): 
+	free_emitters()
 	if get_node_or_null("Level") != null:
 		if !won && Input.is_action_pressed("ui_select"):
 			# Focus Power
@@ -287,3 +290,23 @@ func focus_power(circle, delta):
 
 func get_grow_speed():
 	return world_speed*grow_speed_adjust
+
+# Particle Effects
+
+var BounceParticles = preload("res://src/world/circle_effects/Bounce.tscn")
+
+func free_emitters():
+	for emitter in get_tree().get_nodes_in_group("one_shot_emitters"):
+		if not emitter.emitting:
+			emitter.queue_free()
+
+func new_bounce_particles(pos, color_type):
+	var color = Circle.ct_dict.get(color_type).get("color")
+	var particles = BounceParticles.instance()
+	particles.position = pos
+	particles.modulate = color
+	particles.emitting = true
+	add_child(particles)
+	
+
+
