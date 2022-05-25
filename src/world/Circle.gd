@@ -21,7 +21,7 @@ const ct_dict = {
 		"lowest_power": 10
 	},
 	ColorType.GREEN: {
-		"color": Color(0, 0.55, 0), # todo color-palette
+		"color": Color(0, 0.6, 0), # todo color-palette
 		"speed": 1.4,
 		"lowest_power": 5
 	},

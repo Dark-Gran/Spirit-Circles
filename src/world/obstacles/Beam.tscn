@@ -7,14 +7,14 @@
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 100, 100, 2 )
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.372093, 0.604651, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 2
 emission_box_extents = Vector3( 27, 0, 1 )
 flag_disable_z = true
@@ -29,9 +29,9 @@ linear_accel_random = 1.0
 damping = 10.0
 damping_random = 0.5
 scale = 0.07
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 27, 0, 1 )
 flag_disable_z = true
@@ -46,7 +46,7 @@ linear_accel_random = 1.0
 damping = 10.0
 damping_random = 0.5
 scale = 0.07
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=6]
 emission_shape = 2
@@ -63,9 +63,9 @@ linear_accel_random = 1.0
 damping = 10.0
 damping_random = 0.5
 scale = 0.07
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=7]
 
 [node name="Beam" type="KinematicBody2D" groups=[
 "beams",
@@ -79,8 +79,8 @@ scale = Vector2( 0.6, 5 )
 mesh = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.00689459, -1.25328 )
-scale = Vector2( 0.732445, 0.97512 )
+position = Vector2( -0.326819, -1.25328 )
+scale = Vector2( 0.736418, 0.97512 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
@@ -89,7 +89,8 @@ amount = 16
 lifetime = 5.0
 preprocess = 6.0
 randomness = 1.0
-process_material = SubResource( 3 )
+visibility_rect = Rect2( -250, -250, 500, 500 )
+process_material = SubResource( 4 )
 texture = ExtResource( 3 )
 
 [node name="Particles2D3" type="Particles2D" parent="."]
@@ -98,7 +99,8 @@ amount = 2
 lifetime = 5.0
 preprocess = 6.0
 speed_scale = 3.0
-process_material = SubResource( 7 )
+visibility_rect = Rect2( -250, -250, 500, 500 )
+process_material = SubResource( 5 )
 texture = ExtResource( 3 )
 
 [node name="Particles2D2" type="Particles2D" parent="."]
@@ -107,6 +109,7 @@ amount = 16
 lifetime = 5.0
 preprocess = 6.0
 randomness = 1.0
+visibility_rect = Rect2( -250, -250, 500, 500 )
 process_material = SubResource( 6 )
 texture = ExtResource( 3 )
 
@@ -116,13 +119,14 @@ amount = 2
 lifetime = 5.0
 preprocess = 5.5
 speed_scale = 3.0
+visibility_rect = Rect2( -250, -250, 500, 500 )
 process_material = SubResource( 6 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 scale = Vector2( 3, 25 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -131,4 +135,4 @@ collision_layer = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2( 3, 25 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )
