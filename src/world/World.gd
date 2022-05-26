@@ -236,9 +236,10 @@ func _draw():
 				color = Color.red
 			draw_arc(get_viewport().get_mouse_position(), Main.PC_RADIUS, 0, angle, 40, color, 2, true)
 	# Rays
-	if get_node_or_null("Level") != null && could_spawn_pc_now():
+	if get_node_or_null("Level") != null:
+		var draw_rays = get_rays_enabled() && could_spawn_pc_now()
 		for c in $Level/Circles.get_children():
-			if get_rays_enabled() && c.ray_point_a != null && c.ray_point_b != null:
+			if draw_rays && c.ray_point_a != null && c.ray_point_b != null:
 				draw_line(c.position+c.position.direction_to(c.ray_point_a)*c.size*PI, c.ray_point_a, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
 				draw_line(c.ray_point_a, c.ray_point_b, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
 				c.get_node("RayArrow").position = c.to_local(c.ray_point_b)

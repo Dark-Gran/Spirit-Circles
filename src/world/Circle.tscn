@@ -52,6 +52,7 @@ scale = Vector2( 0.092, 0.092 )
 texture = ExtResource( 2 )
 
 [node name="RayArrow" type="Sprite" parent="."]
+z_index = 1
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
