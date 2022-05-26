@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/world/obstacles/Button.gd" type="Script" id=1]
 [ext_resource path="res://assets/button.png" type="Texture" id=2]
 [ext_resource path="res://assets/button_pressed.png" type="Texture" id=3]
 [ext_resource path="res://assets/shine.png" type="Texture" id=4]
 [ext_resource path="res://assets/shine2.png" type="Texture" id=5]
+[ext_resource path="res://assets/square.png" type="Texture" id=6]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.457364, 1 )
@@ -61,6 +62,30 @@ color_ramp = SubResource( 2 )
 hue_variation = -0.09
 hue_variation_random = 0.61
 
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.426357, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.0745098, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 0.519318 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 7 )
+hue_variation = -0.23
+hue_variation_random = 0.17
+
 [node name="Button" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -102,5 +127,13 @@ lifetime = 5.0
 preprocess = 6.0
 process_material = SubResource( 5 )
 texture = ExtResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 1
+one_shot = true
+speed_scale = 4.0
+process_material = SubResource( 10 )
+texture = ExtResource( 6 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
