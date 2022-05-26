@@ -79,6 +79,7 @@ func _ready():
 	if size < color_info.get("lowest_power"):
 		size = color_info.get("lowest_power")
 	$Sprite.modulate = color_info.get("color")
+	$RayArrow.modulate = color_info.get("color")
 	default_sprite_scale = $Sprite.scale
 	level.create_effects(self)
 	refresh()

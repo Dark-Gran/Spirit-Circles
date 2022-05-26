@@ -201,7 +201,7 @@ func _physics_process(delta):
 		# Screen Edge
 		screen_checker += 1
 		if screen_checker >= SCREEN_CHECK:
-			for c in $Level/Circles.get_children():
+			for c in $Level/Circles.get_children(): # Move check to the Focus Power loop above (for performance)?
 				c.check_edge_portal()
 			screen_checker = 0
 		update()
@@ -235,14 +235,19 @@ func _draw():
 			if !could_spawn_pc_now():
 				color = Color.red
 			draw_arc(get_viewport().get_mouse_position(), Main.PC_RADIUS, 0, angle, 40, color, 2, true)
-		# Rays
-		if could_spawn_pc_now():
-			for c in $Level/Circles.get_children():
-				if c.ray_point_a != null && c.ray_point_b != null:
-					draw_line(c.position+c.position.direction_to(c.ray_point_a)*c.size*PI, c.ray_point_a, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
-					draw_line(c.ray_point_a, c.ray_point_b, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
-					#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
-					#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
+	# Rays
+	if get_node_or_null("Level") != null && could_spawn_pc_now():
+		for c in $Level/Circles.get_children():
+			if get_rays_enabled() && c.ray_point_a != null && c.ray_point_b != null:
+				draw_line(c.position+c.position.direction_to(c.ray_point_a)*c.size*PI, c.ray_point_a, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
+				draw_line(c.ray_point_a, c.ray_point_b, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
+				c.get_node("RayArrow").position = c.to_local(c.ray_point_b)
+				c.get_node("RayArrow").rotation = c.ray_point_a.angle_to_point(c.ray_point_b)
+				c.get_node("RayArrow").visible = true
+				#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
+				#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
+			else:
+				c.get_node("RayArrow").visible = false
 
 # Player Circle
 
