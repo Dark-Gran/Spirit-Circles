@@ -239,8 +239,8 @@ func _draw():
 		if could_spawn_pc_now():
 			for c in $Level/Circles.get_children():
 				if c.ray_point_a != null && c.ray_point_b != null:
-					draw_line(c.position, c.ray_point_a, Color.white, 2, true)
-					draw_line(c.ray_point_a, c.ray_point_b, Color.white, 2, true)
+					draw_line(c.position+c.position.direction_to(c.ray_point_a)*c.size*PI, c.ray_point_a, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
+					draw_line(c.ray_point_a, c.ray_point_b, Circle.ct_dict.get(c.color_type).get("color"), 2, true)
 					#draw_circle(c.position+c.get_node("RayCastA").position, 5, Color.red)
 					#draw_circle(c.position+c.get_node("RayCastB").position, 5, Color.red)
 
