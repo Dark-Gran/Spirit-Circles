@@ -267,7 +267,7 @@ func bounce(collision):
 		velocity = velocity.bounce(collision.normal)
 		angle = rad2deg(velocity.angle())
 		refresh_velocity()
-	world.new_particle_oneshot(collision.position, 0, color_type, "bounce")
+	world.new_particle_oneshot(collision.position, 0, color_type, "bounce", 1, 1)
 
 func mergeIn(collider):
 	collider.merging_away = true
@@ -314,6 +314,8 @@ func split(collider, collision):
 	var tot_size = toSplit.size+toSplit.grow_buffer
 	var half_size = float(tot_size)/2
 	if !toSplit.unbreakable && half_size >= toSplit.color_info.get("lowest_power"): # Break toSplit if big enough
+		if splitter.is_in_group("beams"):
+			world.new_particle_oneshot(collision.position, 0, color_type, "split_by_beam", 10, 2)
 		toSplit.unbreakable = true
 		if angle_to_perp <= 0 && abs(angle_to_perp) != 180: # In direction against splitter's push = move against the push (ie. "splitting opposing force only corrects it")
 			mid_direction = toSplit.velocity_direction - splitter_direction
@@ -336,6 +338,8 @@ func split(collider, collision):
 			collider.add_circle_inside(toSplit)
 		return new_circle
 	elif !toSplit.unbreakable: # Redirect toSplit if too small
+		if splitter.is_in_group("beams"):
+			world.new_particle_oneshot(position, 0, color_type, "split_by_beam", 1, float(size)/PI)
 		toSplit.angle = mid_angle
 		toSplit.refresh()
 		if collider.is_in_group("beams"):

@@ -295,20 +295,26 @@ func get_grow_speed():
 
 var BounceParticles = preload("res://src/world/circle_effects/Bounce.tscn")
 
+var SplitByBeamParticles = preload("res://src/world/circle_effects/SplitByBeam.tscn")
+
 func free_emitters():
 	for emitter in get_tree().get_nodes_in_group("one_shot_emitters"):
 		if not emitter.emitting:
 			emitter.queue_free()
 
-func new_particle_oneshot(pos, rot, color_type, effect_name):
+func new_particle_oneshot(pos, rot, color_type, effect_name, multiply_amount, s):
 	var color = Circle.ct_dict.get(color_type).get("color")
 	var particles
 	match effect_name:
 		"bounce":
 			particles = BounceParticles.instance()
+			particles.modulate = color
+		"split_by_beam":
+			particles = SplitByBeamParticles.instance()
 	if particles != null:
+		particles.scale = Vector2(s, s)
+		particles.amount *= multiply_amount
 		particles.position = pos
 		particles.rotation = rot
-		particles.modulate = color
 		particles.emitting = true
 		add_child(particles)
