@@ -27,7 +27,7 @@ func _ready():
 		level_times.append(0)
 	$DebugGUI/FPS.visible = false
 	enable_continue(false)
-	level_id = 11
+	level_id = 13
 	move_to_level(level_id)
 
 func reload_level():
@@ -300,13 +300,15 @@ func free_emitters():
 		if not emitter.emitting:
 			emitter.queue_free()
 
-func new_bounce_particles(pos, color_type):
+func new_particle_oneshot(pos, rot, color_type, effect_name):
 	var color = Circle.ct_dict.get(color_type).get("color")
-	var particles = BounceParticles.instance()
-	particles.position = pos
-	particles.modulate = color
-	particles.emitting = true
-	add_child(particles)
-	
-
-
+	var particles
+	match effect_name:
+		"bounce":
+			particles = BounceParticles.instance()
+	if particles != null:
+		particles.position = pos
+		particles.rotation = rot
+		particles.modulate = color
+		particles.emitting = true
+		add_child(particles)

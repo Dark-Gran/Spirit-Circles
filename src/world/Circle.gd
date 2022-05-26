@@ -1,13 +1,6 @@
 extends KinematicBody2D
 class_name Circle
 
-var ParticlesWhite = preload("res://src/world/circle_effects/ParticlesWhite.tscn")
-var ParticlesBlue = preload("res://src/world/circle_effects/ParticlesBlue.tscn")
-var ParticlesGreen = preload("res://src/world/circle_effects/ParticlesGreen.tscn")
-var ParticlesRed = preload("res://src/world/circle_effects/ParticlesRed.tscn")
-var GlowBlue = preload("res://src/world/circle_effects/GlowBlue.tscn")
-var GlowGreen = preload("res://src/world/circle_effects/GlowGreen.tscn")
-
 enum ColorType {WHITE, BLUE, GREEN, RED}
 const ct_dict = {
 	ColorType.WHITE: {
@@ -87,27 +80,8 @@ func _ready():
 		size = color_info.get("lowest_power")
 	$Sprite.modulate = color_info.get("color")
 	default_sprite_scale = $Sprite.scale
-	create_effects()
+	level.create_effects(self)
 	refresh()
-	
-func create_effects():
-	var particles
-	var glow
-	match (color_type):
-		ColorType.WHITE:
-			particles = ParticlesWhite.instance()
-		ColorType.BLUE:
-			particles = ParticlesBlue.instance()
-			glow = GlowBlue.instance()
-		ColorType.GREEN:
-			particles = ParticlesGreen.instance()
-			glow = GlowGreen.instance()
-		ColorType.RED:
-			particles = ParticlesRed.instance()
-	if particles != null:
-		add_child(particles)
-	if glow != null:
-		add_child(glow)
 
 func _process(delta):
 	refresh_particle_alpha(delta)
@@ -146,8 +120,8 @@ func _physics_process(delta):
 		$CollisionShape2D.disabled = false
 		stuck_timer = 0
 	# Reset collison-exceptions
-	if grow_buffer == 0: # possibly in-future: debug red beams without this line (note: issues with collide_with_motion()/overlaps_body()?)
-		if ignored_while_overlapping.size() > 0:
+	if ignored_while_overlapping.size() > 0:
+		if grow_buffer == 0: # possibly in-future: debug red beams without this line (note: issues with collide_with_motion()/overlaps_body()?)
 			var not_to_ignore_anymore = Array()
 			for i in ignored_while_overlapping:
 				if i != null && is_instance_valid(i):
@@ -162,6 +136,8 @@ func _physics_process(delta):
 					not_to_ignore_anymore.append(i)
 			for i in not_to_ignore_anymore:
 				remove_from_ignore_while_overlapping(i)
+	elif has_node("SplitParticles") && $SplitParticles.emitting:
+		$SplitParticles.emitting = false
 	# RayCast
 	if world.get_rays_enabled():
 		var cast = velocity*PREDICTION_DISTANCE
@@ -291,7 +267,7 @@ func bounce(collision):
 		velocity = velocity.bounce(collision.normal)
 		angle = rad2deg(velocity.angle())
 		refresh_velocity()
-	world.new_bounce_particles(collision.position, color_type)
+	world.new_particle_oneshot(collision.position, 0, color_type, "bounce")
 
 func mergeIn(collider):
 	collider.merging_away = true
@@ -321,6 +297,9 @@ func split(collider, collision):
 	if color_type == ColorType.RED:
 		toSplit = collider
 		splitter = self
+	if splitter.has_node("SplitParticles"):
+		splitter.get_node("SplitParticles").rotation = collision.normal.angle()
+		splitter.get_node("SplitParticles").emitting = true
 	# Get outcome angle
 	toSplit.add_to_ignore_while_overlapping(splitter)
 	var splitter_direction = Vector2.ZERO
@@ -465,9 +444,11 @@ func refresh_size():
 	var s = float(size)/PI
 	var new_scale = Vector2(s, s)
 	$Sprite.scale = new_scale * default_sprite_scale
-	if (has_node("Particles")):
+	if has_node("Particles"):
 		$Particles.scale = new_scale
-	if (has_node("Glows")):
+	if has_node("SplitParticles"):
+		$SplitParticles.scale = new_scale
+	if has_node("Glows"):
 		$Glows.scale = new_scale
 	$CollisionShape2D.scale = new_scale
 	$StuckDetector.scale = new_scale
