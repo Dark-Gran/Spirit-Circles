@@ -339,7 +339,7 @@ func split(collider, collision):
 		return new_circle
 	elif !toSplit.unbreakable: # Redirect toSplit if too small
 		if splitter.is_in_group("beams"):
-			world.new_particle_oneshot(position, 0, color_type, "split_by_beam", 1, float(size)/PI)
+			$SplitParticles.emitting = true
 		toSplit.angle = mid_angle
 		toSplit.refresh()
 		if collider.is_in_group("beams"):
@@ -450,8 +450,8 @@ func refresh_size():
 	$Sprite.scale = new_scale * default_sprite_scale
 	if has_node("Particles"):
 		$Particles.scale = new_scale
-	if has_node("SplitParticles"):
-		$SplitParticles.scale = new_scale
+	#if has_node("SplitParticles"):
+	$SplitParticles.scale = new_scale
 	if has_node("Glows"):
 		$Glows.scale = new_scale
 	$CollisionShape2D.scale = new_scale

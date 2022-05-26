@@ -17,7 +17,6 @@ const ParticlesGreen = preload("res://src/world/circle_effects/ParticlesGreen.ts
 const ParticlesRed = preload("res://src/world/circle_effects/ParticlesRed.tscn")
 const GlowBlue = preload("res://src/world/circle_effects/GlowBlue.tscn")
 const GlowGreen = preload("res://src/world/circle_effects/GlowGreen.tscn")
-const SplitParticles = preload("res://src/world/circle_effects/Split.tscn")
 
 func create_circle(pos, color_type, angle, size, buffer):
 	var c = CircleScene.instance()
@@ -50,8 +49,6 @@ func create_effects(circle):
 			glow = GlowGreen.instance()
 		Circle.ColorType.RED:
 			particles = ParticlesRed.instance()
-			var split_particles = SplitParticles.instance()
-			circle.add_child(split_particles)
 	if particles != null:
 		circle.add_child(particles)
 	if glow != null:
