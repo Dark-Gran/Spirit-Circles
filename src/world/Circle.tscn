@@ -46,7 +46,6 @@ script = ExtResource( 1 )
 process_material = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0, 1, 0, 1 )
 material = SubResource( 4 )
 scale = Vector2( 0.092, 0.092 )
 texture = ExtResource( 2 )

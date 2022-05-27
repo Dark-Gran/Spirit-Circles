@@ -233,7 +233,7 @@ func _draw():
 			var angle = deg2rad(360*(pc_accumulator / PC_WAIT))
 			var color = Color.white
 			if !could_spawn_pc_now():
-				color = Color(0.6, 0, 0)
+				color = Color(0.7, 0, 0)
 			draw_arc(get_viewport().get_mouse_position(), Main.PC_RADIUS, 0, angle, 40, color, 2, true)
 	# Rays
 	if get_node_or_null("Level") != null:
