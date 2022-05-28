@@ -27,7 +27,7 @@ angle = 90
 size = 18.0
 
 [node name="Circle3" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1261.65, 914.379 )
+position = Vector2( 1620.84, 742.642 )
 angle = 110
 size = 24.0
 
@@ -47,7 +47,7 @@ angle = 240
 size = 15.0
 
 [node name="Circle6" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 1568.68, 760.431 )
+position = Vector2( 1334.09, 926.556 )
 color_type = 1
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
@@ -65,39 +65,43 @@ color_type = 2
 [node name="Rotatables" type="Node2D" parent="Statics"]
 
 [node name="RotatableTriangle" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1120.16, 379.378 )
+position = Vector2( 1117.66, 380.878 )
 rotation = 1.5708
+scale = Vector2( 1.1, 1.1 )
 angles = PoolIntArray( 90, 180, -90, 0 )
 
 [node name="RotatableTriangle2" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1120.16, 699.378 )
+position = Vector2( 1117.66, 696.878 )
+scale = Vector2( 1.1, 1.1 )
 angles = PoolIntArray( 90, 180, -90, 0 )
 
 [node name="RotatableTriangle3" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 800.163, 379.378 )
+position = Vector2( 802.563, 380.878 )
 rotation = 3.14159
+scale = Vector2( 1.1, 1.1 )
 angles = PoolIntArray( 90, 180, -90, 0 )
 
 [node name="RotatableTriangle4" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 800.163, 699.378 )
+position = Vector2( 802.563, 696.878 )
 rotation = -1.5708
+scale = Vector2( 1.1, 1.1 )
 angles = PoolIntArray( 90, 180, -90, 0 )
 
 [node name="Wall3" parent="Statics" instance=ExtResource( 6 )]
-position = Vector2( 960, 1039 )
+position = Vector2( 960, 1034.5 )
 
 [node name="Wall4" parent="Statics" instance=ExtResource( 6 )]
-position = Vector2( 960, 39 )
+position = Vector2( 960, 43.5 )
 
 [node name="Wall" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 240, 540 )
+position = Vector2( 145, 540 )
 rotation = 1.5708
 
 [node name="Wall2" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1680, 540 )
+position = Vector2( 1775, 540 )
 rotation = 1.5708
 
 [node name="Wall_Border" parent="Statics" instance=ExtResource( 4 )]
 
 [node name="Button" parent="Statics" instance=ExtResource( 7 )]
-position = Vector2( 960, 950 )
+position = Vector2( 960, 945.5 )

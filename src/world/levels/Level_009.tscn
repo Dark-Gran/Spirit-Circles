@@ -81,7 +81,7 @@ size = 22.0
 
 [node name="Beam" parent="Statics" instance=ExtResource( 5 )]
 position = Vector2( 960, 540 )
-scale = Vector2( 1.6, 1.246 )
+scale = Vector2( 1.6, 1.161 )
 color_type = 1
 
 [node name="Wall" parent="Statics" instance=ExtResource( 4 )]

@@ -65,68 +65,71 @@ color_type = 1
 [node name="Rotatables" type="Node2D" parent="Statics"]
 
 [node name="RotatableTriangle" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 168.455, 177.881 )
+position = Vector2( 183.455, 182.5 )
 
 [node name="RotatableTriangle2" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 485.455, 180 )
+position = Vector2( 533.455, 182.5 )
 rotation = 1.5708
 angles = PoolIntArray( 0, 90 )
 
 [node name="RotatableTriangle3" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 804.854, 176.636 )
+position = Vector2( 819.854, 182.5 )
 rotation = 1.5708
 angles = PoolIntArray( 0, 90 )
 
 [node name="RotatableTriangle4" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1121.85, 176.636 )
+position = Vector2( 1106.85, 182.5 )
 angles = PoolIntArray( 0, 90 )
 
 [node name="RotatableTriangle5" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1441.25, 180 )
+position = Vector2( 1393.25, 182.5 )
 angles = PoolIntArray( 0, 90 )
 
 [node name="RotatableTriangle6" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1758.25, 180 )
+position = Vector2( 1737.25, 182.5 )
 rotation = 1.5708
 
 [node name="RotatableTriangle7" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 168.455, 900 )
+position = Vector2( 183.455, 896.5 )
 rotation = 4.71239
 
 [node name="RotatableTriangle8" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 485.455, 900 )
+position = Vector2( 533.455, 896.5 )
 rotation = -1.5708
 angles = PoolIntArray( -90, -180 )
 
 [node name="RotatableTriangle9" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 804.854, 900 )
+position = Vector2( 819.854, 896.5 )
 rotation = -1.5708
 angles = PoolIntArray( -90, -180 )
 
 [node name="RotatableTriangle10" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1121.85, 900 )
+position = Vector2( 1106.85, 896.5 )
 rotation = -3.14159
 angles = PoolIntArray( -90, -180 )
 
 [node name="RotatableTriangle11" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1441.25, 900 )
+position = Vector2( 1393.25, 896.5 )
 rotation = -3.14159
 angles = PoolIntArray( -90, -180 )
 
 [node name="RotatableTriangle12" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1758.25, 900 )
+position = Vector2( 1737.25, 896.5 )
 rotation = 3.14159
 
 [node name="Wall_Border" parent="Statics" instance=ExtResource( 4 )]
 
 [node name="Wall2" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 647.5, 540 )
+position = Vector2( 676.5, 540 )
+scale = Vector2( 0.8, 0.857 )
 
 [node name="Wall4" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1282.5, 540 )
+position = Vector2( 1249.5, 540 )
+scale = Vector2( 0.8, 0.857 )
 
 [node name="Wall3" parent="Statics" instance=ExtResource( 6 )]
 position = Vector2( 970, 540 )
+scale = Vector2( 1, 0.857 )
 
 [node name="Button" parent="Statics" instance=ExtResource( 7 )]
 position = Vector2( 970, 540 )
