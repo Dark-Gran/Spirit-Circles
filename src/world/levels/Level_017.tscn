@@ -123,6 +123,14 @@ rotation = 1.5708
 position = Vector2( 960, -80 )
 rotation = 1.5708
 
+[node name="Wall10" parent="Statics" instance=ExtResource( 8 )]
+position = Vector2( -80.5, 541.598 )
+scale = Vector2( 1, 1.149 )
+
+[node name="Wall11" parent="Statics" instance=ExtResource( 8 )]
+position = Vector2( 2000.5, 541.598 )
+scale = Vector2( 1, 1.149 )
+
 [node name="Button" parent="Statics" instance=ExtResource( 4 )]
 position = Vector2( 960, 999.66 )
 

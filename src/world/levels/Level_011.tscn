@@ -91,14 +91,14 @@ angles = PoolIntArray( 90, 180, -90, 0 )
 position = Vector2( 960, 1034.5 )
 
 [node name="Wall4" parent="Statics" instance=ExtResource( 6 )]
-position = Vector2( 960, 43.5 )
+position = Vector2( 960, 42.5 )
 
 [node name="Wall" parent="Statics" instance=ExtResource( 3 )]
 position = Vector2( 145, 540 )
 rotation = 1.5708
 
 [node name="Wall2" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 1775, 540 )
+position = Vector2( 1776, 540 )
 rotation = 1.5708
 
 [node name="Wall_Border" parent="Statics" instance=ExtResource( 4 )]
