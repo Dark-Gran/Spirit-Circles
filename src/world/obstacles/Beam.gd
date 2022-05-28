@@ -19,7 +19,7 @@ func _ready():
 func refresh():
 	var color = Circle.ct_dict.get(color_type).get("color")
 	if color_type == Circle.ColorType.GREEN:
-		color = Color(0, 0.8, 0)
+		color = Color(0, 0.75, 0)
 	$MeshInstance2D.modulate = color
 	$Sprite.modulate = color
 	$Particles2D.modulate = color
