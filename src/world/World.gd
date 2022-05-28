@@ -187,7 +187,7 @@ func _physics_process(delta):
 						break
 			# Player Circle - input
 			var button_hit = false
-			if !focusing: # "No hypo-circle over buttons"
+			if !focusing && $Level.has_node("Statics"): # "No hypo-circle over buttons"
 				for s in $Level/Statics.get_children():
 					if s.is_in_group("button"):
 						var polygon:PoolVector2Array = [Vector2(s.position.x-50, s.position.y-50), Vector2(s.position.x-50, s.position.y+50), Vector2(s.position.x+50, s.position.y+50), Vector2(s.position.x+50, s.position.y-50)]
