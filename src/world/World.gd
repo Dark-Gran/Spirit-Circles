@@ -173,6 +173,7 @@ func _physics_process(delta):
 			# Focus Power
 			var hit
 			var mouse = get_viewport().get_mouse_position()
+			var focusing = false
 			if $Level.FocusPower_enabled && pc_accumulator == 0:
 				var r
 				for c in $Level/Circles.get_children():
@@ -182,9 +183,19 @@ func _physics_process(delta):
 					if !c.merging_away && Geometry.is_point_in_circle(mouse, c.position, r):
 						hit = c
 						focus_power(c, delta)
+						focusing = true
 						break
 			# Player Circle - input
-			if $Level.PlayerCircle_enabled && hit == null && !has_node("PlayerCircle") && !pc_linger:
+			var button_hit = false
+			if !focusing: # "No hypo-circle over buttons"
+				for s in $Level/Statics.get_children():
+					if s.is_in_group("button"):
+						var polygon:PoolVector2Array = [Vector2(s.position.x-50, s.position.y-50), Vector2(s.position.x-50, s.position.y+50), Vector2(s.position.x+50, s.position.y+50), Vector2(s.position.x+50, s.position.y-50)]
+						if Geometry.is_point_in_polygon(mouse, polygon):
+							button_hit = true
+							pc_accumulator = 0
+							break
+			if $Level.PlayerCircle_enabled && hit == null && !has_node("PlayerCircle") && !pc_linger && !button_hit:
 				pc_accumulator += delta
 			# Hypothetical Circle
 			if pc_accumulator > 0:
