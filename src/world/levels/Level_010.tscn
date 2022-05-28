@@ -10,6 +10,7 @@
 [node name="Level" type="Node2D"]
 show_behind_parent = true
 script = ExtResource( 2 )
+level_name = "The Tallest Tree Feels The Furthest Wind"
 
 [node name="Circles" type="Node2D" parent="."]
 
@@ -50,10 +51,10 @@ position = Vector2( 1483.96, 977.321 )
 angle = 175
 
 [node name="Circle8" parent="Circles" instance=ExtResource( 1 )]
-position = Vector2( 715.41, 931.443 )
+position = Vector2( 715.41, 940.443 )
 color_type = 1
 angle = -20
-size = 19.0
+size = 24.0
 
 [node name="Circle9" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 575.601, 715.595 )
@@ -69,7 +70,7 @@ size = 12.0
 position = Vector2( 1297.51, 786.126 )
 color_type = 1
 angle = 150
-size = 24.0
+size = 19.0
 
 [node name="Circle12" parent="Circles" instance=ExtResource( 1 )]
 position = Vector2( 285.361, 373.023 )

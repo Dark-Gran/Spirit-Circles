@@ -13,6 +13,7 @@
 show_behind_parent = true
 position = Vector2( -2, 0 )
 script = ExtResource( 2 )
+level_name = "There Are No Colors In The Dark"
 
 [node name="Circles" type="Node2D" parent="."]
 

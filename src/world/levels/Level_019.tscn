@@ -13,6 +13,7 @@
 show_behind_parent = true
 position = Vector2( 32, 0 )
 script = ExtResource( 2 )
+level_name = "Harmony Is The Highest Mountain"
 
 [node name="Circles" type="Node2D" parent="."]
 

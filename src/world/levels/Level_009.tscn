@@ -10,6 +10,7 @@
 [node name="Level" type="Node2D"]
 show_behind_parent = true
 script = ExtResource( 2 )
+level_name = "Wise Shepherd Respects River"
 
 [node name="Circles" type="Node2D" parent="."]
 

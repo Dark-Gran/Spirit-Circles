@@ -11,6 +11,7 @@
 [node name="Level" type="Node2D"]
 show_behind_parent = true
 script = ExtResource( 2 )
+level_name = "Unproved Balance Is Fragile"
 
 [node name="Circles" type="Node2D" parent="."]
 
