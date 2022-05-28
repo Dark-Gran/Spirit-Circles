@@ -51,6 +51,7 @@ scale = Vector2( 0.092, 0.092 )
 texture = ExtResource( 2 )
 
 [node name="RayArrow" type="Sprite" parent="."]
+visible = false
 z_index = 1
 texture = ExtResource( 5 )
 
