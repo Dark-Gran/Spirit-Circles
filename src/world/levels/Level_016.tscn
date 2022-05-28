@@ -82,12 +82,12 @@ color_type = 3
 [node name="Beams" type="Node2D" parent="Statics"]
 
 [node name="Beam" parent="Statics/Beams" instance=ExtResource( 8 )]
-position = Vector2( 1579.78, 538.606 )
+position = Vector2( 1603.2, 538.606 )
 scale = Vector2( 1, 0.862 )
 color_type = 1
 
 [node name="Beam2" parent="Statics/Beams" instance=ExtResource( 8 )]
-position = Vector2( 339.781, 538.606 )
+position = Vector2( 316.781, 538.606 )
 scale = Vector2( 1, 0.862 )
 color_type = 1
 
