@@ -2,11 +2,11 @@
 
 [ext_resource path="res://src/world/levels/Level_017.gd" type="Script" id=1]
 [ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/world/obstacles/Wall_3.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/world/obstacles/Wall_2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/world/obstacles/Button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/world/obstacles/RotatableTriangle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/world/obstacles/Wall_1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/world/obstacles/Wall_0.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/world/obstacles/Wall_Wide_0.tscn" type="PackedScene" id=8]
 
 [node name="Level" type="Node2D"]
@@ -83,51 +83,73 @@ color_type = 3
 
 [node name="Beam" parent="Statics/Beams" instance=ExtResource( 6 )]
 position = Vector2( 960, 540 )
-scale = Vector2( 2.821, 1.666 )
-color_type = 3
+scale = Vector2( 2.821, 1.523 )
+color_type = 1
 
 [node name="Rotatables" type="Node2D" parent="Statics"]
 
 [node name="RotatableTriangle" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1757.45, 706.497 )
+position = Vector2( 1776.5, 685.497 )
 rotation = 1.5708
 angles = PoolIntArray( 180, 90 )
 
 [node name="RotatableTriangle2" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 161.277, 706.497 )
+position = Vector2( 143.277, 685.497 )
 angles = PoolIntArray( 0, -90 )
 
 [node name="RotatableTriangle3" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 163.442, 375.756 )
+position = Vector2( 143.442, 398.756 )
+rotation = -1.5708
 angles = PoolIntArray( 0, -90 )
 
 [node name="RotatableTriangle4" parent="Statics/Rotatables" instance=ExtResource( 5 )]
-position = Vector2( 1757.41, 375.756 )
-rotation = 1.5708
+position = Vector2( 1776.41, 398.756 )
+rotation = 3.14159
 angles = PoolIntArray( 180, 90 )
-
-[node name="Wall2" parent="Statics" instance=ExtResource( 7 )]
-position = Vector2( 960, 999.66 )
-rotation = 1.5708
-
-[node name="Wall3" parent="Statics" instance=ExtResource( 7 )]
-position = Vector2( 959.027, 82.9314 )
-rotation = 1.5708
 
 [node name="Wall4" parent="Statics" instance=ExtResource( 8 )]
 position = Vector2( 960, 999.66 )
 rotation = 1.5708
 
-[node name="Wall5" parent="Statics" instance=ExtResource( 8 )]
-position = Vector2( 960, 80 )
+[node name="Wall9" parent="Statics" instance=ExtResource( 8 )]
+position = Vector2( 960, 1160 )
 rotation = 1.5708
 
-[node name="Wall" parent="Statics" instance=ExtResource( 3 )]
-position = Vector2( 963.28, 540 )
+[node name="Wall5" parent="Statics" instance=ExtResource( 8 )]
+position = Vector2( 960, 79.931 )
+rotation = 1.5708
+
+[node name="Wall8" parent="Statics" instance=ExtResource( 8 )]
+position = Vector2( 960, -80 )
 rotation = 1.5708
 
 [node name="Button" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 896, 999.66 )
+position = Vector2( 960, 999.66 )
 
 [node name="Button2" parent="Statics" instance=ExtResource( 4 )]
-position = Vector2( 1024, 999.66 )
+position = Vector2( 960, 79.931 )
+
+[node name="Wall6" parent="Statics" instance=ExtResource( 3 )]
+position = Vector2( 960, 540 )
+rotation = 1.5708
+scale = Vector2( 1, 0.898 )
+
+[node name="Wall" parent="Statics" instance=ExtResource( 7 )]
+position = Vector2( 585, 79.931 )
+rotation = 1.5708
+scale = Vector2( 1, 0.5 )
+
+[node name="Wall3" parent="Statics" instance=ExtResource( 7 )]
+position = Vector2( 1335, 79.931 )
+rotation = 1.5708
+scale = Vector2( 1, 0.5 )
+
+[node name="Wall2" parent="Statics" instance=ExtResource( 7 )]
+position = Vector2( 585, 999.66 )
+rotation = 1.5708
+scale = Vector2( 1, 0.5 )
+
+[node name="Wall7" parent="Statics" instance=ExtResource( 7 )]
+position = Vector2( 1335, 999.66 )
+rotation = 1.5708
+scale = Vector2( 1, 0.5 )

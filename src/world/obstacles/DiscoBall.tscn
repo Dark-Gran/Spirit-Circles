@@ -82,19 +82,19 @@ script = ExtResource( 2 )
 
 [node name="Beam" parent="Beams" instance=ExtResource( 1 )]
 rotation = 0.389208
-scale = Vector2( 1, 5 )
+scale = Vector2( 1, 4.8 )
 
 [node name="Beam3" parent="Beams" instance=ExtResource( 1 )]
 rotation = 1.1781
-scale = Vector2( 1, 5 )
+scale = Vector2( 1, 4.8 )
 
 [node name="Beam4" parent="Beams" instance=ExtResource( 1 )]
 rotation = -1.1781
-scale = Vector2( 1, 5 )
+scale = Vector2( 1, 4.8 )
 
 [node name="Beam2" parent="Beams" instance=ExtResource( 1 )]
 rotation = -0.389208
-scale = Vector2( 1, 5 )
+scale = Vector2( 1, 4.8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 4, 25 )
@@ -102,7 +102,7 @@ shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-scale = Vector2( 100, 100 )
+scale = Vector2( 99, 99 )
 mesh = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
