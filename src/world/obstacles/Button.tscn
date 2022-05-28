@@ -64,7 +64,7 @@ hue_variation_random = 0.61
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.426357, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.156863, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.117647, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=7]
 gradient = SubResource( 6 )
