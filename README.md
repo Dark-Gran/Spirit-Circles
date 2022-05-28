@@ -16,6 +16,6 @@ Also, simulating the "future state of physics" constantly and in real-time (as w
 ## Progress
 
 _~~reworked prototype~~  
-art upgrade  
+~~art upgrade~~  
 finishing touches  
 demo release_  
