@@ -79,8 +79,8 @@ scale = Vector2( 0.6, 5 )
 mesh = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.326819, -1.25328 )
-scale = Vector2( 0.736418, 0.97512 )
+position = Vector2( -0.326819, -2.25328 )
+scale = Vector2( 0.736418, 0.931048 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
