@@ -3,9 +3,9 @@
 [ext_resource path="res://src/world/Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/world/levels/Level_010.gd" type="Script" id=2]
 [ext_resource path="res://src/world/obstacles/Wall_Border.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/world/obstacles/Beam_GlowS.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/world/obstacles/Wall_Cross_1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/world/obstacles/Button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=7]
 
 [node name="Level" type="Node2D"]
 show_behind_parent = true
@@ -81,23 +81,23 @@ size = 22.0
 
 [node name="Beams" type="Node2D" parent="Statics"]
 
-[node name="Beam" parent="Statics/Beams" instance=ExtResource( 7 )]
+[node name="Beam" parent="Statics/Beams" instance=ExtResource( 4 )]
 position = Vector2( 960, 892.751 )
 scale = Vector2( 1.6, 0.591 )
 color_type = 2
 
-[node name="Beam2" parent="Statics/Beams" instance=ExtResource( 7 )]
+[node name="Beam2" parent="Statics/Beams" instance=ExtResource( 4 )]
 position = Vector2( 960, 187.138 )
 scale = Vector2( 1.6, 0.591 )
 color_type = 2
 
-[node name="Beam3" parent="Statics/Beams" instance=ExtResource( 7 )]
+[node name="Beam3" parent="Statics/Beams" instance=ExtResource( 4 )]
 position = Vector2( 396.939, 540 )
 rotation = 1.5708
 scale = Vector2( 1.6, 1.433 )
 color_type = 1
 
-[node name="Beam4" parent="Statics/Beams" instance=ExtResource( 7 )]
+[node name="Beam4" parent="Statics/Beams" instance=ExtResource( 4 )]
 position = Vector2( 1523.49, 540 )
 rotation = 1.5708
 scale = Vector2( 1.6, 1.433 )

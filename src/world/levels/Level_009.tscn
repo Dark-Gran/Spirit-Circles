@@ -4,7 +4,7 @@
 [ext_resource path="res://src/world/levels/Level_009.gd" type="Script" id=2]
 [ext_resource path="res://src/world/obstacles/Wall_Wide_0.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/world/obstacles/Wall_2.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/world/obstacles/Beam.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/world/obstacles/Beam_GlowS.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/world/obstacles/Button.tscn" type="PackedScene" id=6]
 
 [node name="Level" type="Node2D"]
@@ -79,11 +79,6 @@ size = 22.0
 
 [node name="Statics" type="Node2D" parent="."]
 
-[node name="Beam" parent="Statics" instance=ExtResource( 5 )]
-position = Vector2( 960, 540 )
-scale = Vector2( 1.6, 1.161 )
-color_type = 1
-
 [node name="Wall" parent="Statics" instance=ExtResource( 4 )]
 position = Vector2( 0, 540 )
 
@@ -98,3 +93,8 @@ position = Vector2( 960, 0 )
 
 [node name="Button" parent="Statics" instance=ExtResource( 6 )]
 position = Vector2( 960, 912 )
+
+[node name="Beam" parent="Statics" instance=ExtResource( 5 )]
+position = Vector2( 960, 540 )
+scale = Vector2( 1.6, 1.161 )
+color_type = 1
