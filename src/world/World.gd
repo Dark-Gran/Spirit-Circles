@@ -124,6 +124,7 @@ func _input(event):
 						pc_accumulator = 0
 					pc_linger = false
 				elif Geometry.is_point_in_circle(get_viewport().get_mouse_position(), $PlayerCircle.position, Main.PC_RADIUS):
+					new_particle_oneshot($PlayerCircle.position, 0, Circle.ColorType.WHITE, "player_smoke", 1, 1)
 					release_pc()
 					pc_accumulator = 0
 					pc_linger = true
@@ -285,6 +286,7 @@ func spawn_pc(pos):
 		PlayerCircle = PC.instance()
 		PlayerCircle.position = pos
 		add_child(PlayerCircle)
+		new_particle_oneshot(pos, 0, Circle.ColorType.WHITE, "shine", 1, 1)
 
 func release_pc():
 	if get_node_or_null("PlayerCircle") != null:
@@ -319,8 +321,9 @@ func get_grow_speed():
 # Particle Effects
 
 var BounceParticles = preload("res://src/world/circle_effects/Bounce.tscn")
-
 var SplitByBeamParticles = preload("res://src/world/circle_effects/SplitByBeam.tscn")
+var PlayerSmokeParticles = preload("res://src/world/circle_effects/PlayerSmoke.tscn")
+var ShineParticles = preload("res://src/world/circle_effects/CircleShine.tscn")
 
 func free_emitters():
 	for emitter in get_tree().get_nodes_in_group("one_shot_emitters"):
@@ -336,6 +339,10 @@ func new_particle_oneshot(pos, rot, color_type, effect_name, multiply_amount, s)
 			particles.modulate = color
 		"split_by_beam":
 			particles = SplitByBeamParticles.instance()
+		"player_smoke":
+			particles = PlayerSmokeParticles.instance()
+		"shine":
+			particles = ShineParticles.instance()
 	if particles != null:
 		particles.scale = Vector2(s, s)
 		particles.amount *= multiply_amount
