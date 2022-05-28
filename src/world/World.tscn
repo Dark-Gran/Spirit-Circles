@@ -7,21 +7,26 @@
 [ext_resource path="res://src/world/ScoreBox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
-size = 34
+size = 36
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 40
+size = 46
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 40
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="CircleShape2D" id=4]
 
 [sub_resource type="Environment" id=5]
-glow_blend_mode = 0
 glow_bicubic_upscale = true
 
 [node name="World" type="Node2D"]
@@ -37,10 +42,10 @@ __meta__ = {
 }
 
 [node name="Continue" type="Button" parent="GUI"]
-margin_left = 850.0
-margin_top = 880.0
-margin_right = 1070.0
-margin_bottom = 930.0
+margin_left = 812.0
+margin_top = 852.0
+margin_right = 1108.0
+margin_bottom = 957.0
 focus_mode = 0
 custom_fonts/font = SubResource( 1 )
 disabled = true
@@ -51,9 +56,9 @@ __meta__ = {
 }
 
 [node name="LevelName" type="Label" parent="GUI"]
-margin_top = 791.0
+margin_top = 795.0
 margin_right = 1920.0
-margin_bottom = 867.0
+margin_bottom = 871.0
 custom_fonts/font = SubResource( 2 )
 text = "..."
 align = 1
@@ -62,15 +67,15 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="GUI/LevelName"]
-wait_time = 4.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
 [node name="Stopwatch" type="Label" parent="GUI"]
-margin_left = 1665.65
-margin_top = 881.01
-margin_right = 1726.65
-margin_bottom = 922.01
+margin_left = 1810.5
+margin_top = 995.0
+margin_right = 1871.5
+margin_bottom = 1036.0
 custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1

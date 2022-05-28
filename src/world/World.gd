@@ -6,6 +6,8 @@ var grow_speed_adjust = 0.1 # see get_grow_speed()
 const SCREEN_CHECK = 50
 var screen_checker = SCREEN_CHECK
 
+const NAME_FADE_SPEED = 0.5
+
 var ready = false
 var PC = preload("res://src/world/PlayerCircle.tscn")
 var PlayerCircle
@@ -89,7 +91,7 @@ func unload_level():
 func reset_LevelName():
 	if get_node_or_null("Level") != null:
 		$GUI/LevelName.text = $Level.level_name
-	$GUI/LevelName.modulate.a = 1
+	$GUI/LevelName.modulate.a = 0
 	$GUI/LevelName.show()
 	$GUI/LevelName/Timer.start()
 
@@ -137,6 +139,8 @@ func _input(event):
 				$DebugGUI/FPS.visible = !$DebugGUI/FPS.visible
 			elif InputMap.event_is_action(event, "ui_times"):
 				$GUI/ScoreBox.switch_visibility(level_times)
+			elif InputMap.event_is_action(event, "ui_timer"):
+				$GUI/Stopwatch.visible = !$GUI/Stopwatch.visible
 			elif InputMap.event_is_action(event, "ui_accept"):
 				if won:
 					_on_Continue_button_up()
@@ -146,10 +150,14 @@ func _input(event):
 func _process(delta):
 	# LevelName
 	if hideLevelName:
-		$GUI/LevelName.modulate.a -= 0.5 * delta
-		if $GUI/LevelName.modulate.a <= 0:
+		$GUI/LevelName.modulate.a -= NAME_FADE_SPEED * delta
+		if $GUI/LevelName.modulate.a <= 0.0:
 			$GUI/LevelName.hide()
 			hideLevelName = false
+	elif $GUI/LevelName.modulate.a != 1.0:
+		$GUI/LevelName.modulate.a += NAME_FADE_SPEED * delta
+		if $GUI/LevelName.modulate.a >= 1.0:
+			$GUI/LevelName.modulate.a = 1.0
 	if get_node_or_null("Level") != null:
 		# LevelTime
 		if !won:
