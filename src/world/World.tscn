@@ -100,6 +100,7 @@ environment = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -1.0
 
 [connection signal="button_up" from="GUI/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="timeout" from="GUI/LevelName/Timer" to="." method="_on_LevelNameTimer_timeout"]
