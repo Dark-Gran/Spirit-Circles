@@ -30,6 +30,7 @@ func _ready():
 	$DebugGUI/FPS.visible = false
 	enable_continue(false)
 	level_id = 1
+	$AudioStreamPlayer.playing = true
 	move_to_level(level_id)
 
 func reload_level():
@@ -147,6 +148,8 @@ func _input(event):
 					_on_Continue_button_up()
 			elif InputMap.event_is_action(event, "toggle_fullscreen"):
 				OS.window_fullscreen = !OS.window_fullscreen
+			elif InputMap.event_is_action(event, "toggle_music"):
+				$AudioStreamPlayer.stream_paused = !$AudioStreamPlayer.stream_paused
 
 func _process(delta):
 	# LevelName
