@@ -6,13 +6,13 @@
 [ext_resource path="res://src/world/circle_effects/Split.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/ray_arrow.png" type="Texture" id=5]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/blur_start = 0.3
 shader_param/blur = 5.0
 shader_param/ramp_factor = 4.0
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=2]
 
 [node name="Circle" type="KinematicBody2D" groups=[
 "circles",
@@ -23,7 +23,7 @@ script = ExtResource( 1 )
 emitting = false
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 4 )
+material = SubResource( 1 )
 scale = Vector2( 0.092, 0.092 )
 texture = ExtResource( 2 )
 
@@ -34,7 +34,7 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="RayCastA" type="RayCast2D" parent="."]
 visible = false
@@ -71,4 +71,4 @@ collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StuckDetector"]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 2 )

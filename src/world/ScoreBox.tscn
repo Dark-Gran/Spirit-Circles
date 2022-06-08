@@ -8,6 +8,7 @@ size = 40
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
+extra_spacing_bottom = 6
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -30,9 +31,9 @@ margin_top = 74.0
 margin_right = 1920.0
 margin_bottom = 203.0
 custom_fonts/font = SubResource( 1 )
-text = "YOU HAVE COMPLETED ALL LEVELS
-
-CONGRATULATIONS! CHECK OUT YOUR TIMES..."
+text = "CONGRATULATIONS!
+YOU HAVE COMPLETED ALL LEVELS
+CHECK OUT YOUR TIMES..."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

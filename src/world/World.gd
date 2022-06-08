@@ -166,7 +166,7 @@ func _process(delta):
 		# LevelTime
 		if !won:
 			level_time += delta
-		if $Level.Stopwatch_enabled:
+		if $GUI/Stopwatch.visible:
 			$GUI/Stopwatch.text = String(floor(level_time))
 		# Check Level-End
 		if !won && victory_check():
