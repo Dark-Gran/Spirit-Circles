@@ -121,10 +121,13 @@ func _physics_process(delta):
 		$CollisionShape2D.disabled = false
 		stuck_timer = 0
 	# Reset collison-exceptions
+	var no_more_split = true
 	if ignored_while_overlapping.size() > 0:
 		if grow_buffer == 0: # possibly in-future: debug red beams without this line (note: issues with collide_with_motion()/overlaps_body()?)
 			var not_to_ignore_anymore = Array()
 			for i in ignored_while_overlapping:
+				if i.is_in_group("beams") && i.color_type == ColorType.RED:
+					no_more_split = false
 				if i != null && is_instance_valid(i):
 					if i.is_in_group("circles"):
 						if merging_away || !circles_overlap(self, i):
@@ -137,7 +140,7 @@ func _physics_process(delta):
 					not_to_ignore_anymore.append(i)
 			for i in not_to_ignore_anymore:
 				remove_from_ignore_while_overlapping(i)
-	elif has_node("SplitParticles") && $SplitParticles.emitting:
+	if no_more_split && has_node("SplitParticles") && $SplitParticles.emitting:
 		$SplitParticles.emitting = false
 	# RayCast
 	if world.get_rays_enabled():
