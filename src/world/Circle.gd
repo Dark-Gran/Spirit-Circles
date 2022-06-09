@@ -126,7 +126,7 @@ func _physics_process(delta):
 		if grow_buffer == 0: # possibly in-future: debug red beams without this line (note: issues with collide_with_motion()/overlaps_body()?)
 			var not_to_ignore_anymore = Array()
 			for i in ignored_while_overlapping:
-				if i.is_in_group("beams") && i.color_type == ColorType.RED:
+				if (i.is_in_group("circles") && i.color_type == ColorType.RED || color_type == ColorType.RED) || (i.is_in_group("beams") && i.color_type == ColorType.RED):
 					no_more_split = false
 				if i != null && is_instance_valid(i):
 					if i.is_in_group("circles"):
