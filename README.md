@@ -3,6 +3,7 @@
 ![main_preview](_screenshots/preview.gif)  
   
 This is a FREE game.  
+Made in [Godot](https://github.com/godotengine/godot), the open-source and lightweight alternative to engines like Unity.
 
 [RELEASE DOWNLOAD](https://github.com/Dark-Gran/SMC/releases/tag/1.0)  
 (use M to Mute sound)
