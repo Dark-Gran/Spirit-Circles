@@ -34,3 +34,12 @@ Also, simulating the "future state of physics" constantly and in real-time (as w
 ## Todo
 
 _- fix collision bugs_  
+
+
+## Screenshots
+  
+![preview1](_screenshots/screen_01.png)  
+---  
+![preview2](_screenshots/screen_02.png)  
+---  
+![preview3](_screenshots/screen_03.png)  
