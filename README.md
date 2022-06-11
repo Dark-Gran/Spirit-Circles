@@ -10,7 +10,7 @@ Made in [Godot](https://github.com/godotengine/godot), the open-source alternati
 
 Contains 20 levels.
   
-If you'd like to give me feedback or see my other projects, [join us on Discord!](https://discord.gg/Hwetj9cWNn)[![discord_icon](https://github.com/Dark-Gran/Farstar-2/blob/master/discord32flip.png)](https://discord.com/invite/N4JxKsX3Q5)
+If you'd like to give me feedback, [join us on Discord!](https://discord.gg/Hwetj9cWNn)[![discord_icon](https://github.com/Dark-Gran/Farstar-2/blob/master/discord32flip.png)](https://discord.com/invite/N4JxKsX3Q5)
 
 **Controls:**
 - Game is played with Left Mouse Button / Touch only.
