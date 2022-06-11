@@ -7,7 +7,7 @@ This is a FREE game.
 [RELEASE DOWNLOAD](https://github.com/Dark-Gran/SMC/releases/tag/1.0)  
 (use M to Mute sound)
   
-If you'd like to give me feedback or see my other projects, [join us on Discord!](https://discord.com/invite/N4JxKsX3Q5)[![discord_icon](https://github.com/Dark-Gran/Farstar-2/blob/master/discord32flip.png)](https://discord.com/invite/N4JxKsX3Q5)
+If you'd like to give me feedback or see my other projects, [join us on Discord!](https://discord.gg/Hwetj9cWNn)[![discord_icon](https://github.com/Dark-Gran/Farstar-2/blob/master/discord32flip.png)](https://discord.com/invite/N4JxKsX3Q5)
 
 **Controls:**
 - Game is played with Left Mouse Button / Touch only.
