@@ -18,5 +18,5 @@ Also, simulating the "future state of physics" constantly and in real-time (as w
 _~~reworked prototype~~  
 ~~art upgrade~~  
 ~~music (demo track)~~  
-finishing touches  
-demo release_  
+~~finishing touches~~  
+~~demo release~~_  
