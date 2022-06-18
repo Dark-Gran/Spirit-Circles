@@ -35,7 +35,7 @@ Also, simulating the "future state of physics" constantly and in real-time (as w
   
 ## Future Todo
 
-_- fix collision bugs_
+_- fix collision bugs_  
 _- mobile release_  
 
 
