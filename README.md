@@ -35,7 +35,7 @@ Also, simulating the "future state of physics" constantly and in real-time (as w
 ## Future Todo
 
 _- fix collision bugs_  
-_- support different resolutions (only 1920x1080 atm)_
+_- support different resolutions (only 1920x1080 atm)_  
 _- mobile release_  
 
 
