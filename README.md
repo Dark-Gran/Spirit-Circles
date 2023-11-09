@@ -17,8 +17,6 @@ Contains 20 levels.
   - Left/Right Arrow to switch between Levels.
   - M to mute sound.
   
-If you want to learn about _everything_ I do, I'll be happy if you [follow me on my humble Twitter](https://twitter.com/DarkGran_CZ).  
-  
 ## About Project  
   
 Free game based on a [previous prototype](https://github.com/Dark-Gran/SaveMeCircles).  
