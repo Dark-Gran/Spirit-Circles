@@ -33,6 +33,7 @@ Also, simulating the "future state of physics" constantly and in real-time (as w
 ## Todo
 
 _- support different resolutions (only 1920x1080 atm)_  
+_- check for bugs_  
 
 ## Screenshots
   
