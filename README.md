@@ -30,12 +30,9 @@ To address performance issues of the prototype, Box2D engine (and LibGDX in cons
 Godot 3.x does not support simulating the world in the same extent as Box2D does, however such simulation has been deemed unnecessary as its only purpose was to "help with aim", which can also be done using raytracing (which is a _much_ more lightweight solution).  
 Also, simulating the "future state of physics" constantly and in real-time (as was possible in the original prototype) goes against the original "chilled chaos" idea both visually and gameplay-wise.  
   
-## Future Todo
+## Todo
 
-_- fix collision bugs_  
 _- support different resolutions (only 1920x1080 atm)_  
-_- mobile release_  
-
 
 ## Screenshots
   
