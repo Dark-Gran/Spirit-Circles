@@ -19,7 +19,7 @@ Contains 20 levels.
   
 ## About Project  
   
-Free game based on a [previous prototype](https://github.com/Dark-Gran/SaveMeCircles).  
+Based on a [previous prototype](https://github.com/Dark-Gran/SaveMeCircles).  
 
 _"There are circles floating in space, and you can touch them to make them smaller and faster, or bigger and slower...  
 You can also place a static circle of your own.  
