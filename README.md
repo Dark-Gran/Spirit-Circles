@@ -14,7 +14,7 @@ Contains 20 levels.
 - Game is played with Left Mouse Button / Touch only.
 - Extra controls are:  
   - R to restart the current Level.
-  - Left/Right Arrow to switch between Levels.
+  - Left/Right Arrow to skip Levels.
   - M to mute sound.
   
 ## About Project  
