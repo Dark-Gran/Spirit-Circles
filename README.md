@@ -1,4 +1,4 @@
-# SaveMeCircles  
+# Spirit Circles
   
 ![main_preview](_screenshots/preview.gif)  
   
