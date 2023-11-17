@@ -5,7 +5,7 @@
 This is a FREE game.  
 Made in [Godot](https://github.com/godotengine/godot), the open-source alternative to engines like Unity.
 
-[RELEASE DOWNLOAD](https://github.com/Dark-Gran/SMC/releases/tag/1.0)  
+[RELEASE DOWNLOAD](https://github.com/Dark-Gran/Spirit-Circles/releases/tag/1.0)  
 (use M to Mute sound)
 
 Contains 20 levels.
@@ -19,7 +19,7 @@ Contains 20 levels.
   
 ## About Project  
   
-Based on a [previous prototype](https://github.com/Dark-Gran/SaveMeCircles).  
+Based on a [previous prototype](https://github.com/Dark-Gran/SMC).  
 
 _"There are circles floating in space, and you can touch them to make them smaller and faster, or bigger and slower...  
 You can also place a static circle of your own.  
