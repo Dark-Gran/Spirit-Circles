@@ -16,6 +16,8 @@ Contains 20 levels.
   - R to restart the current Level.
   - Left/Right Arrow to skip Levels.
   - M to mute sound.
+ 
+[Visit itch.io page](https://darkgran.itch.io/spirit-circles) if you want to donate to my work.
   
 ## About Project  
   
